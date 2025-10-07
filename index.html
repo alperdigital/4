@@ -573,41 +573,17 @@
                     <p class="text-muted mb-5">Projenizi hayata geçirmeye hazır mısınız? Bize mesaj gönderin, 24 saat içinde size dönüş yapalım! Ücretsiz danışmanlık hizmetimizden yararlanın.</p>
                 </div>
             </div>
-            <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
-                <div class="col-lg-6">
-                    <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                        <!-- Name input-->
-                        <div class="form-floating mb-3">
-                            <input class="form-control" id="name" name="name" type="text" placeholder="Adınızı girin..." required />
-                            <label for="name">Ad Soyad</label>
-                        </div>
-                        <!-- Email address input-->
-                        <div class="form-floating mb-3">
-                            <input class="form-control" id="email" name="email" type="email" placeholder="ornek@email.com" required />
-                            <label for="email">E-posta Adresi</label>
-                        </div>
-                        <!-- Phone number input-->
-                        <div class="form-floating mb-3">
-                            <input class="form-control" id="phone" name="phone" type="tel" placeholder="(555) 123-4567" required />
-                            <label for="phone">Telefon Numarası</label>
-                        </div>
-                        <!-- Message input-->
-                        <div class="form-floating mb-3">
-                            <textarea class="form-control" id="message" name="message" placeholder="Mesajınızı buraya yazın..." style="height: 10rem" required></textarea>
-                            <label for="message">Mesaj</label>
-                        </div>
-                        <!-- Submit Button-->
-                        <div class="d-grid">
-                            <button class="btn btn-primary btn-xl" type="submit">Gönder</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
             <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-lg-4">
+                <div class="col-lg-4 col-md-6 mb-4">
                     <div class="contact-info">
                         <i class="bi-phone"></i>
                         <div><a href="tel:+905071353025" class="text-decoration-none">+90 507 135 30 25</a></div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="contact-info">
+                        <i class="bi-envelope"></i>
+                        <div><a href="mailto:alperdigital@icloud.com" class="text-decoration-none">alperdigital@icloud.com</a></div>
                     </div>
                 </div>
             </div>
@@ -635,14 +611,6 @@
     
     <!-- Custom JS -->
     <script>
-        // Form handling - Formspree will handle the submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            // Formspree will handle the submission automatically
-            // You can add loading state here if needed
-            const submitButton = this.querySelector('button[type="submit"]');
-            submitButton.innerHTML = 'Gönderiliyor...';
-            submitButton.disabled = true;
-        });
 
         // Initialize SimpleLightbox
         new SimpleLightbox('.portfolio-box', {
