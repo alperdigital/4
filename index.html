@@ -575,25 +575,25 @@
             </div>
             <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
                 <div class="col-lg-6">
-                    <form id="contactForm">
+                    <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                         <!-- Name input-->
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="name" type="text" placeholder="Adınızı girin..." required />
+                            <input class="form-control" id="name" name="name" type="text" placeholder="Adınızı girin..." required />
                             <label for="name">Ad Soyad</label>
                         </div>
                         <!-- Email address input-->
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="email" type="email" placeholder="ornek@email.com" required />
+                            <input class="form-control" id="email" name="email" type="email" placeholder="ornek@email.com" required />
                             <label for="email">E-posta Adresi</label>
                         </div>
                         <!-- Phone number input-->
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="phone" type="tel" placeholder="(555) 123-4567" required />
+                            <input class="form-control" id="phone" name="phone" type="tel" placeholder="(555) 123-4567" required />
                             <label for="phone">Telefon Numarası</label>
                         </div>
                         <!-- Message input-->
                         <div class="form-floating mb-3">
-                            <textarea class="form-control" id="message" placeholder="Mesajınızı buraya yazın..." style="height: 10rem" required></textarea>
+                            <textarea class="form-control" id="message" name="message" placeholder="Mesajınızı buraya yazın..." style="height: 10rem" required></textarea>
                             <label for="message">Mesaj</label>
                         </div>
                         <!-- Submit Button-->
@@ -635,10 +635,13 @@
     
     <!-- Custom JS -->
     <script>
-        // Simple form handling
+        // Form handling - Formspree will handle the submission
         document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Mesajınız başarıyla gönderildi! 24 saat içinde size dönüş yapacağız. Teşekkür ederiz!');
+            // Formspree will handle the submission automatically
+            // You can add loading state here if needed
+            const submitButton = this.querySelector('button[type="submit"]');
+            submitButton.innerHTML = 'Gönderiliyor...';
+            submitButton.disabled = true;
         });
 
         // Initialize SimpleLightbox
