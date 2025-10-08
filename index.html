@@ -20,6 +20,10 @@
     <!-- Bootstrap CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     
+    <!-- PIXI.js for WebGL graphics -->
+    <script src="js/lib/pixi.min.js"></script>
+    <script src="js/lib/tweenjs-0.6.2.min.js"></script>
+    
     <!-- Custom CSS -->
     <style>
         :root {
@@ -94,6 +98,21 @@
             align-items: center;
             position: relative;
             overflow: hidden;
+        }
+        
+        #spiderweb-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .masthead-content {
+            position: relative;
+            z-index: 2;
         }
         
         .masthead::before {
@@ -424,13 +443,14 @@
 
     <!-- Masthead-->
     <header class="masthead">
+        <canvas id="spiderweb-canvas"></canvas>
         <div class="container px-4 px-lg-5 h-100">
             <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
-                <div class="col-lg-8 align-self-end">
+                <div class="col-lg-8 align-self-end masthead-content">
                     <h1 class="text-white font-weight-bold">Dijital Dünyada Fark Yaratın</h1>
                     <hr class="divider" />
                 </div>
-                <div class="col-lg-8 align-self-baseline">
+                <div class="col-lg-8 align-self-baseline masthead-content">
                     <p class="text-white-75 mb-5">Alperdigital olarak, modern teknolojiler kullanarak işletmeniz için özel yazılım çözümleri geliştiriyoruz. Web uygulamaları, mobil uygulamalar ve dijital dönüşüm projelerinde uzmanız. İşinizi bir üst seviyeye taşıyacak çözümlerle yanınızdayız.</p>
                     <a class="btn btn-primary btn-xl" href="#about">Daha Fazla Bilgi</a>
                 </div>
@@ -608,6 +628,10 @@
     
     <!-- SimpleLightbox plugin JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+    
+    <!-- Spiderweb Animation -->
+    <script src="js/lib/helpers.js"></script>
+    <script src="js/spiderweb.js"></script>
     
     <!-- Custom JS -->
     <script>
