@@ -112,6 +112,103 @@
             z-index: 20;
         }
         
+        /* Direct CSS Spiderweb Animation */
+        .spiderweb-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            pointer-events: none;
+        }
+        
+        .spider-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .spider-ring-1 {
+            width: 200px;
+            height: 200px;
+            animation: spin 10s linear infinite;
+        }
+        
+        .spider-ring-2 {
+            width: 400px;
+            height: 400px;
+            animation: spin 15s linear infinite reverse;
+        }
+        
+        .spider-ring-3 {
+            width: 600px;
+            height: 600px;
+            animation: spin 20s linear infinite;
+        }
+        
+        .spider-dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+        }
+        
+        .spider-dot-1 {
+            top: 20%;
+            left: 20%;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        .spider-dot-2 {
+            top: 30%;
+            left: 70%;
+            animation: bounce 2s ease-in-out infinite 0.5s;
+        }
+        
+        .spider-dot-3 {
+            top: 70%;
+            left: 30%;
+            animation: bounce 2s ease-in-out infinite 1s;
+        }
+        
+        .spider-dot-4 {
+            top: 80%;
+            left: 80%;
+            animation: bounce 2s ease-in-out infinite 1.5s;
+        }
+        
+        .spider-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-30px) scale(1.5); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+            50% { transform: translate(-50%, -50%) scale(2); opacity: 1; }
+        }
+        
         .masthead::before {
             content: '';
             position: absolute;
@@ -441,6 +538,19 @@
     <!-- Masthead-->
     <header class="masthead">
         <canvas id="spiderweb-canvas"></canvas>
+        
+        <!-- Direct HTML Spiderweb -->
+        <div class="spiderweb-overlay">
+            <div class="spider-ring spider-ring-1"></div>
+            <div class="spider-ring spider-ring-2"></div>
+            <div class="spider-ring spider-ring-3"></div>
+            <div class="spider-dot spider-dot-1"></div>
+            <div class="spider-dot spider-dot-2"></div>
+            <div class="spider-dot spider-dot-3"></div>
+            <div class="spider-dot spider-dot-4"></div>
+            <div class="spider-center"></div>
+        </div>
+        
         <div class="container px-4 px-lg-5 h-100">
             <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
                 <div class="col-lg-8 align-self-end masthead-content">
@@ -626,8 +736,6 @@
     <!-- SimpleLightbox plugin JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
     
-    <!-- Visible Spiderweb Animation -->
-    <script src="js/visible-spiderweb.js"></script>
     
     <!-- Custom JS -->
     <script>
