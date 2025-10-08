@@ -1,5 +1,5 @@
 // Spiderweb Animation for Alperdigital Website
-// Based on Trustheory's splash screen design
+// Simplified version with visible elements
 
 // Global variables
 let spiderwebApp;
@@ -8,11 +8,18 @@ let edges = [];
 
 // Initialize spiderweb animation
 function initSpiderweb() {
+    console.log('Starting spiderweb initialization...');
+    
     const canvas = document.getElementById('spiderweb-canvas');
-    if (!canvas) return;
+    if (!canvas) {
+        console.log('Canvas not found!');
+        return;
+    }
 
     const width = window.innerWidth;
     const height = window.innerHeight;
+
+    console.log('Canvas dimensions:', width, height);
 
     // Create PIXI application
     spiderwebApp = new PIXI.Application({
@@ -23,7 +30,11 @@ function initSpiderweb() {
         antialias: true
     });
 
+    // Clear canvas and append PIXI view
+    canvas.innerHTML = '';
     canvas.appendChild(spiderwebApp.view);
+
+    console.log('PIXI app created');
 
     // Create containers
     const edgesContainer = new PIXI.Container();
@@ -37,17 +48,21 @@ function initSpiderweb() {
     // Create connections
     createConnections(edgesContainer, peeps);
 
+    console.log('Created', peeps.length, 'peeps and', edges.length, 'edges');
+
     // Start animation
     spiderwebApp.ticker.add(animate);
+    
+    console.log('Spiderweb animation started!');
 }
 
 // Create skeleton peeps in rings
 function createSkeletonPeeps(container, width, height) {
     // Create rings of peeps
-    createRing(container, width/2, height/2, 200, 15);
-    createRing(container, width/2, height/2, 300, 20);
-    createRing(container, width/2, height/2, 400, 25);
-    createRing(container, width/2, height/2, 500, 30);
+    createRing(container, width/2, height/2, 150, 12);
+    createRing(container, width/2, height/2, 250, 16);
+    createRing(container, width/2, height/2, 350, 20);
+    createRing(container, width/2, height/2, 450, 24);
 }
 
 // Create a ring of peeps
@@ -71,16 +86,17 @@ function createSkeletonPeep(x, y) {
         initX: x,
         initY: y,
         graphics: new PIXI.Graphics(),
-        radius: 5 + Math.random() * 15,
-        swing: 0.05 + Math.random() * 0.45,
+        radius: 8 + Math.random() * 12,
+        swing: 0.05 + Math.random() * 0.3,
         angle: Math.random() * Math.PI * 2,
-        speed: (0.05 + Math.random() * 0.95) / 60,
+        speed: (0.02 + Math.random() * 0.08) / 60,
         initRotation: (Math.random() - 0.5) * (Math.PI - 0.4)
     };
 
-    // Draw skeleton peep (simple circle for now)
-    peep.graphics.beginFill(0xffffff, 0.8);
-    peep.graphics.drawCircle(0, 0, 3);
+    // Draw skeleton peep (white circle with border)
+    peep.graphics.beginFill(0xffffff, 0.9);
+    peep.graphics.lineStyle(2, 0xcccccc, 0.8);
+    peep.graphics.drawCircle(0, 0, 4);
     peep.graphics.endFill();
     
     peep.graphics.x = x;
@@ -91,7 +107,7 @@ function createSkeletonPeep(x, y) {
 
 // Create connections between nearby peeps
 function createConnections(container, peeps) {
-    const maxDistance = 150;
+    const maxDistance = 120;
     
     for (let i = 0; i < peeps.length; i++) {
         for (let j = i + 1; j < peeps.length; j++) {
@@ -137,13 +153,13 @@ function animate(delta) {
         const dx = mouse.x - x;
         const dy = mouse.y - y;
         const distance = Math.sqrt(dx * dx + dy * dy);
-        const maxDistance = 200;
+        const maxDistance = 150;
         
         let bulgeX = 0;
         let bulgeY = 0;
         
         if (distance < maxDistance) {
-            const bulge = Math.sin(((maxDistance - distance) / maxDistance) * Math.PI / 4) * 50;
+            const bulge = Math.sin(((maxDistance - distance) / maxDistance) * Math.PI / 4) * 40;
             const bulgeAngle = Math.atan2(-dy, -dx);
             bulgeX = Math.cos(bulgeAngle) * bulge;
             bulgeY = Math.sin(bulgeAngle) * bulge;
@@ -164,7 +180,7 @@ function animate(delta) {
         const distance = Math.sqrt(dx * dx + dy * dy);
         
         edge.graphics.clear();
-        edge.graphics.lineStyle(1, 0xffffff, 0.3);
+        edge.graphics.lineStyle(1, 0xffffff, 0.4);
         edge.graphics.moveTo(0, 0);
         edge.graphics.lineTo(distance, 0);
         
@@ -186,8 +202,17 @@ function handleResize() {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize spiderweb immediately (without loading external resources)
-    initSpiderweb();
+    console.log('DOM loaded, initializing spiderweb...');
+    
+    // Wait a bit for PIXI to be available
+    setTimeout(() => {
+        if (typeof PIXI !== 'undefined') {
+            initSpiderweb();
+        } else {
+            console.log('PIXI not available, retrying...');
+            setTimeout(initSpiderweb, 1000);
+        }
+    }, 100);
     
     // Handle window resize
     window.addEventListener('resize', handleResize);
