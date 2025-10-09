@@ -4,6 +4,7 @@ class MatrixApp {
   constructor() {
     this.isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     this.isHighContrast = false;
+    this.isSoundEnabled = true;
     this.codeRain = null;
     this.puddle = null;
     this.init();
@@ -214,14 +215,20 @@ class MatrixApp {
     const controls = document.querySelector('.accessibility-controls');
     if (!controls) return;
 
-    const motionToggle = controls.querySelector('[data-control="motion"]');
-    const contrastToggle = controls.querySelector('[data-control="contrast"]');
+    const motionToggle = document.getElementById('reduce-motion');
+    const contrastToggle = document.getElementById('high-contrast');
+    const soundToggle = document.getElementById('sound-toggle');
 
+    // Motion toggle (⚡)
     if (motionToggle) {
       motionToggle.addEventListener('click', () => {
         this.isReducedMotion = !this.isReducedMotion;
         motionToggle.classList.toggle('active', this.isReducedMotion);
         document.body.classList.toggle('reduced-motion', this.isReducedMotion);
+        
+        // Update button text
+        motionToggle.textContent = this.isReducedMotion ? '⚡' : '⚡';
+        motionToggle.setAttribute('aria-label', this.isReducedMotion ? 'Enable Motion' : 'Reduce Motion');
         
         if (this.isReducedMotion) {
           this.stopAnimations();
@@ -231,12 +238,49 @@ class MatrixApp {
       });
     }
 
+    // Contrast toggle (🔆)
     if (contrastToggle) {
       contrastToggle.addEventListener('click', () => {
         this.isHighContrast = !this.isHighContrast;
         contrastToggle.classList.toggle('active', this.isHighContrast);
         document.body.classList.toggle('high-contrast', this.isHighContrast);
+        
+        // Update button text
+        contrastToggle.textContent = this.isHighContrast ? '🌙' : '🔆';
+        contrastToggle.setAttribute('aria-label', this.isHighContrast ? 'Normal Contrast' : 'High Contrast');
       });
+    }
+
+    // Sound toggle (🔊)
+    if (soundToggle) {
+      soundToggle.addEventListener('click', () => {
+        this.isSoundEnabled = !this.isSoundEnabled;
+        soundToggle.classList.toggle('active', !this.isSoundEnabled);
+        
+        // Update button text
+        soundToggle.textContent = this.isSoundEnabled ? '🔊' : '🔇';
+        soundToggle.setAttribute('aria-label', this.isSoundEnabled ? 'Disable Sound' : 'Enable Sound');
+        
+        // Store preference
+        localStorage.setItem('soundEnabled', this.isSoundEnabled);
+      });
+    }
+
+    // Load saved preferences
+    this.loadAccessibilityPreferences();
+  }
+
+  loadAccessibilityPreferences() {
+    // Load sound preference
+    const savedSound = localStorage.getItem('soundEnabled');
+    if (savedSound !== null) {
+      this.isSoundEnabled = savedSound === 'true';
+      const soundToggle = document.getElementById('sound-toggle');
+      if (soundToggle) {
+        soundToggle.classList.toggle('active', !this.isSoundEnabled);
+        soundToggle.textContent = this.isSoundEnabled ? '🔊' : '🔇';
+        soundToggle.setAttribute('aria-label', this.isSoundEnabled ? 'Disable Sound' : 'Enable Sound');
+      }
     }
   }
 

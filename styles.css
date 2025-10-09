@@ -48,6 +48,39 @@
     --transition-normal: 0s;
     --transition-slow: 0s;
   }
+}
+
+/* Accessibility Classes */
+.reduced-motion * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+.reduced-motion .code-rain,
+.reduced-motion .puddle,
+.reduced-motion .loader-canvas {
+  display: none !important;
+}
+
+.high-contrast {
+  --matrix-green: #ffffff;
+  --matrix-green-dim: #cccccc;
+  --matrix-green-bright: #ffffff;
+  --matrix-text: #ffffff;
+  --matrix-black: #000000;
+  --matrix-gray: #333333;
+  --matrix-light-gray: #666666;
+}
+
+.high-contrast .control-btn {
+  border-width: 2px;
+}
+
+.high-contrast .nav {
+  background: rgba(0, 0, 0, 0.95);
+  border-bottom-width: 2px;
+}
   
   * {
     animation-duration: 0.01ms !important;
@@ -411,6 +444,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 4px;
+  user-select: none;
 }
 
 .control-btn:hover,
@@ -418,11 +453,17 @@ body {
   background: var(--matrix-green);
   color: var(--matrix-black);
   box-shadow: 0 0 10px var(--matrix-green);
+  transform: scale(1.05);
 }
 
 .control-btn.active {
   background: var(--matrix-green);
   color: var(--matrix-black);
+  box-shadow: 0 0 15px var(--matrix-green);
+}
+
+.control-btn:active {
+  transform: scale(0.95);
 }
 
 /* Progress Bar */
