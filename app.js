@@ -26,27 +26,101 @@ class MatrixApp {
     const loader = document.getElementById('matrix-loader');
     const progressBar = document.querySelector('.progress-bar-matrix');
     const percentage = document.querySelector('.loader-percentage');
+    const status = document.querySelector('.loader-status');
     
     if (!loader) return;
     
+    // Setup loader canvas
+    this.setupLoaderCanvas();
+    
+    const statusMessages = [
+      'INITIALIZING SYSTEMS...',
+      'LOADING MATRIX PROTOCOLS...',
+      'ESTABLISHING CONNECTION...',
+      'PREPARING DIGITAL ENVIRONMENT...',
+      'FINALIZING MATRIX ENTRY...'
+    ];
+    
     let progress = 0;
+    let statusIndex = 0;
+    
     const interval = setInterval(() => {
-      progress += Math.random() * 15;
+      progress += Math.random() * 12 + 3;
+      
+      // Update status message
+      if (progress > (statusIndex + 1) * 20) {
+        statusIndex = Math.min(statusIndex + 1, statusMessages.length - 1);
+        status.textContent = statusMessages[statusIndex];
+      }
+      
       if (progress >= 100) {
         progress = 100;
         clearInterval(interval);
+        
+        // Final status
+        status.textContent = 'MATRIX ENTRY COMPLETE';
         
         setTimeout(() => {
           loader.style.opacity = '0';
           setTimeout(() => {
             loader.style.display = 'none';
-          }, 500);
-        }, 500);
+          }, 800);
+        }, 1000);
       }
       
       progressBar.style.width = progress + '%';
       percentage.textContent = Math.floor(progress) + '%';
-    }, 100);
+    }, 120);
+  }
+
+  setupLoaderCanvas() {
+    const canvas = document.getElementById('loader-canvas');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const drops = [];
+    const fontSize = 12;
+    const columns = Math.floor(canvas.width / fontSize);
+    
+    // Initialize drops
+    for (let i = 0; i < columns; i++) {
+      drops[i] = {
+        x: i * fontSize,
+        y: Math.random() * canvas.height,
+        speed: Math.random() * 2 + 1,
+        char: Math.random() > 0.5 ? '0' : '1'
+      };
+    }
+    
+    const animate = () => {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.03)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      ctx.fillStyle = '#00ff41';
+      ctx.font = '12px monospace';
+      
+      drops.forEach((drop, index) => {
+        ctx.fillText(drop.char, drop.x, drop.y);
+        
+        drop.y += drop.speed;
+        
+        if (drop.y > canvas.height) {
+          drop.y = 0;
+          drop.char = Math.random() > 0.5 ? '0' : '1';
+        }
+        
+        if (Math.random() < 0.01) {
+          drop.char = Math.random() > 0.5 ? '0' : '1';
+        }
+      });
+      
+      requestAnimationFrame(animate);
+    };
+    
+    animate();
   }
 
   setupAccessibilityControls() {
