@@ -62,12 +62,12 @@ class MatrixApp {
         
         setTimeout(() => {
           this.triggerScreenExplosion();
-        }, 1500);
+        }, 500);
       }
       
       progressBar.style.width = progress + '%';
       percentage.textContent = Math.floor(progress) + '%';
-    }, 120);
+    }, 50);
   }
 
   setupLoaderCanvas() {
@@ -142,12 +142,12 @@ class MatrixApp {
     // Start screen corruption
     setTimeout(() => {
       this.startScreenCorruption(loader);
-    }, 500);
+    }, 200);
     
     // Final explosion and transition
     setTimeout(() => {
       this.finalExplosion(loader);
-    }, 3000);
+    }, 1500);
   }
 
   createExplosionEffect(container) {
@@ -206,8 +206,8 @@ class MatrixApp {
       loader.style.opacity = '0';
       setTimeout(() => {
         loader.style.display = 'none';
-      }, 1000);
-    }, 2000);
+      }, 500);
+    }, 1000);
   }
 
   setupAccessibilityControls() {
