@@ -117,6 +117,10 @@ body {
   animation: loaderPulse 2s ease-in-out infinite;
 }
 
+.loading-dots {
+  animation: loadingDots 1.5s ease-in-out infinite;
+}
+
 .loader-progress {
   width: 300px;
   height: 4px;
@@ -144,6 +148,12 @@ body {
 @keyframes loaderPulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }
+}
+
+@keyframes loadingDots {
+  0%, 20% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 /* Accessibility Controls */
