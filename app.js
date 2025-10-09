@@ -397,9 +397,9 @@ class MatrixApp {
     audioOverlay.innerHTML = `
       <div style="text-align: center; border: 2px solid var(--matrix-green); padding: 40px; border-radius: 8px; background: rgba(0, 0, 0, 0.7); box-shadow: 0 0 30px var(--matrix-green);">
         <div style="font-size: 48px; margin-bottom: 20px; animation: pulse 2s infinite;">🔊</div>
-        <div style="font-size: 20px; margin-bottom: 10px; text-shadow: 0 0 10px var(--matrix-green);">CYBERPUNK AUDIO</div>
-        <div style="font-size: 16px; margin-bottom: 20px; opacity: 0.8;">Ses deneyimi için tıklayın</div>
-        <div style="font-size: 12px; opacity: 0.6; border-top: 1px solid var(--matrix-green); padding-top: 10px;">Click to start cyberpunk audio experience</div>
+        <div style="font-size: 20px; margin-bottom: 10px; text-shadow: 0 0 10px var(--matrix-green);">MATRIX AUDIO</div>
+        <div style="font-size: 16px; margin-bottom: 20px; opacity: 0.8;">Epik ses deneyimi için tıklayın</div>
+        <div style="font-size: 12px; opacity: 0.6; border-top: 1px solid var(--matrix-green); padding-top: 10px;">Click to start Matrix audio experience</div>
         <div style="font-size: 10px; margin-top: 15px; opacity: 0.4;">Otomatik kapanır: 5 saniye</div>
       </div>
       <style>
