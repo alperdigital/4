@@ -312,7 +312,7 @@ class CodeRain {
   }
 
   getRandomChar() {
-    const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+    const chars = '01';
     return chars[Math.floor(Math.random() * chars.length)];
   }
 
