@@ -379,7 +379,7 @@ class CodeRain {
   }
 
   getRandomChar() {
-    const chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()_+-=[]{}|;:,.<>?';
+    const chars = '01';
     return chars[Math.floor(Math.random() * chars.length)];
   }
 
