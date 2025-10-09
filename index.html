@@ -3,659 +3,292 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="Alperdigital - Yazılım Geliştirme ve Dijital Çözümler" />
+    <meta name="description" content="Alperdigital - We translate falling code into working systems. AI, Cybersecurity, Creative Engineering." />
     <meta name="author" content="Alper Baş" />
-    <title>Alperdigital - Yazılım Geliştirme Şirketi</title>
+    <title>Alperdigital - Enter the Code</title>
     
-    <!-- Bootstrap Icons-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Preload critical fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
     
-    <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>A</text></svg>">
     
-    <!-- SimpleLightbox plugin CSS-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+    <!-- Open Graph -->
+    <meta property="og:title" content="Alperdigital - Enter the Code">
+    <meta property="og:description" content="We translate falling code into working systems. AI, Cybersecurity, Creative Engineering.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alperdigital.com">
     
-    <!-- Bootstrap CSS-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    
-    
-    <!-- Custom CSS -->
-    <style>
-        :root {
-            --bs-primary: #2563eb;
-            --bs-primary-rgb: 37, 99, 235;
-            --bs-secondary: #64748b;
-            --bs-success: #10b981;
-            --bs-info: #06b6d4;
-            --bs-warning: #f59e0b;
-            --bs-danger: #ef4444;
-            --bs-light: #f8fafc;
-            --bs-dark: #1e293b;
-        }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-        }
-        
-        .navbar {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95) !important;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .navbar-brand {
-            font-weight: 800;
-            font-size: 1.75rem;
-            background: linear-gradient(135deg, var(--bs-primary), #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .nav-link {
-            font-weight: 500;
-            color: var(--bs-dark) !important;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .nav-link:hover {
-            color: var(--bs-primary) !important;
-            transform: translateY(-2px);
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 50%;
-            background: var(--bs-primary);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        .masthead {
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.9) 0%, rgba(59, 130, 246, 0.8) 50%, rgba(16, 185, 129, 0.7) 100%), 
-                        url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2015&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        #spiderweb-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 10;
-            pointer-events: none;
-        }
-        
-        .masthead-content {
-            position: relative;
-            z-index: 20;
-        }
-        
-        /* Advanced Spiderweb Animation */
-        .spiderweb-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 10;
-            pointer-events: none;
-        }
-        
-        .masthead::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(37, 99, 235, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
-            animation: gradientShift 10s ease-in-out infinite;
-        }
-        
-        @keyframes gradientShift {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.7; }
-        }
-        
-        .masthead .container {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .masthead h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            animation: fadeInUp 1s ease-out;
-        }
-        
-        .masthead p {
-            font-size: 1.25rem;
-            font-weight: 400;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            animation: fadeInUp 1s ease-out 0.2s both;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .divider {
-            height: 4px;
-            background: linear-gradient(90deg, var(--bs-primary), #3b82f6, var(--bs-success));
-            border: none;
-            max-width: 4rem;
-            margin: 2rem auto;
-            border-radius: 2px;
-            animation: pulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scaleX(1); }
-            50% { transform: scaleX(1.1); }
-        }
-        
-        .divider-light {
-            background: linear-gradient(90deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4));
-        }
-        
-        .text-white-75 {
-            color: rgba(255, 255, 255, 0.9);
-        }
-        
-        .btn-xl {
-            padding: 1.25rem 2.5rem;
-            font-size: 1.125rem;
-            font-weight: 600;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
-            border: none;
-        }
-        
-        .btn-xl:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--bs-primary), #3b82f6);
-            border: none;
-        }
-        
-        .btn-light {
-            background: rgba(255, 255, 255, 0.95);
-            color: var(--bs-primary);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .btn-light:hover {
-            background: white;
-            color: var(--bs-primary);
-            transform: translateY(-3px);
-        }
-        
-        .page-section {
-            padding: 5rem 0;
-        }
-        
-        .bg-primary {
-            background: linear-gradient(135deg, var(--bs-primary) 0%, #3b82f6 50%, var(--bs-success) 100%) !important;
-        }
-        
-        .service-card {
-            background: white;
-            border-radius: 20px;
-            padding: 2.5rem 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(37, 99, 235, 0.1);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            height: 100%;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
-            border-color: var(--bs-primary);
-        }
-        
-        .service-card i {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--bs-primary), #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .service-card h3 {
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--bs-dark);
-        }
-        
-        .service-card p {
-            color: var(--bs-secondary);
-            line-height: 1.6;
-        }
-        
-        .portfolio-box {
-            position: relative;
-            display: block;
-            overflow: hidden;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-        }
-        
-        .portfolio-box:hover {
-            transform: scale(1.05);
-        }
-        
-        .portfolio-box img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            transition: all 0.3s ease;
-        }
-        
-        .portfolio-box:hover img {
-            transform: scale(1.1);
-        }
-        
-        .portfolio-box-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.95), rgba(16, 185, 129, 0.95));
-            color: white;
-            padding: 1.5rem;
-            transform: translateY(100%);
-            transition: all 0.3s ease;
-            border-radius: 0 0 15px 15px;
-        }
-        
-        .portfolio-box:hover .portfolio-box-caption {
-            transform: translateY(0);
-        }
-        
-        .project-category {
-            font-size: 0.875rem;
-            font-weight: 500;
-            opacity: 0.9;
-            margin-bottom: 0.5rem;
-        }
-        
-        .project-name {
-            font-size: 1.125rem;
-            font-weight: 700;
-        }
-        
-        .form-control {
-            border-radius: 10px;
-            border: 2px solid #e2e8f0;
-            padding: 0.875rem 1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .form-control:focus {
-            border-color: var(--bs-primary);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-        
-        .form-floating > label {
-            color: var(--bs-secondary);
-            font-weight: 500;
-        }
-        
-        .footer {
-            background: linear-gradient(135deg, var(--bs-dark) 0%, #334155 100%);
-            color: white;
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--bs-primary), #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .section-subtitle {
-            font-size: 1.125rem;
-            color: var(--bs-secondary);
-            margin-bottom: 3rem;
-        }
-        
-        .contact-info {
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(16, 185, 129, 0.05));
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-        }
-        
-        .contact-info i {
-            font-size: 2.5rem;
-            color: var(--bs-primary);
-            margin-bottom: 1rem;
-        }
-        
-        .contact-info div {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--bs-dark);
-        }
-        
-        .contact-info a {
-            color: var(--bs-primary);
-            font-weight: 700;
-            transition: all 0.3s ease;
-        }
-        
-        .contact-info a:hover {
-            color: var(--bs-success);
-            transform: scale(1.05);
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .masthead h1 {
-                font-size: 2.5rem;
-            }
-            
-            .masthead p {
-                font-size: 1.125rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .service-card {
-                padding: 2rem 1.5rem;
-                margin-bottom: 2rem;
-            }
-        }
-        
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        /* Loading animation */
-        .fade-in {
-            animation: fadeIn 0.6s ease-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-    </style>
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
 </head>
+<body>
+    <!-- Accessibility Controls -->
+    <div id="accessibility-controls" class="accessibility-controls">
+        <button id="reduce-motion" class="control-btn" aria-label="Reduce Motion">⚡</button>
+        <button id="high-contrast" class="control-btn" aria-label="High Contrast">🔆</button>
+        <button id="sound-toggle" class="control-btn" aria-label="Toggle Sound">🔊</button>
+    </div>
 
-<body id="page-top">
-    <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
-        <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="#page-top">Alperdigital</a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="#about">Hakkımızda</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#services">Hizmetler</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#portfolio">Portföy</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">İletişim</a></li>
-                </ul>
+    <!-- Progress Bar -->
+    <div id="progress-bar" class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-text">ALPERDIGITAL</span>
             </div>
+            <ul class="nav-links">
+                <li><a href="#hero" class="nav-link">Enter</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#work" class="nav-link">Work</a></li>
+                <li><a href="#approach" class="nav-link">Approach</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
         </div>
     </nav>
 
-    <!-- Masthead-->
-    <header class="masthead">
-        <canvas id="spiderweb-canvas"></canvas>
+    <!-- Hero Section -->
+    <section id="hero" class="hero" role="banner">
+        <!-- Code Rain Background -->
+        <canvas id="code-rain" class="code-rain" aria-hidden="true"></canvas>
         
-        <!-- Advanced Spiderweb Canvas -->
-        <div id="spiderweb-overlay" class="spiderweb-overlay"></div>
+        <!-- Puddle Reflection -->
+        <div class="puddle-container">
+            <div class="puddle" id="puddle">
+                <div class="puddle-reflection">
+                    <div class="reflection-content">
+                        <div class="ladder-silhouette"></div>
+                        <div class="crescent-moon"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
         
-        <div class="container px-4 px-lg-5 h-100">
-            <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
-                <div class="col-lg-8 align-self-end masthead-content">
-                    <h1 class="text-white font-weight-bold">Dijital Dünyada Fark Yaratın</h1>
-                    <hr class="divider" />
-                </div>
-                <div class="col-lg-8 align-self-baseline masthead-content">
-                    <p class="text-white-75 mb-5">Alperdigital olarak, modern teknolojiler kullanarak işletmeniz için özel yazılım çözümleri geliştiriyoruz. Web uygulamaları, mobil uygulamalar ve dijital dönüşüm projelerinde uzmanız. İşinizi bir üst seviyeye taşıyacak çözümlerle yanınızdayız.</p>
-                    <a class="btn btn-primary btn-xl" href="#about">Daha Fazla Bilgi</a>
-                </div>
+        <!-- Hero Content -->
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="title-line">ALPERDIGITAL</span>
+            </h1>
+            <h2 class="hero-subtitle">
+                <span class="subtitle-text">We translate falling code into working systems</span>
+            </h2>
+            <div class="hero-tagline">
+                <span class="tagline-item">Secure.</span>
+                <span class="tagline-item">Measurable.</span>
+                <span class="tagline-item">Human-centered.</span>
+            </div>
+            <div class="hero-cta">
+                <button class="cta-button primary" data-text="ENTER THE CODE">
+                    <span class="button-text">ENTER THE CODE</span>
+                </button>
+                <button class="cta-button secondary" data-text="VIEW WORK">
+                    <span class="button-text">VIEW WORK</span>
+                </button>
             </div>
         </div>
-    </header>
-
-    <!-- About-->
-    <section class="page-section bg-primary" id="about">
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-lg-8 text-center">
-                    <h2 class="text-white mt-0">İhtiyacınız Olan Her Şey Burada!</h2>
-                    <hr class="divider divider-light" />
-                    <p class="text-white-75 mb-4">Alperdigital olarak, işletmenizin dijital dönüşümü için gerekli tüm teknolojik çözümleri sunuyoruz. Modern web teknolojileri, mobil uygulama geliştirme ve bulut çözümleri ile işinizi bir üst seviyeye taşıyoruz. 5+ yıllık deneyimimizle projelerinizi başarıyla hayata geçiriyoruz.</p>
-                    <a class="btn btn-light btn-xl" href="#services">Başlayalım!</a>
-                </div>
-            </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <div class="scroll-text">SCROLL TO DECODE</div>
+            <div class="scroll-arrow"></div>
         </div>
     </section>
 
-    <!-- Services-->
-    <section class="page-section" id="services">
-        <div class="container px-4 px-lg-5">
-            <div class="text-center mb-5">
-                <h2 class="section-title">Hizmetlerimiz</h2>
-                <p class="section-subtitle">Modern teknolojiler ile işletmenizi dijital dünyaya taşıyoruz</p>
-                <hr class="divider" />
-            </div>
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6">
-                    <div class="service-card">
-                        <i class="bi-code-slash"></i>
-                        <h3>Web Geliştirme</h3>
-                        <p>React, Vue.js, Angular ve modern web teknolojileri ile responsive, hızlı ve SEO uyumlu web siteleri geliştiriyoruz.</p>
+    <!-- Services Section -->
+    <section id="services" class="services" role="region" aria-labelledby="services-heading">
+        <div class="container">
+            <h2 id="services-heading" class="section-title">
+                <span class="title-text">WHAT WE DO</span>
+            </h2>
+            <div class="services-grid">
+                <div class="service-card" data-service="ai">
+                    <div class="card-matrix" aria-hidden="true"></div>
+                    <div class="card-content">
+                        <h3 class="card-title">AI SYSTEMS</h3>
+                        <p class="card-description">Intelligent automation and machine learning solutions that adapt and evolve.</p>
+                        <div class="card-tech">TensorFlow • PyTorch • OpenAI</div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="service-card">
-                        <i class="bi-phone"></i>
-                        <h3>Mobil Uygulama</h3>
-                        <p>React Native, Flutter ve native teknolojiler ile iOS ve Android platformları için performanslı mobil uygulamalar.</p>
+                <div class="service-card" data-service="security">
+                    <div class="card-matrix" aria-hidden="true"></div>
+                    <div class="card-content">
+                        <h3 class="card-title">CYBERSECURITY</h3>
+                        <p class="card-description">Fortress-grade protection for your digital infrastructure and data.</p>
+                        <div class="card-tech">Zero Trust • Penetration Testing • SOC</div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="service-card">
-                        <i class="bi-cloud"></i>
-                        <h3>Bulut Çözümleri</h3>
-                        <p>AWS, Azure ve Google Cloud platformlarında güvenli, ölçeklenebilir ve maliyet etkin bulut altyapı çözümleri.</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="service-card">
-                        <i class="bi-gear"></i>
-                        <h3>Dijital Dönüşüm</h3>
-                        <p>İşletmenizi dijital çağa hazırlayan kapsamlı teknoloji danışmanlığı ve süreç optimizasyonu.</p>
+                <div class="service-card" data-service="creative">
+                    <div class="card-matrix" aria-hidden="true"></div>
+                    <div class="card-content">
+                        <h3 class="card-title">CREATIVE ENGINEERING</h3>
+                        <p class="card-description">Innovative solutions that bridge technology and human experience.</p>
+                        <div class="card-tech">WebGL • React • Node.js</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Portfolio-->
-    <div id="portfolio">
-        <div class="container-fluid p-0">
-            <div class="row g-0">
-                <div class="col-lg-4 col-sm-6">
-                    <a class="portfolio-box" href="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" title="E-Ticaret Platformu">
-                        <img class="img-fluid" src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="E-Ticaret Platformu" />
-                        <div class="portfolio-box-caption">
-                            <div class="project-category text-white-50">Web Geliştirme</div>
-                            <div class="project-name">E-Ticaret Platformu</div>
+    <!-- Work Section -->
+    <section id="work" class="work" role="region" aria-labelledby="work-heading">
+        <div class="container">
+            <h2 id="work-heading" class="section-title">
+                <span class="title-text">SELECTED WORK</span>
+            </h2>
+            <div class="work-grid">
+                <div class="work-item" data-work="project1">
+                    <div class="work-thumbnail">
+                        <div class="work-ascii" aria-hidden="true"></div>
+                        <div class="work-overlay">
+                            <h3 class="work-title">AI-Powered Analytics</h3>
+                            <p class="work-description">Real-time data processing system</p>
                         </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a class="portfolio-box" href="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" title="Mobil Uygulama">
-                        <img class="img-fluid" src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Mobil Uygulama" />
-                        <div class="portfolio-box-caption">
-                            <div class="project-category text-white-50">Mobil Uygulama</div>
-                            <div class="project-name">iOS/Android App</div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a class="portfolio-box" href="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" title="Kurumsal Website">
-                        <img class="img-fluid" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Kurumsal Website" />
-                        <div class="portfolio-box-caption">
-                            <div class="project-category text-white-50">Web Tasarım</div>
-                            <div class="project-name">Kurumsal Website</div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a class="portfolio-box" href="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" title="Bulut Migrasyonu">
-                        <img class="img-fluid" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Bulut Migrasyonu" />
-                        <div class="portfolio-box-caption">
-                            <div class="project-category text-white-50">Bulut Çözümleri</div>
-                            <div class="project-name">AWS Migrasyonu</div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a class="portfolio-box" href="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" title="API Geliştirme">
-                        <img class="img-fluid" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="API Geliştirme" />
-                        <div class="portfolio-box-caption">
-                            <div class="project-category text-white-50">Backend</div>
-                            <div class="project-name">RESTful API</div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a class="portfolio-box" href="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" title="Dijital Dönüşüm">
-                        <img class="img-fluid" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Dijital Dönüşüm" />
-                        <div class="portfolio-box-caption p-3">
-                            <div class="project-category text-white-50">Danışmanlık</div>
-                            <div class="project-name">Dijital Dönüşüm</div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Call to action-->
-    <section class="page-section bg-dark text-white">
-        <div class="container px-4 px-lg-5 text-center">
-            <h2 class="mb-4">Projenizi Hayata Geçirelim!</h2>
-            <a class="btn btn-light btn-xl" href="#contact">Hemen İletişime Geçin!</a>
-        </div>
-    </section>
-
-    <!-- Contact-->
-    <section class="page-section" id="contact">
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-lg-8 col-xl-6 text-center">
-                    <h2 class="mt-0">İletişime Geçelim!</h2>
-                    <hr class="divider" />
-                    <p class="text-muted mb-5">Projenizi hayata geçirmeye hazır mısınız? Bize mesaj gönderin, 24 saat içinde size dönüş yapalım! Ücretsiz danışmanlık hizmetimizden yararlanın.</p>
-                </div>
-            </div>
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="contact-info">
-                        <i class="bi-phone"></i>
-                        <div><a href="tel:+905071353025" class="text-decoration-none">+90 507 135 30 25</a></div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="contact-info">
-                        <i class="bi-envelope"></i>
-                        <div><a href="mailto:alperdigital@icloud.com" class="text-decoration-none">alperdigital@icloud.com</a></div>
+                <div class="work-item" data-work="project2">
+                    <div class="work-thumbnail">
+                        <div class="work-ascii" aria-hidden="true"></div>
+                        <div class="work-overlay">
+                            <h3 class="work-title">Security Framework</h3>
+                            <p class="work-description">Enterprise-grade protection suite</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="work-item" data-work="project3">
+                    <div class="work-thumbnail">
+                        <div class="work-ascii" aria-hidden="true"></div>
+                        <div class="work-overlay">
+                            <h3 class="work-title">Creative Platform</h3>
+                            <p class="work-description">Interactive digital experiences</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer-->
-    <footer class="footer py-5">
-        <div class="container px-4 px-lg-5">
-            <div class="text-center">
-                <div class="mb-3">
-                    <h4 class="text-white mb-2">Alperdigital</h4>
-                    <p class="text-white-50">Dijital Dünyada Fark Yaratın</p>
+    <!-- Approach Section -->
+    <section id="approach" class="approach" role="region" aria-labelledby="approach-heading">
+        <div class="container">
+            <h2 id="approach-heading" class="section-title">
+                <span class="title-text">OUR APPROACH</span>
+            </h2>
+            <div class="approach-timeline">
+                <div class="timeline-step" data-step="decode">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3 class="step-title">DECODE</h3>
+                        <p class="step-description">We analyze the data streams, understand the patterns, and identify the opportunities hidden in the noise.</p>
+                    </div>
                 </div>
-                <div class="small text-white-50">Copyright &copy; 2024 - Alperdigital. Tüm hakları saklıdır.</div>
+                <div class="timeline-step" data-step="model">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3 class="step-title">MODEL</h3>
+                        <p class="step-description">We architect intelligent systems that can adapt, learn, and evolve with your business needs.</p>
+                    </div>
+                </div>
+                <div class="timeline-step" data-step="secure">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3 class="step-title">SECURE</h3>
+                        <p class="step-description">We build fortress-grade security into every layer, ensuring your systems remain impenetrable.</p>
+                    </div>
+                </div>
+                <div class="timeline-step" data-step="ship">
+                    <div class="step-number">04</div>
+                    <div class="step-content">
+                        <h3 class="step-title">SHIP</h3>
+                        <p class="step-description">We deploy with precision, monitor with vigilance, and iterate with purpose.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about" role="region" aria-labelledby="about-heading">
+        <div class="container">
+            <h2 id="about-heading" class="section-title">
+                <span class="title-text">ABOUT</span>
+            </h2>
+            <div class="about-content">
+                <div class="about-portrait">
+                    <svg class="portrait-svg" viewBox="0 0 200 200" aria-hidden="true">
+                        <path class="portrait-path" d="M100,20 Q150,50 150,100 Q150,150 100,180 Q50,150 50,100 Q50,50 100,20 Z" />
+                    </svg>
+                </div>
+                <div class="about-text">
+                    <p class="about-description">
+                        Founded by Alper Baş, Alperdigital operates at the intersection of artificial intelligence, 
+                        cybersecurity, and creative engineering. We believe that the future belongs to those who 
+                        can read the digital rain and transform it into meaningful action.
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">Projects Delivered</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">99.9%</span>
+                            <span class="stat-label">Uptime Achieved</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">24/7</span>
+                            <span class="stat-label">Security Monitoring</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact" role="region" aria-labelledby="contact-heading">
+        <div class="container">
+            <h2 id="contact-heading" class="section-title">
+                <span class="title-text">CONTACT</span>
+            </h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3 class="contact-subtitle">Ready to enter the code?</h3>
+                    <p class="contact-description">
+                        Let's discuss how we can transform your digital challenges into competitive advantages.
+                    </p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <span class="contact-label">Email:</span>
+                            <a href="mailto:alperdigital@icloud.com" class="contact-link">alperdigital@icloud.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-label">Phone:</span>
+                            <a href="tel:+905071353025" class="contact-link">+90 507 135 30 25</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">ALPERDIGITAL</div>
+                <div class="footer-text">From signal to ship.</div>
+                <div class="footer-year">© 2024</div>
             </div>
         </div>
     </footer>
 
-    <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- SimpleLightbox plugin JS-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
-    
-    <!-- Advanced Spiderweb Animation -->
-    <script src="js/advanced-spiderweb.js"></script>
-    
-    <!-- Custom JS -->
-    <script>
-
-        // Initialize SimpleLightbox
-        new SimpleLightbox('.portfolio-box', {
-            captions: true,
-            captionSelector: 'img',
-            captionType: 'attr',
-            captionsData: 'alt',
-            captionPosition: 'bottom',
-            captionDelay: 250
-        });
-    </script>
+    <!-- Scripts -->
+    <script src="app.js" type="module"></script>
 </body>
 </html>

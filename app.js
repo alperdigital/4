@@ -1,0 +1,456 @@
+/* Matrix-Style JavaScript for Alperdigital */
+
+class MatrixApp {
+  constructor() {
+    this.isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.isHighContrast = false;
+    this.codeRain = null;
+    this.puddle = null;
+    this.init();
+  }
+
+  init() {
+    this.setupAccessibilityControls();
+    this.setupProgressBar();
+    this.setupNavigation();
+    this.setupCodeRain();
+    this.setupPuddle();
+    this.setupScrollAnimations();
+    this.setupDigitMorphing();
+    this.setupParallax();
+    this.setupEasterEggs();
+  }
+
+  setupAccessibilityControls() {
+    const controls = document.querySelector('.accessibility-controls');
+    if (!controls) return;
+
+    const motionToggle = controls.querySelector('[data-control="motion"]');
+    const contrastToggle = controls.querySelector('[data-control="contrast"]');
+
+    if (motionToggle) {
+      motionToggle.addEventListener('click', () => {
+        this.isReducedMotion = !this.isReducedMotion;
+        motionToggle.classList.toggle('active', this.isReducedMotion);
+        document.body.classList.toggle('reduced-motion', this.isReducedMotion);
+        
+        if (this.isReducedMotion) {
+          this.stopAnimations();
+        } else {
+          this.startAnimations();
+        }
+      });
+    }
+
+    if (contrastToggle) {
+      contrastToggle.addEventListener('click', () => {
+        this.isHighContrast = !this.isHighContrast;
+        contrastToggle.classList.toggle('active', this.isHighContrast);
+        document.body.classList.toggle('high-contrast', this.isHighContrast);
+      });
+    }
+  }
+
+  setupProgressBar() {
+    const progressFill = document.querySelector('.progress-fill');
+    if (!progressFill) return;
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      progressFill.style.width = scrollPercent + '%';
+    });
+  }
+
+  setupNavigation() {
+    const nav = document.querySelector('.nav');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    // Nav scroll effect
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+
+    // Smooth scroll for nav links
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (href.startsWith('#')) {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    });
+  }
+
+  setupCodeRain() {
+    if (this.isReducedMotion) return;
+
+    const canvas = document.querySelector('.code-rain');
+    if (!canvas) return;
+
+    this.codeRain = new CodeRain(canvas);
+    this.codeRain.start();
+  }
+
+  setupPuddle() {
+    if (this.isReducedMotion) return;
+
+    const puddle = document.querySelector('.puddle');
+    if (!puddle) return;
+
+    this.puddle = new PuddleEffect(puddle);
+    this.puddle.init();
+  }
+
+  setupScrollAnimations() {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements for animation
+    const animateElements = document.querySelectorAll('.service-card, .work-item, .timeline-step');
+    animateElements.forEach(el => observer.observe(el));
+  }
+
+
+  setupDigitMorphing() {
+    const morphElements = document.querySelectorAll('[data-morph]');
+    
+    morphElements.forEach(element => {
+      element.addEventListener('mouseenter', () => {
+        this.morphToText(element);
+      });
+      
+      element.addEventListener('mouseleave', () => {
+        this.morphToDigits(element);
+      });
+    });
+  }
+
+  morphToText(element) {
+    const targetText = element.dataset.morph;
+    const currentText = element.textContent;
+    
+    if (currentText === targetText) return;
+    
+    // Create digit sequence
+    const digits = '01';
+    let morphText = '';
+    
+    for (let i = 0; i < targetText.length; i++) {
+      morphText += digits[Math.floor(Math.random() * digits.length)];
+    }
+    
+    element.textContent = morphText;
+    
+    // Animate to target text
+    let index = 0;
+    const interval = setInterval(() => {
+      if (index < targetText.length) {
+        const newText = targetText.substring(0, index + 1) + 
+                       morphText.substring(index + 1);
+        element.textContent = newText;
+        index++;
+      } else {
+        clearInterval(interval);
+        element.textContent = targetText;
+      }
+    }, 50);
+  }
+
+  morphToDigits(element) {
+    const originalText = element.textContent;
+    const digits = '01';
+    let morphText = '';
+    
+    for (let i = 0; i < originalText.length; i++) {
+      morphText += digits[Math.floor(Math.random() * digits.length)];
+    }
+    
+    element.textContent = morphText;
+  }
+
+  setupParallax() {
+    if (this.isReducedMotion) return;
+
+    const parallaxElements = document.querySelectorAll('[data-parallax]');
+    
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      
+      parallaxElements.forEach(element => {
+        const rate = scrolled * -0.5;
+        element.style.transform = `translateY(${rate}px)`;
+      });
+    });
+  }
+
+  setupEasterEggs() {
+    // Konami code
+    let konamiCode = [];
+    const konamiSequence = [
+      'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+      'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+      'KeyB', 'KeyA'
+    ];
+
+    document.addEventListener('keydown', (e) => {
+      konamiCode.push(e.code);
+      
+      if (konamiCode.length > konamiSequence.length) {
+        konamiCode.shift();
+      }
+      
+      if (konamiCode.join(',') === konamiSequence.join(',')) {
+        this.activateKonamiCode();
+        konamiCode = [];
+      }
+    });
+  }
+
+  activateKonamiCode() {
+    // Slow down code rain
+    if (this.codeRain) {
+      this.codeRain.slowDown();
+    }
+    
+    // Show style guide
+    this.showStyleGuide();
+  }
+
+  showStyleGuide() {
+    const styleGuide = document.createElement('div');
+    styleGuide.className = 'style-guide';
+    styleGuide.innerHTML = `
+      <div class="style-guide-content">
+        <h2>Alperdigital Style Guide</h2>
+        <div class="color-palette">
+          <div class="color-swatch" style="background: #00ff88;"></div>
+          <div class="color-swatch" style="background: #00d870;"></div>
+          <div class="color-swatch" style="background: #000000;"></div>
+        </div>
+        <p>Matrix-inspired design system</p>
+        <button onclick="this.parentElement.parentElement.remove()">Close</button>
+      </div>
+    `;
+    
+    document.body.appendChild(styleGuide);
+    
+    setTimeout(() => {
+      styleGuide.remove();
+    }, 10000);
+  }
+
+  stopAnimations() {
+    if (this.codeRain) {
+      this.codeRain.stop();
+    }
+    if (this.puddle) {
+      this.puddle.stop();
+    }
+  }
+
+  startAnimations() {
+    if (this.codeRain) {
+      this.codeRain.start();
+    }
+    if (this.puddle) {
+      this.puddle.start();
+    }
+  }
+}
+
+class CodeRain {
+  constructor(canvas) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.drops = [];
+    this.animationId = null;
+    this.isRunning = false;
+    
+    this.resize();
+    window.addEventListener('resize', () => this.resize());
+  }
+
+  resize() {
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
+    this.initDrops();
+  }
+
+  initDrops() {
+    this.drops = [];
+    const fontSize = 14;
+    const columns = Math.floor(this.canvas.width / fontSize);
+    
+    for (let i = 0; i < columns; i++) {
+      this.drops[i] = {
+        x: i * fontSize,
+        y: Math.random() * this.canvas.height,
+        speed: Math.random() * 3 + 1,
+        char: this.getRandomChar()
+      };
+    }
+  }
+
+  getRandomChar() {
+    const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+    return chars[Math.floor(Math.random() * chars.length)];
+  }
+
+  animate() {
+    if (!this.isRunning) return;
+    
+    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    
+    this.ctx.fillStyle = '#00ff88';
+    this.ctx.font = '14px monospace';
+    
+    this.drops.forEach((drop, index) => {
+      this.ctx.fillText(drop.char, drop.x, drop.y);
+      
+      drop.y += drop.speed;
+      
+      if (drop.y > this.canvas.height) {
+        drop.y = 0;
+        drop.char = this.getRandomChar();
+      }
+      
+      // Randomly change character
+      if (Math.random() < 0.01) {
+        drop.char = this.getRandomChar();
+      }
+    });
+    
+    this.animationId = requestAnimationFrame(() => this.animate());
+  }
+
+  start() {
+    this.isRunning = true;
+    this.animate();
+  }
+
+  stop() {
+    this.isRunning = false;
+    if (this.animationId) {
+      cancelAnimationFrame(this.animationId);
+    }
+  }
+
+  slowDown() {
+    this.drops.forEach(drop => {
+      drop.speed *= 0.1;
+    });
+  }
+}
+
+class PuddleEffect {
+  constructor(puddle) {
+    this.puddle = puddle;
+    this.ripples = [];
+    this.isRunning = false;
+  }
+
+  init() {
+    this.puddle.addEventListener('mouseenter', () => {
+      this.createRipple(event.clientX, event.clientY);
+    });
+    
+    this.puddle.addEventListener('mousemove', (e) => {
+      if (Math.random() < 0.1) {
+        this.createRipple(e.clientX, e.clientY);
+      }
+    });
+    
+    window.addEventListener('scroll', () => {
+      if (Math.random() < 0.05) {
+        this.createRipple(
+          this.puddle.offsetLeft + this.puddle.offsetWidth / 2,
+          this.puddle.offsetTop + this.puddle.offsetHeight / 2
+        );
+      }
+    });
+  }
+
+  createRipple(x, y) {
+    const ripple = {
+      x: x - this.puddle.offsetLeft,
+      y: y - this.puddle.offsetTop,
+      radius: 0,
+      maxRadius: 50,
+      opacity: 1,
+      speed: 2
+    };
+    
+    this.ripples.push(ripple);
+    
+    // Remove ripple after animation
+    setTimeout(() => {
+      const index = this.ripples.indexOf(ripple);
+      if (index > -1) {
+        this.ripples.splice(index, 1);
+      }
+    }, 1000);
+  }
+
+  start() {
+    this.isRunning = true;
+    this.animate();
+  }
+
+  stop() {
+    this.isRunning = false;
+  }
+
+  animate() {
+    if (!this.isRunning) return;
+    
+    this.ripples.forEach(ripple => {
+      ripple.radius += ripple.speed;
+      ripple.opacity = 1 - (ripple.radius / ripple.maxRadius);
+      
+      if (ripple.opacity <= 0) {
+        ripple.opacity = 0;
+      }
+    });
+    
+    requestAnimationFrame(() => this.animate());
+  }
+}
+
+// Initialize app when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  new MatrixApp();
+});
+
+// Service Worker registration for offline support
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        console.log('SW registered: ', registration);
+      })
+      .catch(registrationError => {
+        console.log('SW registration failed: ', registrationError);
+      });
+  });
+}
