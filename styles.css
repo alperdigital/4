@@ -1161,11 +1161,11 @@ section {
 @media (max-width: 768px) {
   .work-overlay {
     transform: translateY(0) !important;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.95));
+    background: transparent;
     padding: var(--spacing-lg);
     display: block;
     position: absolute;
-    bottom: 0;
+    bottom: -150px;
     left: 0;
     right: 0;
     height: 150px;
@@ -1174,30 +1174,30 @@ section {
   
   .work-overlay .work-title {
     position: absolute;
-    bottom: 60px;
-    left: var(--spacing-lg);
-    right: var(--spacing-lg);
+    top: 0;
+    left: 0;
+    right: 0;
     margin: 0;
   }
   
   .work-overlay .work-description {
     position: absolute;
-    bottom: 35px;
-    left: var(--spacing-lg);
-    right: var(--spacing-lg);
+    top: 30px;
+    left: 0;
+    right: 0;
     margin: 0;
   }
   
   .work-overlay .work-tech {
     position: absolute;
-    bottom: 10px;
-    left: var(--spacing-lg);
-    right: var(--spacing-lg);
+    top: 60px;
+    left: 0;
+    right: 0;
     margin: 0;
   }
   
   .work-item {
-    height: 350px;
+    height: 500px;
   }
   
   .work-thumbnail {
@@ -1627,7 +1627,7 @@ section {
   }
   
   .work-item {
-    height: 320px;
+    height: 460px;
   }
   
   .work-thumbnail {
@@ -1642,34 +1642,35 @@ section {
     padding: var(--spacing-md);
     display: block;
     position: absolute;
-    bottom: 0;
+    bottom: -140px;
     left: 0;
     right: 0;
     height: 140px;
     z-index: 10;
+    background: transparent;
   }
   
   .work-overlay .work-title {
     position: absolute;
-    bottom: 50px;
-    left: var(--spacing-md);
-    right: var(--spacing-md);
+    top: 0;
+    left: 0;
+    right: 0;
     margin: 0;
   }
   
   .work-overlay .work-description {
     position: absolute;
-    bottom: 30px;
-    left: var(--spacing-md);
-    right: var(--spacing-md);
+    top: 25px;
+    left: 0;
+    right: 0;
     margin: 0;
   }
   
   .work-overlay .work-tech {
     position: absolute;
-    bottom: 8px;
-    left: var(--spacing-md);
-    right: var(--spacing-md);
+    top: 50px;
+    left: 0;
+    right: 0;
     margin: 0;
   }
   
