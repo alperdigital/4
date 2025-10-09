@@ -17,6 +17,7 @@ class MatrixApp {
     this.setupProgressBar();
     this.setupNavigation();
     this.setupAudio();
+    this.setupMatrixBackground();
     this.setupCodeRain();
     this.setupPuddle();
     this.setupScrollAnimations();
@@ -454,6 +455,16 @@ class MatrixApp {
         }
       });
     });
+  }
+
+  setupMatrixBackground() {
+    if (this.isReducedMotion) return;
+
+    const canvas = document.getElementById('matrix-background');
+    if (!canvas) return;
+
+    this.matrixBackground = new MatrixBackground(canvas);
+    this.matrixBackground.start();
   }
 
   setupCodeRain() {
@@ -926,6 +937,149 @@ class PuddleEffect {
     });
     
     requestAnimationFrame(() => this.animate());
+  }
+}
+
+// Matrix Background Digital Rain Class
+class MatrixBackground {
+  constructor(canvas) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.drops = [];
+    this.animationId = null;
+    this.isRunning = false;
+    this.fontSize = 14;
+    this.columns = [];
+    
+    this.resize();
+    window.addEventListener('resize', () => this.resize());
+  }
+
+  resize() {
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
+    this.initColumns();
+  }
+
+  initColumns() {
+    this.columns = [];
+    const columnCount = Math.floor(this.canvas.width / this.fontSize);
+    
+    for (let i = 0; i < columnCount; i++) {
+      this.columns[i] = {
+        x: i * this.fontSize,
+        drops: [],
+        nextDropTime: Math.random() * 2000,
+        lastUpdate: Date.now(),
+        speed: Math.random() * 2 + 1
+      };
+    }
+  }
+
+  getRandomChar() {
+    return Math.random() < 0.5 ? '0' : '1';
+  }
+
+  createDrop(column) {
+    const drop = {
+      char: this.getRandomChar(),
+      y: -this.fontSize,
+      speed: column.speed + Math.random() * 1,
+      opacity: 1,
+      trail: []
+    };
+    
+    column.drops.push(drop);
+  }
+
+  updateDrops() {
+    const now = Date.now();
+    
+    this.columns.forEach(column => {
+      // Create new drops
+      if (now - column.lastUpdate > column.nextDropTime) {
+        this.createDrop(column);
+        column.nextDropTime = Math.random() * 1000 + 500;
+        column.lastUpdate = now;
+      }
+      
+      // Update existing drops
+      column.drops.forEach((drop, index) => {
+        // Update trail
+        drop.trail.unshift({ char: drop.char, y: drop.y, opacity: drop.opacity });
+        if (drop.trail.length > 15) {
+          drop.trail.pop();
+        }
+        
+        // Move drop
+        drop.y += drop.speed;
+        
+        // Fade out
+        if (drop.y > this.canvas.height * 0.3) {
+          drop.opacity = Math.max(0, drop.opacity - 0.02);
+        }
+        
+        // Remove old drops
+        if (drop.y > this.canvas.height || drop.opacity <= 0) {
+          column.drops.splice(index, 1);
+        }
+      });
+    });
+  }
+
+  draw() {
+    // Fade effect
+    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    
+    this.ctx.font = `${this.fontSize}px 'Courier New', monospace`;
+    this.ctx.textAlign = 'center';
+    
+    this.columns.forEach(column => {
+      column.drops.forEach(drop => {
+        // Draw trail
+        drop.trail.forEach((trailPoint, index) => {
+          const trailOpacity = (trailPoint.opacity * (1 - index / drop.trail.length)) * 0.3;
+          this.ctx.fillStyle = `rgba(0, 255, 0, ${trailOpacity})`;
+          this.ctx.fillText(trailPoint.char, column.x + this.fontSize/2, trailPoint.y);
+        });
+        
+        // Draw main character
+        this.ctx.fillStyle = `rgba(0, 255, 0, ${drop.opacity})`;
+        
+        // Add glow effect for bright characters
+        if (drop.opacity > 0.8) {
+          this.ctx.shadowColor = '#00ff00';
+          this.ctx.shadowBlur = 8;
+        } else {
+          this.ctx.shadowBlur = 0;
+        }
+        
+        this.ctx.fillText(drop.char, column.x + this.fontSize/2, drop.y);
+        this.ctx.shadowBlur = 0;
+      });
+    });
+  }
+
+  animate() {
+    if (!this.isRunning) return;
+    
+    this.updateDrops();
+    this.draw();
+    
+    this.animationId = requestAnimationFrame(() => this.animate());
+  }
+
+  start() {
+    this.isRunning = true;
+    this.animate();
+  }
+
+  stop() {
+    this.isRunning = false;
+    if (this.animationId) {
+      cancelAnimationFrame(this.animationId);
+    }
   }
 }
 
