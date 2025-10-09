@@ -1192,19 +1192,21 @@ section {
 /* Responsive Design */
 @media (max-width: 768px) {
   .nav-container {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    gap: var(--spacing-sm);
     padding: var(--spacing-sm) var(--spacing-md);
   }
   
   .logo-text {
     font-size: var(--font-size-base);
     letter-spacing: 0.05em;
+    text-align: center;
   }
   
   .nav-links {
     gap: var(--spacing-sm);
+    justify-content: center;
+    flex-wrap: wrap;
   }
   
   .nav-link {
@@ -1291,18 +1293,23 @@ section {
   
   .nav-container {
     padding: var(--spacing-xs) var(--spacing-sm);
+    gap: var(--spacing-xs);
   }
   
   .logo-text {
     font-size: var(--font-size-sm);
+    text-align: center;
   }
   
   .nav-links {
     gap: var(--spacing-xs);
+    justify-content: center;
+    flex-wrap: wrap;
   }
   
   .nav-link {
     font-size: 10px;
+    padding: var(--spacing-xs) var(--spacing-sm);
   }
   
   .accessibility-controls {
