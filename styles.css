@@ -466,10 +466,12 @@ body {
   transform: scale(0.95);
 }
 
-/* Sound button special effects */
+/* Cyberpunk sound button effects */
 #sound-toggle {
   position: relative;
   overflow: hidden;
+  background: linear-gradient(45deg, var(--matrix-black), var(--matrix-gray));
+  border: 2px solid var(--matrix-green);
 }
 
 #sound-toggle::before {
@@ -486,35 +488,80 @@ body {
   opacity: 0;
 }
 
-#sound-toggle.active::before {
-  width: 60px;
-  height: 60px;
-  opacity: 0.3;
-  animation: soundPulse 2s ease-in-out infinite;
+#sound-toggle::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--matrix-green), transparent, var(--matrix-green));
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
 }
 
-@keyframes soundPulse {
+#sound-toggle.active::before {
+  width: 80px;
+  height: 80px;
+  opacity: 0.4;
+  animation: cyberPulse 1.8s ease-in-out infinite;
+}
+
+#sound-toggle.active::after {
+  opacity: 0.6;
+  animation: cyberGlow 2s linear infinite;
+}
+
+@keyframes cyberPulse {
   0%, 100% {
     transform: translate(-50%, -50%) scale(1);
-    opacity: 0.3;
+    opacity: 0.4;
   }
   50% {
-    transform: translate(-50%, -50%) scale(1.2);
-    opacity: 0.1;
+    transform: translate(-50%, -50%) scale(1.3);
+    opacity: 0.2;
   }
 }
 
-/* Sound waves animation for active state */
+@keyframes cyberGlow {
+  0% {
+    background: linear-gradient(45deg, var(--matrix-green), transparent, var(--matrix-green));
+  }
+  25% {
+    background: linear-gradient(135deg, var(--matrix-green), transparent, var(--matrix-green));
+  }
+  50% {
+    background: linear-gradient(225deg, var(--matrix-green), transparent, var(--matrix-green));
+  }
+  75% {
+    background: linear-gradient(315deg, var(--matrix-green), transparent, var(--matrix-green));
+  }
+  100% {
+    background: linear-gradient(45deg, var(--matrix-green), transparent, var(--matrix-green));
+  }
+}
+
+/* Cyberpunk sound waves animation for active state */
 #sound-toggle.active {
-  animation: soundWave 1.5s ease-in-out infinite;
+  animation: cyberWave 1.2s ease-in-out infinite;
+  box-shadow: 
+    0 0 10px var(--matrix-green),
+    inset 0 0 10px rgba(0, 255, 136, 0.1);
 }
 
-@keyframes soundWave {
+@keyframes cyberWave {
   0%, 100% {
-    box-shadow: 0 0 5px var(--matrix-green);
+    box-shadow: 
+      0 0 10px var(--matrix-green),
+      inset 0 0 10px rgba(0, 255, 136, 0.1);
   }
   50% {
-    box-shadow: 0 0 20px var(--matrix-green), 0 0 30px var(--matrix-green);
+    box-shadow: 
+      0 0 25px var(--matrix-green),
+      0 0 35px var(--matrix-green),
+      inset 0 0 15px rgba(0, 255, 136, 0.2);
   }
 }
 
