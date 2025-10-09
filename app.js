@@ -464,6 +464,31 @@ class MatrixApp {
 
     this.codeRain = new CodeRain(canvas);
     this.codeRain.start();
+    
+    // Add Matrix interaction effects
+    this.setupMatrixInteractions(canvas);
+  }
+
+  setupMatrixInteractions(canvas) {
+    // Mouse hover effects
+    canvas.addEventListener('mousemove', (e) => {
+      if (Math.random() < 0.1) {
+        this.codeRain.triggerGlitch();
+      }
+    });
+
+    // Click effects
+    canvas.addEventListener('click', (e) => {
+      this.codeRain.createMatrixExplosion();
+      this.codeRain.triggerGlitch();
+    });
+
+    // Scroll effects
+    window.addEventListener('scroll', () => {
+      if (Math.random() < 0.05) {
+        this.codeRain.increaseIntensity();
+      }
+    });
   }
 
   setupPuddle() {
@@ -636,6 +661,11 @@ class MatrixApp {
       this.codeRain.slowDown();
     }
     
+    // Trigger Matrix glitch effect
+    if (this.codeRain) {
+      this.codeRain.triggerGlitch();
+    }
+    
     // Show style guide
     this.showStyleGuide();
   }
@@ -702,58 +732,83 @@ class CodeRain {
 
   initDrops() {
     this.drops = [];
-    const fontSize = 14;
+    const fontSize = 16;
     const columns = Math.floor(this.canvas.width / fontSize);
     
     for (let i = 0; i < columns; i++) {
       this.drops[i] = {
         x: i * fontSize,
         y: Math.random() * this.canvas.height,
-        speed: Math.random() * 3 + 1,
-        char: this.getRandomChar()
+        speed: Math.random() * 4 + 1,
+        char: this.getRandomChar(),
+        trail: [],
+        glitchTimer: 0
       };
     }
   }
 
   getRandomChar() {
-    const chars = '01';
-    return chars[Math.floor(Math.random() * chars.length)];
+    const matrixChars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()_+-=[]{}|;:,.<>?';
+    return matrixChars[Math.floor(Math.random() * matrixChars.length)];
   }
 
   animate() {
     if (!this.isRunning) return;
     
-    // Create trailing effect
-    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+    // Create trailing effect with Matrix-style fade
+    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     
-    this.ctx.font = '14px monospace';
+    this.ctx.font = '16px "Courier New", monospace';
+    this.ctx.textAlign = 'center';
     
     this.drops.forEach((drop, index) => {
-      // Bright green for leading character
-      this.ctx.fillStyle = '#00ff41';
-      this.ctx.fillText(drop.char, drop.x, drop.y);
-      
-      // Dimmer trail effect
-      for (let i = 1; i < 20; i++) {
-        const trailY = drop.y - (i * 20);
+      // Matrix-style trail effect
+      for (let i = 0; i < 15; i++) {
+        const trailY = drop.y - (i * 18);
         if (trailY > 0) {
-          const opacity = Math.max(0, 1 - (i * 0.05));
+          const opacity = Math.max(0, (1 - (i * 0.08)) * 0.4);
           this.ctx.fillStyle = `rgba(0, 255, 65, ${opacity})`;
           this.ctx.fillText(drop.char, drop.x, trailY);
         }
       }
       
+      // Bright leading character with glow
+      this.ctx.fillStyle = '#00ff41';
+      this.ctx.shadowColor = '#00ff41';
+      this.ctx.shadowBlur = 8;
+      this.ctx.fillText(drop.char, drop.x, drop.y);
+      this.ctx.shadowBlur = 0;
+      
       drop.y += drop.speed;
       
       if (drop.y > this.canvas.height) {
-        drop.y = 0;
+        drop.y = -20;
+        drop.char = this.getRandomChar();
+        drop.speed = Math.random() * 3 + 1;
+      }
+      
+      // Matrix-style character morphing
+      if (Math.random() < 0.05) {
         drop.char = this.getRandomChar();
       }
       
-      // Randomly change character
-      if (Math.random() < 0.02) {
-        drop.char = this.getRandomChar();
+      // Glitch effect with timer
+      if (drop.glitchTimer > 0) {
+        const glitchChars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+        drop.char = glitchChars[Math.floor(Math.random() * glitchChars.length)];
+        this.ctx.fillStyle = '#ff0040';
+        this.ctx.shadowColor = '#ff0040';
+        this.ctx.shadowBlur = 5;
+        this.ctx.fillText(drop.char, drop.x, drop.y);
+        this.ctx.shadowBlur = 0;
+        drop.glitchTimer -= 16;
+      } else if (Math.random() < 0.005) {
+        // Random glitch
+        const glitchChars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+        drop.char = glitchChars[Math.floor(Math.random() * glitchChars.length)];
+        this.ctx.fillStyle = '#ff0040';
+        this.ctx.fillText(drop.char, drop.x, drop.y);
       }
     });
     
@@ -776,6 +831,27 @@ class CodeRain {
     this.drops.forEach(drop => {
       drop.speed *= 0.1;
     });
+  }
+
+  // Matrix-style effects
+  triggerGlitch() {
+    this.drops.forEach(drop => {
+      drop.glitchTimer = 100;
+    });
+  }
+
+  increaseIntensity() {
+    this.drops.forEach(drop => {
+      drop.speed *= 1.5;
+    });
+  }
+
+  createMatrixExplosion() {
+    // Create temporary red glitch effect
+    const originalFillStyle = this.ctx.fillStyle;
+    this.ctx.fillStyle = 'rgba(255, 0, 0, 0.3)';
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.fillStyle = originalFillStyle;
   }
 }
 
