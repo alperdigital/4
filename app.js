@@ -10,6 +10,7 @@ class MatrixApp {
   }
 
   init() {
+    this.setupMatrixLoader();
     this.setupAccessibilityControls();
     this.setupProgressBar();
     this.setupNavigation();
@@ -19,6 +20,33 @@ class MatrixApp {
     this.setupDigitMorphing();
     this.setupParallax();
     this.setupEasterEggs();
+  }
+
+  setupMatrixLoader() {
+    const loader = document.getElementById('matrix-loader');
+    const progressBar = document.querySelector('.progress-bar-matrix');
+    const percentage = document.querySelector('.loader-percentage');
+    
+    if (!loader) return;
+    
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += Math.random() * 15;
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(interval);
+        
+        setTimeout(() => {
+          loader.style.opacity = '0';
+          setTimeout(() => {
+            loader.style.display = 'none';
+          }, 500);
+        }, 500);
+      }
+      
+      progressBar.style.width = progress + '%';
+      percentage.textContent = Math.floor(progress) + '%';
+    }, 100);
   }
 
   setupAccessibilityControls() {
@@ -143,6 +171,45 @@ class MatrixApp {
         this.morphToDigits(element);
       });
     });
+
+    // Add glitch effect to titles
+    this.setupGlitchEffects();
+  }
+
+  setupGlitchEffects() {
+    const glitchElements = document.querySelectorAll('.hero-title, .title-text');
+    
+    glitchElements.forEach(element => {
+      element.addEventListener('mouseenter', () => {
+        this.triggerGlitch(element);
+      });
+    });
+  }
+
+  triggerGlitch(element) {
+    const originalText = element.textContent;
+    const glitchChars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+    
+    let glitchCount = 0;
+    const glitchInterval = setInterval(() => {
+      if (glitchCount >= 10) {
+        element.textContent = originalText;
+        clearInterval(glitchInterval);
+        return;
+      }
+      
+      let glitchedText = '';
+      for (let i = 0; i < originalText.length; i++) {
+        if (Math.random() < 0.3) {
+          glitchedText += glitchChars[Math.floor(Math.random() * glitchChars.length)];
+        } else {
+          glitchedText += originalText[i];
+        }
+      }
+      
+      element.textContent = glitchedText;
+      glitchCount++;
+    }, 50);
   }
 
   morphToText(element) {
@@ -312,21 +379,33 @@ class CodeRain {
   }
 
   getRandomChar() {
-    const chars = '01';
+    const chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()_+-=[]{}|;:,.<>?';
     return chars[Math.floor(Math.random() * chars.length)];
   }
 
   animate() {
     if (!this.isRunning) return;
     
-    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    // Create trailing effect
+    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     
-    this.ctx.fillStyle = '#00ff88';
     this.ctx.font = '14px monospace';
     
     this.drops.forEach((drop, index) => {
+      // Bright green for leading character
+      this.ctx.fillStyle = '#00ff41';
       this.ctx.fillText(drop.char, drop.x, drop.y);
+      
+      // Dimmer trail effect
+      for (let i = 1; i < 20; i++) {
+        const trailY = drop.y - (i * 20);
+        if (trailY > 0) {
+          const opacity = Math.max(0, 1 - (i * 0.05));
+          this.ctx.fillStyle = `rgba(0, 255, 65, ${opacity})`;
+          this.ctx.fillText(drop.char, drop.x, trailY);
+        }
+      }
       
       drop.y += drop.speed;
       
@@ -336,7 +415,7 @@ class CodeRain {
       }
       
       // Randomly change character
-      if (Math.random() < 0.01) {
+      if (Math.random() < 0.02) {
         drop.char = this.getRandomChar();
       }
     });

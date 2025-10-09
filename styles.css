@@ -2,15 +2,15 @@
 
 /* CSS Custom Properties */
 :root {
-  --matrix-green: #00ff88;
-  --matrix-green-dim: #00d870;
-  --matrix-green-bright: #00ffaa;
+  --matrix-green: #00ff41;
+  --matrix-green-dim: #00cc33;
+  --matrix-green-bright: #00ff88;
   --matrix-black: #000000;
-  --matrix-dark: #0a0a0a;
-  --matrix-gray: #1a1a1a;
-  --matrix-light-gray: #333333;
+  --matrix-dark: #001100;
+  --matrix-gray: #001a00;
+  --matrix-light-gray: #003300;
   --matrix-white: #ffffff;
-  --matrix-text: #cccccc;
+  --matrix-text: #00ff41;
   
   --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', 'Consolas', monospace;
   --font-size-xs: 0.75rem;
@@ -87,6 +87,63 @@ body {
   overflow-x: hidden;
   font-size: var(--font-size-base);
   letter-spacing: 0.025em;
+}
+
+/* Matrix Loading Screen */
+.matrix-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--matrix-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.5s ease;
+}
+
+.loader-content {
+  text-align: center;
+  color: var(--matrix-green);
+}
+
+.loader-text {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--spacing-lg);
+  animation: loaderPulse 2s ease-in-out infinite;
+}
+
+.loader-progress {
+  width: 300px;
+  height: 4px;
+  background: var(--matrix-gray);
+  border: 1px solid var(--matrix-green);
+  margin: var(--spacing-lg) auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar-matrix {
+  height: 100%;
+  background: linear-gradient(90deg, var(--matrix-green), var(--matrix-green-bright));
+  width: 0%;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px var(--matrix-green);
+}
+
+.loader-percentage {
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+@keyframes loaderPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
 
 /* Accessibility Controls */
@@ -346,6 +403,14 @@ body {
   letter-spacing: 0.1em;
   margin-bottom: var(--spacing-lg);
   animation: titleGlow 3s ease-in-out infinite;
+  position: relative;
+}
+
+.hero-title::after {
+  content: '_';
+  color: var(--matrix-green);
+  animation: cursorBlink 1s infinite;
+  margin-left: 5px;
 }
 
 .hero-subtitle {
@@ -441,6 +506,11 @@ body {
 @keyframes titleGlow {
   0%, 100% { text-shadow: 0 0 20px var(--matrix-green); }
   50% { text-shadow: 0 0 30px var(--matrix-green), 0 0 40px var(--matrix-green); }
+}
+
+@keyframes cursorBlink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
 }
 
 /* Scroll Indicator */
