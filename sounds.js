@@ -44,12 +44,19 @@ class MatrixAudio {
 
     // Resume audio context if suspended
     if (this.audioContext.state === 'suspended') {
-      this.audioContext.resume();
+      this.audioContext.resume().then(() => {
+        this.isPlaying = true;
+        this.createAmbientTone();
+        this.createCodeRainSound();
+      }).catch(error => {
+        console.log('Audio context resume failed:', error);
+        throw error;
+      });
+    } else {
+      this.isPlaying = true;
+      this.createAmbientTone();
+      this.createCodeRainSound();
     }
-
-    this.isPlaying = true;
-    this.createAmbientTone();
-    this.createCodeRainSound();
   }
 
   stopAmbientSound() {

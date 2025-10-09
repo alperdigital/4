@@ -209,6 +209,14 @@ class MatrixApp {
       loader.style.opacity = '0';
       setTimeout(() => {
         loader.style.display = 'none';
+        document.body.classList.add('loaded');
+        
+        // Try to start audio after loading is complete
+        if (this.audio && this.isSoundEnabled && !this.audio.isPlaying) {
+          setTimeout(() => {
+            this.attemptAutoStart();
+          }, 1000);
+        }
       }, 500);
     }, 1000);
   }
@@ -341,17 +349,87 @@ class MatrixApp {
     if (window.MatrixAudio) {
       this.audio = new MatrixAudio();
       
-      // Start ambient sound after loading
-      setTimeout(() => {
-        if (this.isSoundEnabled && this.audio) {
-          this.audio.startAmbientSound();
-        }
-      }, 2000);
+      // Try to start audio automatically
+      this.attemptAutoStart();
     }
 
     // Add click sounds to interactive elements
     this.addClickSounds();
     this.addHoverSounds();
+  }
+
+  attemptAutoStart() {
+    // Try to start audio immediately
+    if (this.isSoundEnabled && this.audio) {
+      try {
+        this.audio.startAmbientSound();
+        console.log('Audio started automatically');
+      } catch (error) {
+        console.log('Auto-start failed, waiting for user interaction');
+        this.setupUserInteractionStart();
+      }
+    }
+  }
+
+  setupUserInteractionStart() {
+    // Create invisible overlay to capture first user interaction
+    const audioOverlay = document.createElement('div');
+    audioOverlay.id = 'audio-overlay';
+    audioOverlay.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(0, 0, 0, 0.95), rgba(0, 20, 0, 0.9));
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--matrix-green);
+      font-family: var(--font-mono);
+      font-size: 18px;
+      text-align: center;
+      cursor: pointer;
+      backdrop-filter: blur(5px);
+    `;
+    
+    audioOverlay.innerHTML = `
+      <div style="text-align: center; border: 2px solid var(--matrix-green); padding: 40px; border-radius: 8px; background: rgba(0, 0, 0, 0.7); box-shadow: 0 0 30px var(--matrix-green);">
+        <div style="font-size: 48px; margin-bottom: 20px; animation: pulse 2s infinite;">🔊</div>
+        <div style="font-size: 20px; margin-bottom: 10px; text-shadow: 0 0 10px var(--matrix-green);">CYBERPUNK AUDIO</div>
+        <div style="font-size: 16px; margin-bottom: 20px; opacity: 0.8;">Ses deneyimi için tıklayın</div>
+        <div style="font-size: 12px; opacity: 0.6; border-top: 1px solid var(--matrix-green); padding-top: 10px;">Click to start cyberpunk audio experience</div>
+        <div style="font-size: 10px; margin-top: 15px; opacity: 0.4;">Otomatik kapanır: 5 saniye</div>
+      </div>
+      <style>
+        @keyframes pulse {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.1); opacity: 0.7; }
+        }
+      </style>
+    `;
+
+    // Add click handler to start audio
+    const startAudio = () => {
+      if (this.audio && this.isSoundEnabled) {
+        this.audio.startAmbientSound();
+      }
+      document.body.removeChild(audioOverlay);
+    };
+
+    audioOverlay.addEventListener('click', startAudio);
+    audioOverlay.addEventListener('touchstart', startAudio);
+    
+    // Add to page
+    document.body.appendChild(audioOverlay);
+
+    // Auto-remove after 5 seconds if no interaction
+    setTimeout(() => {
+      if (document.body.contains(audioOverlay)) {
+        document.body.removeChild(audioOverlay);
+      }
+    }, 5000);
   }
 
   addClickSounds() {
