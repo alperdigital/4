@@ -61,11 +61,8 @@ class MatrixApp {
         status.textContent = 'MATRIX ENTRY COMPLETE';
         
         setTimeout(() => {
-          loader.style.opacity = '0';
-          setTimeout(() => {
-            loader.style.display = 'none';
-          }, 800);
-        }, 1000);
+          this.triggerScreenExplosion();
+        }, 1500);
       }
       
       progressBar.style.width = progress + '%';
@@ -121,6 +118,96 @@ class MatrixApp {
     };
     
     animate();
+  }
+
+  triggerScreenExplosion() {
+    const loader = document.getElementById('matrix-loader');
+    const canvas = document.getElementById('loader-canvas');
+    
+    if (!loader) return;
+    
+    // Create explosion effect
+    this.createExplosionEffect(loader);
+    
+    // Add error message
+    const errorMessage = document.createElement('div');
+    errorMessage.className = 'explosion-error';
+    errorMessage.innerHTML = `
+      <div class="error-text">SYSTEM ERROR</div>
+      <div class="error-code">MATRIX_ENTRY_FAILED</div>
+      <div class="error-message">SCREEN CORRUPTION DETECTED</div>
+    `;
+    loader.appendChild(errorMessage);
+    
+    // Start screen corruption
+    setTimeout(() => {
+      this.startScreenCorruption(loader);
+    }, 500);
+    
+    // Final explosion and transition
+    setTimeout(() => {
+      this.finalExplosion(loader);
+    }, 3000);
+  }
+
+  createExplosionEffect(container) {
+    // Create explosion particles
+    for (let i = 0; i < 50; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'explosion-particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.top = Math.random() * 100 + '%';
+      particle.style.animationDelay = Math.random() * 2 + 's';
+      particle.style.setProperty('--random-x', (Math.random() - 0.5) * 2);
+      particle.style.setProperty('--random-y', (Math.random() - 0.5) * 2);
+      container.appendChild(particle);
+    }
+  }
+
+  startScreenCorruption(container) {
+    // Add glitch effect
+    container.classList.add('screen-corruption');
+    
+    // Create digital noise overlay
+    const noiseOverlay = document.createElement('div');
+    noiseOverlay.className = 'digital-noise';
+    container.appendChild(noiseOverlay);
+    
+    // Add random glitch lines
+    for (let i = 0; i < 20; i++) {
+      setTimeout(() => {
+        const glitchLine = document.createElement('div');
+        glitchLine.className = 'glitch-line';
+        glitchLine.style.top = Math.random() * 100 + '%';
+        glitchLine.style.animationDelay = Math.random() * 1 + 's';
+        container.appendChild(glitchLine);
+      }, i * 100);
+    }
+  }
+
+  finalExplosion(loader) {
+    // Add final explosion class
+    loader.classList.add('final-explosion');
+    
+    // Create massive explosion particles
+    for (let i = 0; i < 100; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'final-particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.top = Math.random() * 100 + '%';
+      particle.style.animationDelay = Math.random() * 0.5 + 's';
+      particle.style.setProperty('--random-x', (Math.random() - 0.5) * 4);
+      particle.style.setProperty('--random-y', (Math.random() - 0.5) * 4);
+      loader.appendChild(particle);
+    }
+    
+    // Hide loader after explosion
+    setTimeout(() => {
+      loader.style.opacity = '0';
+      setTimeout(() => {
+        loader.style.display = 'none';
+      }, 1000);
+    }, 2000);
   }
 
   setupAccessibilityControls() {

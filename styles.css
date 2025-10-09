@@ -233,6 +233,158 @@ body {
   50% { opacity: 0.3; }
 }
 
+/* Explosion Effects */
+.explosion-error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+  color: #ff0000;
+  font-family: var(--font-mono);
+  animation: errorGlow 0.5s ease-in-out infinite;
+}
+
+.error-text {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--spacing-md);
+  text-shadow: 0 0 20px #ff0000;
+}
+
+.error-code {
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--spacing-sm);
+  color: #ff6666;
+}
+
+.error-message {
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+}
+
+.explosion-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #ff0000;
+  border-radius: 50%;
+  animation: particleExplode 2s ease-out forwards;
+  z-index: 5;
+}
+
+.final-particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #ff0000;
+  border-radius: 50%;
+  animation: finalExplode 1s ease-out forwards;
+  z-index: 5;
+}
+
+.screen-corruption {
+  animation: screenShake 0.1s ease-in-out infinite;
+}
+
+.digital-noise {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 0, 0, 0.1) 2px,
+    rgba(255, 0, 0, 0.1) 4px
+  );
+  animation: noiseFlicker 0.1s ease-in-out infinite;
+  z-index: 3;
+}
+
+.glitch-line {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ff0000, transparent);
+  animation: glitchLine 0.5s ease-in-out infinite;
+  z-index: 4;
+}
+
+.final-explosion {
+  animation: finalShake 0.05s ease-in-out infinite;
+}
+
+@keyframes errorGlow {
+  0%, 100% { 
+    text-shadow: 0 0 20px #ff0000;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% { 
+    text-shadow: 0 0 40px #ff0000, 0 0 60px #ff0000;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
+@keyframes particleExplode {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2) translate(calc(var(--random-x, 0) * 100px), calc(var(--random-y, 0) * 100px));
+    opacity: 0;
+  }
+}
+
+@keyframes finalExplode {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3) translate(calc(var(--random-x, 0) * 200px), calc(var(--random-y, 0) * 200px));
+    opacity: 0;
+  }
+}
+
+@keyframes screenShake {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-2px, -2px); }
+  50% { transform: translate(2px, -2px); }
+  75% { transform: translate(-2px, 2px); }
+}
+
+@keyframes noiseFlicker {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes glitchLine {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@keyframes finalShake {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-5px, -5px); }
+  50% { transform: translate(5px, -5px); }
+  75% { transform: translate(-5px, 5px); }
+}
+
 /* Accessibility Controls */
 .accessibility-controls {
   position: fixed;
