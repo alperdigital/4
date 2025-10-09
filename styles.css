@@ -1166,6 +1166,11 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
   }
   
   .work-item {
@@ -1615,6 +1620,11 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 140px;
   }
   
   .work-visual {
