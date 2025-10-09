@@ -7,6 +7,7 @@ class MatrixApp {
     this.isSoundEnabled = true;
     this.codeRain = null;
     this.puddle = null;
+    this.audio = null;
     this.init();
   }
 
@@ -15,6 +16,7 @@ class MatrixApp {
     this.setupAccessibilityControls();
     this.setupProgressBar();
     this.setupNavigation();
+    this.setupAudio();
     this.setupCodeRain();
     this.setupPuddle();
     this.setupScrollAnimations();
@@ -261,6 +263,11 @@ class MatrixApp {
         soundToggle.textContent = this.isSoundEnabled ? '🔊' : '🔇';
         soundToggle.setAttribute('aria-label', this.isSoundEnabled ? 'Disable Sound' : 'Enable Sound');
         
+        // Control audio system
+        if (this.audio) {
+          this.audio.setEnabled(this.isSoundEnabled);
+        }
+        
         // Store preference
         localStorage.setItem('soundEnabled', this.isSoundEnabled);
       });
@@ -280,6 +287,11 @@ class MatrixApp {
         soundToggle.classList.toggle('active', !this.isSoundEnabled);
         soundToggle.textContent = this.isSoundEnabled ? '🔊' : '🔇';
         soundToggle.setAttribute('aria-label', this.isSoundEnabled ? 'Disable Sound' : 'Enable Sound');
+      }
+      
+      // Apply to audio system
+      if (this.audio) {
+        this.audio.setEnabled(this.isSoundEnabled);
       }
     }
   }
@@ -319,6 +331,48 @@ class MatrixApp {
           if (target) {
             target.scrollIntoView({ behavior: 'smooth' });
           }
+        }
+      });
+    });
+  }
+
+  setupAudio() {
+    // Initialize Matrix Audio System
+    if (window.MatrixAudio) {
+      this.audio = new MatrixAudio();
+      
+      // Start ambient sound after loading
+      setTimeout(() => {
+        if (this.isSoundEnabled && this.audio) {
+          this.audio.startAmbientSound();
+        }
+      }, 2000);
+    }
+
+    // Add click sounds to interactive elements
+    this.addClickSounds();
+    this.addHoverSounds();
+  }
+
+  addClickSounds() {
+    const clickableElements = document.querySelectorAll('button, .nav-link, .control-btn');
+    
+    clickableElements.forEach(element => {
+      element.addEventListener('click', () => {
+        if (this.audio && this.isSoundEnabled) {
+          this.audio.playClickSound();
+        }
+      });
+    });
+  }
+
+  addHoverSounds() {
+    const hoverElements = document.querySelectorAll('.control-btn, .nav-link, .work-item');
+    
+    hoverElements.forEach(element => {
+      element.addEventListener('mouseenter', () => {
+        if (this.audio && this.isSoundEnabled) {
+          this.audio.playHoverSound();
         }
       });
     });

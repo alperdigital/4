@@ -466,6 +466,58 @@ body {
   transform: scale(0.95);
 }
 
+/* Sound button special effects */
+#sound-toggle {
+  position: relative;
+  overflow: hidden;
+}
+
+#sound-toggle::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, var(--matrix-green) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+#sound-toggle.active::before {
+  width: 60px;
+  height: 60px;
+  opacity: 0.3;
+  animation: soundPulse 2s ease-in-out infinite;
+}
+
+@keyframes soundPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.1;
+  }
+}
+
+/* Sound waves animation for active state */
+#sound-toggle.active {
+  animation: soundWave 1.5s ease-in-out infinite;
+}
+
+@keyframes soundWave {
+  0%, 100% {
+    box-shadow: 0 0 5px var(--matrix-green);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--matrix-green), 0 0 30px var(--matrix-green);
+  }
+}
+
 /* Progress Bar */
 .progress-bar {
   position: fixed;
