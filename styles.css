@@ -1166,11 +1166,22 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    align-items: flex-start;
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     height: 150px;
+  }
+  
+  .work-overlay .work-title,
+  .work-overlay .work-description,
+  .work-overlay .work-tech {
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .work-overlay .work-tech {
+    margin-bottom: 0;
   }
   
   .work-item {
@@ -1620,11 +1631,22 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    align-items: flex-start;
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     height: 140px;
+  }
+  
+  .work-overlay .work-title,
+  .work-overlay .work-description,
+  .work-overlay .work-tech {
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .work-overlay .work-tech {
+    margin-bottom: 0;
   }
   
   .work-visual {
