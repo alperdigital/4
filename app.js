@@ -1019,8 +1019,11 @@ class MatrixBackground {
   }
 
   draw() {
+    // Check if high contrast mode is active
+    const isHighContrast = document.body.classList.contains('high-contrast');
+    
     // Clear with fade effect
-    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    this.ctx.fillStyle = isHighContrast ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     
     // Set font
@@ -1031,16 +1034,18 @@ class MatrixBackground {
       // Draw trail
       drop.trail.forEach((trailPoint, index) => {
         const trailOpacity = (trailPoint.opacity * (1 - index / drop.trail.length)) * 0.3;
-        this.ctx.fillStyle = `rgba(0, 255, 0, ${trailOpacity})`;
+        const trailColor = isHighContrast ? `rgba(0, 0, 0, ${trailOpacity})` : `rgba(0, 255, 0, ${trailOpacity})`;
+        this.ctx.fillStyle = trailColor;
         this.ctx.fillText(trailPoint.char, trailPoint.x, trailPoint.y);
       });
       
       // Draw main character
-      this.ctx.fillStyle = `rgba(0, 255, 0, ${drop.opacity})`;
+      const mainColor = isHighContrast ? `rgba(0, 0, 0, ${drop.opacity})` : `rgba(0, 255, 0, ${drop.opacity})`;
+      this.ctx.fillStyle = mainColor;
       
       // Add glow
-      this.ctx.shadowColor = '#00ff00';
-      this.ctx.shadowBlur = 8;
+      this.ctx.shadowColor = isHighContrast ? '#000000' : '#00ff00';
+      this.ctx.shadowBlur = isHighContrast ? 4 : 8;
       
       this.ctx.fillText(drop.char, drop.x, drop.y);
       this.ctx.shadowBlur = 0;
