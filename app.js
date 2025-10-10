@@ -12,8 +12,8 @@ class MatrixApp {
   }
 
   init() {
-    // Start with high contrast mode active
-    document.body.classList.add('high-contrast');
+    // Don't start with high contrast mode - let loading screen be green (Matrix theme)
+    // High contrast will be activated after loading is complete
     
     this.setupMatrixLoader();
     this.setupAccessibilityControls();
@@ -215,6 +215,17 @@ class MatrixApp {
         loader.style.display = 'none';
         document.body.classList.add('loaded');
         
+        // Activate high contrast mode after loading is complete
+        document.body.classList.add('high-contrast');
+        
+        // Update contrast toggle button to show correct state
+        const contrastToggle = document.getElementById('high-contrast');
+        if (contrastToggle) {
+          contrastToggle.classList.add('active');
+          contrastToggle.textContent = '🌙';
+          contrastToggle.setAttribute('aria-label', 'Switch to Night Mode (Matrix)');
+        }
+        
         // Try to start audio after loading is complete
         if (this.audio && this.isSoundEnabled && !this.audio.isPlaying) {
           setTimeout(() => {
@@ -254,10 +265,10 @@ class MatrixApp {
 
     // Contrast toggle (🔆/🌙) - Now toggles between day (default high contrast) and night (Matrix theme)
     if (contrastToggle) {
-      // Set initial state - start with high contrast (day mode) active
-      contrastToggle.classList.add('active');
-      contrastToggle.textContent = '🌙';
-      contrastToggle.setAttribute('aria-label', 'Switch to Night Mode (Matrix)');
+      // Set initial state - start with Matrix theme (night mode) during loading
+      contrastToggle.classList.remove('active');
+      contrastToggle.textContent = '🔆';
+      contrastToggle.setAttribute('aria-label', 'Switch to Day Mode (High Contrast)');
       
       contrastToggle.addEventListener('click', () => {
         this.isHighContrast = !this.isHighContrast;
