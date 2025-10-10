@@ -155,6 +155,140 @@
 .high-contrast .contact-subtitle {
   color: #333333 !important;
 }
+
+/* High Contrast Mode - All Text Elements */
+.high-contrast h1,
+.high-contrast h2,
+.high-contrast h3,
+.high-contrast h4,
+.high-contrast h5,
+.high-contrast h6 {
+  color: #000000 !important;
+}
+
+.high-contrast p,
+.high-contrast span,
+.high-contrast div,
+.high-contrast li,
+.high-contrast td,
+.high-contrast th {
+  color: #000000 !important;
+}
+
+/* High Contrast Mode - Navigation */
+.high-contrast .nav-link {
+  color: #000000 !important;
+}
+
+.high-contrast .nav-link:hover {
+  color: #000000 !important;
+}
+
+.high-contrast .logo-text {
+  color: #000000 !important;
+}
+
+/* High Contrast Mode - Hero Section */
+.high-contrast .hero-title {
+  color: #000000 !important;
+}
+
+.high-contrast .hero-subtitle {
+  color: #333333 !important;
+}
+
+.high-contrast .hero-description {
+  color: #333333 !important;
+}
+
+/* High Contrast Mode - About Section */
+.high-contrast .about {
+  background: #ffffff !important;
+}
+
+.high-contrast .about .section-title,
+.high-contrast .about .section-subtitle {
+  color: #000000 !important;
+}
+
+.high-contrast .about-description {
+  color: #333333 !important;
+}
+
+.high-contrast .stat-number {
+  color: #000000 !important;
+}
+
+.high-contrast .stat-label {
+  color: #333333 !important;
+}
+
+/* High Contrast Mode - Selected Works */
+.high-contrast .selected-works {
+  background: #ffffff !important;
+}
+
+.high-contrast .selected-works .section-title,
+.high-contrast .selected-works .section-subtitle {
+  color: #000000 !important;
+}
+
+.high-contrast .work-title {
+  color: #000000 !important;
+}
+
+.high-contrast .work-description {
+  color: #333333 !important;
+}
+
+.high-contrast .work-tech {
+  color: #000000 !important;
+}
+
+/* High Contrast Mode - Footer */
+.high-contrast .footer {
+  background: #ffffff !important;
+  border-top: 2px solid #000000 !important;
+}
+
+.high-contrast .footer-logo {
+  color: #000000 !important;
+}
+
+.high-contrast .footer-text {
+  color: #333333 !important;
+}
+
+.high-contrast .footer-year {
+  color: #333333 !important;
+}
+
+/* High Contrast Mode - Buttons */
+.high-contrast .btn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #000000 !important;
+}
+
+.high-contrast .btn:hover {
+  background: #333333 !important;
+  color: #ffffff !important;
+  border-color: #333333 !important;
+}
+
+/* High Contrast Mode - Links */
+.high-contrast a {
+  color: #000000 !important;
+}
+
+.high-contrast a:hover {
+  color: #333333 !important;
+}
+
+/* High Contrast Mode - Matrix Background */
+.high-contrast .matrix-background {
+  opacity: 0.1 !important;
+}
   
   * {
     animation-duration: 0.01ms !important;
