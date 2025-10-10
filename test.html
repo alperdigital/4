@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Test - Alperdigital</title>
+    <style>
+        body {
+            background: #000;
+            color: #00ff00;
+            font-family: monospace;
+            margin: 0;
+            padding: 20px;
+        }
+        .test-box {
+            background: #001100;
+            border: 1px solid #00ff00;
+            padding: 20px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Matrix Test Page</h1>
+    <div class="test-box">
+        <h2>Test 1: Basic HTML/CSS</h2>
+        <p>Bu sayfa çalışıyorsa, temel HTML/CSS sorunsuz.</p>
+    </div>
+    
+    <div class="test-box">
+        <h2>Test 2: JavaScript</h2>
+        <p id="js-test">JavaScript yükleniyor...</p>
+    </div>
+    
+    <div class="test-box">
+        <h2>Test 3: Canvas</h2>
+        <canvas id="test-canvas" width="400" height="200" style="border: 1px solid #00ff00;"></canvas>
+    </div>
+    
+    <script>
+        // Test JavaScript
+        document.getElementById('js-test').textContent = 'JavaScript çalışıyor! ✅';
+        
+        // Test Canvas
+        const canvas = document.getElementById('test-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Draw Matrix-style test
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, 400, 200);
+        
+        ctx.fillStyle = '#00ff00';
+        ctx.font = '16px monospace';
+        ctx.fillText('Matrix Canvas Test', 10, 30);
+        
+        // Draw some falling characters
+        for (let i = 0; i < 20; i++) {
+            ctx.fillText('01アイウエオ', Math.random() * 400, Math.random() * 200);
+        }
+        
+        console.log('Test page loaded successfully!');
+    </script>
+</body>
+</html>
