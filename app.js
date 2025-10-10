@@ -249,16 +249,24 @@ class MatrixApp {
       });
     }
 
-    // Contrast toggle (🔆)
+    // Contrast toggle (🔆/🌙) - Now toggles between night (default) and day (high contrast)
     if (contrastToggle) {
       contrastToggle.addEventListener('click', () => {
         this.isHighContrast = !this.isHighContrast;
         contrastToggle.classList.toggle('active', this.isHighContrast);
         document.body.classList.toggle('high-contrast', this.isHighContrast);
         
-        // Update button text
+        // Update button text - Now shows opposite of current state
         contrastToggle.textContent = this.isHighContrast ? '🌙' : '🔆';
-        contrastToggle.setAttribute('aria-label', this.isHighContrast ? 'Normal Contrast' : 'High Contrast');
+        contrastToggle.setAttribute('aria-label', this.isHighContrast ? 'Switch to Night Mode' : 'Switch to Day Mode');
+        
+        // Update Matrix background colors immediately
+        if (this.matrixBackground) {
+          this.matrixBackground.draw();
+        }
+        
+        // Store preference
+        localStorage.setItem('highContrast', this.isHighContrast);
       });
     }
 

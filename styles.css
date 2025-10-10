@@ -290,9 +290,9 @@
   opacity: 0.1 !important;
 }
 
-/* High Contrast Mode - Complete Color Palette Override */
+/* High Contrast Mode - Complete Color Palette Override (Day Mode) */
 .high-contrast {
-  /* Override all Matrix colors to high contrast */
+  /* Override all Matrix colors to high contrast (Day Mode) */
   --matrix-green: #000000 !important;
   --matrix-green-dim: #000000 !important;
   --matrix-green-bright: #000000 !important;
@@ -302,6 +302,20 @@
   --matrix-gray: #f0f0f0 !important;
   --matrix-light-gray: #e0e0e0 !important;
   --matrix-white: #000000 !important;
+}
+
+/* Normal Mode - Night Mode (Matrix Theme) */
+body:not(.high-contrast) {
+  /* Keep original Matrix colors for night mode */
+  --matrix-green: #00ff00;
+  --matrix-green-dim: #00cc00;
+  --matrix-green-bright: #00ff88;
+  --matrix-text: #00ff00;
+  --matrix-black: #000000;
+  --matrix-dark: #0a0a0a;
+  --matrix-gray: #1a1a1a;
+  --matrix-light-gray: #333333;
+  --matrix-white: #ffffff;
 }
 
 /* High Contrast Mode - Body and Main Elements */
@@ -403,6 +417,86 @@
 .high-contrast canvas {
   filter: invert(1) !important;
   opacity: 0.3 !important;
+}
+
+/* High Contrast Mode - Additional Text Elements */
+.high-contrast .text-matrix,
+.high-contrast .matrix-text,
+.high-contrast .code-text,
+.high-contrast .terminal-text {
+  color: #000000 !important;
+}
+
+.high-contrast .glow-text,
+.high-contrast .neon-text {
+  color: #000000 !important;
+  text-shadow: none !important;
+}
+
+.high-contrast .gradient-text {
+  background: linear-gradient(45deg, #000000, #333333) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* High Contrast Mode - All possible text selectors */
+.high-contrast * {
+  color: inherit !important;
+}
+
+.high-contrast .text-white,
+.high-contrast .text-light,
+.high-contrast .text-muted {
+  color: #000000 !important;
+}
+
+.high-contrast .text-dark,
+.high-contrast .text-black {
+  color: #000000 !important;
+}
+
+/* High Contrast Mode - Ensure all text is readable */
+.high-contrast .hero h1,
+.high-contrast .hero h2,
+.high-contrast .hero h3,
+.high-contrast .hero p,
+.high-contrast .hero span,
+.high-contrast .hero div {
+  color: #000000 !important;
+}
+
+.high-contrast .section h1,
+.high-contrast .section h2,
+.high-contrast .section h3,
+.high-contrast .section h4,
+.high-contrast .section h5,
+.high-contrast .section h6,
+.high-contrast .section p,
+.high-contrast .section span,
+.high-contrast .section div,
+.high-contrast .section li {
+  color: #000000 !important;
+}
+
+/* High Contrast Mode - Override any remaining green text */
+.high-contrast .text-green,
+.high-contrast .text-success,
+.high-contrast .matrix-green {
+  color: #000000 !important;
+}
+
+/* High Contrast Mode - Ensure proper contrast for all elements */
+.high-contrast .bg-dark,
+.high-contrast .bg-black {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+.high-contrast .bg-light,
+.high-contrast .bg-white {
+  background-color: #ffffff !important;
+  color: #000000 !important;
 }
   
   * {
