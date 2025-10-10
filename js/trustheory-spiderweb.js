@@ -232,3 +232,4 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle window resize
     window.addEventListener('resize', handleTrustheoryResize);
 });
+

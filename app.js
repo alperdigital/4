@@ -940,16 +940,18 @@ class PuddleEffect {
   }
 }
 
-// Matrix Background Digital Rain Class
+// Professional Matrix Background Digital Rain Class
 class MatrixBackground {
   constructor(canvas) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
-    this.drops = [];
     this.animationId = null;
     this.isRunning = false;
     this.fontSize = 14;
     this.columns = [];
+    this.matrixChars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+    this.englishChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()_+-=[]{}|;:,.<>?';
+    this.allChars = this.matrixChars + this.englishChars;
     
     this.resize();
     window.addEventListener('resize', () => this.resize());
@@ -969,24 +971,27 @@ class MatrixBackground {
       this.columns[i] = {
         x: i * this.fontSize,
         drops: [],
-        nextDropTime: Math.random() * 2000,
+        nextDropTime: Math.random() * 1000 + 200,
         lastUpdate: Date.now(),
-        speed: Math.random() * 2 + 1
+        speed: Math.random() * 3 + 1,
+        dropCount: Math.floor(Math.random() * 20) + 10
       };
     }
   }
 
   getRandomChar() {
-    return Math.random() < 0.5 ? '0' : '1';
+    return this.allChars[Math.floor(Math.random() * this.allChars.length)];
   }
 
   createDrop(column) {
     const drop = {
       char: this.getRandomChar(),
-      y: -this.fontSize,
-      speed: column.speed + Math.random() * 1,
+      y: -this.fontSize * Math.random() * 20,
+      speed: column.speed + Math.random() * 2,
       opacity: 1,
-      trail: []
+      trail: [],
+      brightness: Math.random() > 0.8 ? 1 : Math.random() * 0.5 + 0.3,
+      charChangeTimer: Math.random() * 100 + 50
     };
     
     column.drops.push(drop);
@@ -997,30 +1002,41 @@ class MatrixBackground {
     
     this.columns.forEach(column => {
       // Create new drops
-      if (now - column.lastUpdate > column.nextDropTime) {
+      if (now - column.lastUpdate > column.nextDropTime && column.drops.length < column.dropCount) {
         this.createDrop(column);
-        column.nextDropTime = Math.random() * 1000 + 500;
+        column.nextDropTime = Math.random() * 800 + 300;
         column.lastUpdate = now;
       }
       
       // Update existing drops
       column.drops.forEach((drop, index) => {
+        // Character morphing
+        drop.charChangeTimer--;
+        if (drop.charChangeTimer <= 0) {
+          drop.char = this.getRandomChar();
+          drop.charChangeTimer = Math.random() * 100 + 50;
+        }
+        
         // Update trail
-        drop.trail.unshift({ char: drop.char, y: drop.y, opacity: drop.opacity });
-        if (drop.trail.length > 15) {
+        drop.trail.unshift({ 
+          char: drop.char, 
+          y: drop.y, 
+          opacity: drop.opacity * drop.brightness 
+        });
+        if (drop.trail.length > 20) {
           drop.trail.pop();
         }
         
         // Move drop
         drop.y += drop.speed;
         
-        // Fade out
-        if (drop.y > this.canvas.height * 0.3) {
-          drop.opacity = Math.max(0, drop.opacity - 0.02);
+        // Fade out gradually
+        if (drop.y > this.canvas.height * 0.1) {
+          drop.opacity = Math.max(0, drop.opacity - 0.008);
         }
         
         // Remove old drops
-        if (drop.y > this.canvas.height || drop.opacity <= 0) {
+        if (drop.y > this.canvas.height + 50 || drop.opacity <= 0) {
           column.drops.splice(index, 1);
         }
       });
@@ -1028,29 +1044,37 @@ class MatrixBackground {
   }
 
   draw() {
-    // Fade effect
-    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    // More subtle fade effect for better trail
+    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.03)';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     
-    this.ctx.font = `${this.fontSize}px 'Courier New', monospace`;
+    this.ctx.font = `${this.fontSize}px 'Courier New', 'Monaco', monospace`;
     this.ctx.textAlign = 'center';
     
     this.columns.forEach(column => {
       column.drops.forEach(drop => {
-        // Draw trail
+        // Draw trail with better gradient
         drop.trail.forEach((trailPoint, index) => {
-          const trailOpacity = (trailPoint.opacity * (1 - index / drop.trail.length)) * 0.3;
-          this.ctx.fillStyle = `rgba(0, 255, 0, ${trailOpacity})`;
+          const trailOpacity = (trailPoint.opacity * (1 - index / drop.trail.length)) * 0.4;
+          const trailColor = trailPoint.opacity > 0.8 ? '#00ff41' : '#00cc33';
+          
+          this.ctx.fillStyle = trailColor.replace(')', `, ${trailOpacity})`).replace('rgb', 'rgba');
           this.ctx.fillText(trailPoint.char, column.x + this.fontSize/2, trailPoint.y);
         });
         
-        // Draw main character
-        this.ctx.fillStyle = `rgba(0, 255, 0, ${drop.opacity})`;
+        // Draw main character with enhanced glow
+        const mainOpacity = drop.opacity * drop.brightness;
+        const mainColor = drop.brightness > 0.8 ? '#00ff41' : '#00cc33';
         
-        // Add glow effect for bright characters
-        if (drop.opacity > 0.8) {
-          this.ctx.shadowColor = '#00ff00';
-          this.ctx.shadowBlur = 8;
+        this.ctx.fillStyle = mainColor.replace(')', `, ${mainOpacity})`).replace('rgb', 'rgba');
+        
+        // Enhanced glow effect
+        if (drop.brightness > 0.8) {
+          this.ctx.shadowColor = '#00ff41';
+          this.ctx.shadowBlur = 12;
+        } else if (drop.brightness > 0.6) {
+          this.ctx.shadowColor = '#00cc33';
+          this.ctx.shadowBlur = 6;
         } else {
           this.ctx.shadowBlur = 0;
         }
