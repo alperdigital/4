@@ -82,6 +82,79 @@
   background: rgba(0, 0, 0, 0.95);
   border-bottom-width: 2px;
 }
+
+/* High Contrast Mode - Section Backgrounds */
+.high-contrast .services {
+  background: #ffffff !important;
+}
+
+.high-contrast .services .section-title,
+.high-contrast .services .section-subtitle {
+  color: #000000 !important;
+}
+
+.high-contrast .service-card {
+  background: #f0f0f0 !important;
+  border-color: #000000 !important;
+  color: #000000 !important;
+}
+
+.high-contrast .service-card:hover {
+  border-color: #000000 !important;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+.high-contrast .card-title {
+  color: #000000 !important;
+}
+
+.high-contrast .card-description {
+  color: #333333 !important;
+}
+
+.high-contrast .approach {
+  background: #ffffff !important;
+}
+
+.high-contrast .approach .section-title,
+.high-contrast .approach .section-subtitle {
+  color: #000000 !important;
+}
+
+.high-contrast .timeline-step {
+  border-left-color: #000000 !important;
+  color: #000000 !important;
+}
+
+.high-contrast .timeline-step:hover {
+  border-left-color: #000000 !important;
+  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+.high-contrast .step-number {
+  color: #000000 !important;
+}
+
+.high-contrast .step-title {
+  color: #000000 !important;
+}
+
+.high-contrast .step-description {
+  color: #333333 !important;
+}
+
+.high-contrast .contact {
+  background: #ffffff !important;
+}
+
+.high-contrast .contact .section-title,
+.high-contrast .contact .section-subtitle {
+  color: #000000 !important;
+}
+
+.high-contrast .contact-subtitle {
+  color: #333333 !important;
+}
   
   * {
     animation-duration: 0.01ms !important;
