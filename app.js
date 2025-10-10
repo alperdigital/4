@@ -940,17 +940,19 @@ class PuddleEffect {
   }
 }
 
-// Professional Matrix Background Digital Rain Class
+// Ultimate Matrix Digital Rain - Based on Best Internet Examples
 class MatrixBackground {
   constructor(canvas) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
     this.animationId = null;
     this.isRunning = false;
-    this.fontSize = 14;
+    this.fontSize = 16;
     this.columns = [];
-    this.matrixChars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-    this.englishChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()_+-=[]{}|;:,.<>?';
+    
+    // Authentic Matrix character set (Japanese Katakana + numbers/symbols)
+    this.matrixChars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789';
+    this.englishChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@#$%^&*()_+-=[]{}|;:,.<>?';
     this.allChars = this.matrixChars + this.englishChars;
     
     this.resize();
@@ -971,10 +973,10 @@ class MatrixBackground {
       this.columns[i] = {
         x: i * this.fontSize,
         drops: [],
-        nextDropTime: Math.random() * 1000 + 200,
+        nextDropTime: Math.random() * 2000 + 500,
         lastUpdate: Date.now(),
-        speed: Math.random() * 3 + 1,
-        dropCount: Math.floor(Math.random() * 20) + 10
+        speed: Math.random() * 2 + 1,
+        maxDrops: Math.floor(Math.random() * 15) + 8
       };
     }
   }
@@ -986,12 +988,13 @@ class MatrixBackground {
   createDrop(column) {
     const drop = {
       char: this.getRandomChar(),
-      y: -this.fontSize * Math.random() * 20,
-      speed: column.speed + Math.random() * 2,
+      y: -this.fontSize * (Math.random() * 30 + 5),
+      speed: column.speed + Math.random() * 1.5,
       opacity: 1,
       trail: [],
-      brightness: Math.random() > 0.8 ? 1 : Math.random() * 0.5 + 0.3,
-      charChangeTimer: Math.random() * 100 + 50
+      brightness: Math.random() > 0.85 ? 1 : Math.random() * 0.4 + 0.2,
+      charChangeTimer: Math.random() * 80 + 40,
+      isLeading: Math.random() > 0.9
     };
     
     column.drops.push(drop);
@@ -1002,41 +1005,42 @@ class MatrixBackground {
     
     this.columns.forEach(column => {
       // Create new drops
-      if (now - column.lastUpdate > column.nextDropTime && column.drops.length < column.dropCount) {
+      if (now - column.lastUpdate > column.nextDropTime && column.drops.length < column.maxDrops) {
         this.createDrop(column);
-        column.nextDropTime = Math.random() * 800 + 300;
+        column.nextDropTime = Math.random() * 1500 + 800;
         column.lastUpdate = now;
       }
       
       // Update existing drops
       column.drops.forEach((drop, index) => {
-        // Character morphing
+        // Character morphing (like in the movie)
         drop.charChangeTimer--;
         if (drop.charChangeTimer <= 0) {
           drop.char = this.getRandomChar();
-          drop.charChangeTimer = Math.random() * 100 + 50;
+          drop.charChangeTimer = Math.random() * 80 + 40;
         }
         
-        // Update trail
+        // Update trail with Matrix-style fading
         drop.trail.unshift({ 
           char: drop.char, 
           y: drop.y, 
-          opacity: drop.opacity * drop.brightness 
+          opacity: drop.opacity * drop.brightness,
+          brightness: drop.brightness
         });
-        if (drop.trail.length > 20) {
+        if (drop.trail.length > 25) {
           drop.trail.pop();
         }
         
         // Move drop
         drop.y += drop.speed;
         
-        // Fade out gradually
-        if (drop.y > this.canvas.height * 0.1) {
-          drop.opacity = Math.max(0, drop.opacity - 0.008);
+        // Matrix-style fade out (starts fading after 20% of screen)
+        if (drop.y > this.canvas.height * 0.2) {
+          drop.opacity = Math.max(0, drop.opacity - 0.01);
         }
         
         // Remove old drops
-        if (drop.y > this.canvas.height + 50 || drop.opacity <= 0) {
+        if (drop.y > this.canvas.height + 100 || drop.opacity <= 0) {
           column.drops.splice(index, 1);
         }
       });
@@ -1044,37 +1048,53 @@ class MatrixBackground {
   }
 
   draw() {
-    // More subtle fade effect for better trail
-    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.03)';
+    // Matrix-style fade effect (very subtle for authentic look)
+    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     
-    this.ctx.font = `${this.fontSize}px 'Courier New', 'Monaco', monospace`;
+    this.ctx.font = `${this.fontSize}px 'Courier New', 'Monaco', 'Consolas', monospace`;
     this.ctx.textAlign = 'center';
     
     this.columns.forEach(column => {
       column.drops.forEach(drop => {
-        // Draw trail with better gradient
+        // Draw trail with authentic Matrix gradient
         drop.trail.forEach((trailPoint, index) => {
-          const trailOpacity = (trailPoint.opacity * (1 - index / drop.trail.length)) * 0.4;
-          const trailColor = trailPoint.opacity > 0.8 ? '#00ff41' : '#00cc33';
+          const trailOpacity = (trailPoint.opacity * (1 - index / drop.trail.length)) * 0.3;
+          let trailColor;
           
-          this.ctx.fillStyle = trailColor.replace(')', `, ${trailOpacity})`).replace('rgb', 'rgba');
+          if (trailPoint.brightness > 0.8) {
+            trailColor = `rgba(0, 255, 65, ${trailOpacity})`; // Bright Matrix green
+          } else if (trailPoint.brightness > 0.5) {
+            trailColor = `rgba(0, 204, 51, ${trailOpacity})`; // Medium green
+          } else {
+            trailColor = `rgba(0, 153, 38, ${trailOpacity})`; // Dim green
+          }
+          
+          this.ctx.fillStyle = trailColor;
           this.ctx.fillText(trailPoint.char, column.x + this.fontSize/2, trailPoint.y);
         });
         
-        // Draw main character with enhanced glow
+        // Draw main character with authentic Matrix glow
         const mainOpacity = drop.opacity * drop.brightness;
-        const mainColor = drop.brightness > 0.8 ? '#00ff41' : '#00cc33';
+        let mainColor;
         
-        this.ctx.fillStyle = mainColor.replace(')', `, ${mainOpacity})`).replace('rgb', 'rgba');
+        if (drop.brightness > 0.8) {
+          mainColor = `rgba(0, 255, 65, ${mainOpacity})`; // Bright leading character
+        } else if (drop.brightness > 0.5) {
+          mainColor = `rgba(0, 204, 51, ${mainOpacity})`; // Medium character
+        } else {
+          mainColor = `rgba(0, 153, 38, ${mainOpacity})`; // Dim character
+        }
         
-        // Enhanced glow effect
+        this.ctx.fillStyle = mainColor;
+        
+        // Authentic Matrix glow effect
         if (drop.brightness > 0.8) {
           this.ctx.shadowColor = '#00ff41';
-          this.ctx.shadowBlur = 12;
+          this.ctx.shadowBlur = 15;
         } else if (drop.brightness > 0.6) {
           this.ctx.shadowColor = '#00cc33';
-          this.ctx.shadowBlur = 6;
+          this.ctx.shadowBlur = 8;
         } else {
           this.ctx.shadowBlur = 0;
         }
