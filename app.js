@@ -3,7 +3,7 @@
 class MatrixApp {
   constructor() {
     this.isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    this.isHighContrast = false;
+    this.isHighContrast = true; // Start with high contrast (white) mode
     this.isSoundEnabled = true;
     this.codeRain = null;
     this.puddle = null;
@@ -12,6 +12,9 @@ class MatrixApp {
   }
 
   init() {
+    // Start with high contrast mode active
+    document.body.classList.add('high-contrast');
+    
     this.setupMatrixLoader();
     this.setupAccessibilityControls();
     this.setupProgressBar();
@@ -249,8 +252,13 @@ class MatrixApp {
       });
     }
 
-    // Contrast toggle (🔆/🌙) - Now toggles between night (default) and day (high contrast)
+    // Contrast toggle (🔆/🌙) - Now toggles between day (default high contrast) and night (Matrix theme)
     if (contrastToggle) {
+      // Set initial state - start with high contrast (day mode) active
+      contrastToggle.classList.add('active');
+      contrastToggle.textContent = '🌙';
+      contrastToggle.setAttribute('aria-label', 'Switch to Night Mode (Matrix)');
+      
       contrastToggle.addEventListener('click', () => {
         this.isHighContrast = !this.isHighContrast;
         contrastToggle.classList.toggle('active', this.isHighContrast);
@@ -258,7 +266,7 @@ class MatrixApp {
         
         // Update button text - Now shows opposite of current state
         contrastToggle.textContent = this.isHighContrast ? '🌙' : '🔆';
-        contrastToggle.setAttribute('aria-label', this.isHighContrast ? 'Switch to Night Mode' : 'Switch to Day Mode');
+        contrastToggle.setAttribute('aria-label', this.isHighContrast ? 'Switch to Night Mode (Matrix)' : 'Switch to Day Mode (High Contrast)');
         
         // Update Matrix background colors immediately
         if (this.matrixBackground) {
