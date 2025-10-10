@@ -461,8 +461,12 @@ class MatrixApp {
     if (this.isReducedMotion) return;
 
     const canvas = document.getElementById('matrix-background');
-    if (!canvas) return;
+    if (!canvas) {
+      console.error('Matrix background canvas not found!');
+      return;
+    }
 
+    console.log('Setting up Matrix background...');
     this.matrixBackground = new MatrixBackground(canvas);
     this.matrixBackground.start();
   }
@@ -940,112 +944,77 @@ class PuddleEffect {
   }
 }
 
-// Fixed Matrix Digital Rain - Debugged and Working
+// Simple and Guaranteed Matrix Digital Rain
 class MatrixBackground {
   constructor(canvas) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
     this.animationId = null;
     this.isRunning = false;
-    this.fontSize = 14;
-    this.columns = [];
+    this.fontSize = 16;
+    this.drops = [];
     
-    // Simplified character set for better performance
+    // Simple character set
     this.chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()_+-=[]{}|;:,.<>?';
     
     this.resize();
     window.addEventListener('resize', () => this.resize());
     
-    // Debug: Log initialization
     console.log('MatrixBackground initialized', this.canvas.width, this.canvas.height);
   }
 
   resize() {
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
-    this.initColumns();
     console.log('MatrixBackground resized', this.canvas.width, this.canvas.height);
-  }
-
-  initColumns() {
-    this.columns = [];
-    const columnCount = Math.floor(this.canvas.width / this.fontSize);
-    
-    for (let i = 0; i < columnCount; i++) {
-      this.columns[i] = {
-        x: i * this.fontSize,
-        drops: [],
-        nextDropTime: Math.random() * 1000 + 500,
-        lastUpdate: Date.now(),
-        speed: Math.random() * 2 + 1,
-        maxDrops: Math.floor(Math.random() * 10) + 5
-      };
-    }
-    
-    console.log('MatrixBackground columns initialized:', columnCount);
   }
 
   getRandomChar() {
     return this.chars[Math.floor(Math.random() * this.chars.length)];
   }
 
-  createDrop(column) {
-    const drop = {
+  createDrop() {
+    return {
+      x: Math.random() * this.canvas.width,
+      y: -20,
       char: this.getRandomChar(),
-      y: -this.fontSize * (Math.random() * 20 + 5),
-      speed: column.speed + Math.random() * 1,
+      speed: Math.random() * 3 + 1,
       opacity: 1,
-      trail: [],
-      brightness: Math.random() > 0.8 ? 1 : Math.random() * 0.5 + 0.3,
-      charChangeTimer: Math.random() * 50 + 30
+      trail: []
     };
-    
-    column.drops.push(drop);
   }
 
   updateDrops() {
-    const now = Date.now();
+    // Create new drops
+    if (Math.random() < 0.1) {
+      this.drops.push(this.createDrop());
+    }
     
-    this.columns.forEach(column => {
-      // Create new drops
-      if (now - column.lastUpdate > column.nextDropTime && column.drops.length < column.maxDrops) {
-        this.createDrop(column);
-        column.nextDropTime = Math.random() * 800 + 400;
-        column.lastUpdate = now;
+    // Update existing drops
+    this.drops.forEach((drop, index) => {
+      // Update trail
+      drop.trail.unshift({ x: drop.x, y: drop.y, char: drop.char, opacity: drop.opacity });
+      if (drop.trail.length > 10) {
+        drop.trail.pop();
       }
       
-      // Update existing drops
-      column.drops.forEach((drop, index) => {
-        // Character morphing
-        drop.charChangeTimer--;
-        if (drop.charChangeTimer <= 0) {
-          drop.char = this.getRandomChar();
-          drop.charChangeTimer = Math.random() * 50 + 30;
-        }
-        
-        // Update trail
-        drop.trail.unshift({ 
-          char: drop.char, 
-          y: drop.y, 
-          opacity: drop.opacity * drop.brightness
-        });
-        if (drop.trail.length > 15) {
-          drop.trail.pop();
-        }
-        
-        // Move drop
-        drop.y += drop.speed;
-        
-        // Fade out
-        if (drop.y > this.canvas.height * 0.3) {
-          drop.opacity = Math.max(0, drop.opacity - 0.015);
-        }
-        
-        // Remove old drops
-        if (drop.y > this.canvas.height + 50 || drop.opacity <= 0) {
-          column.drops.splice(index, 1);
-        }
-      });
+      // Move drop
+      drop.y += drop.speed;
+      
+      // Change character occasionally
+      if (Math.random() < 0.05) {
+        drop.char = this.getRandomChar();
+      }
+      
+      // Fade out
+      if (drop.y > this.canvas.height * 0.5) {
+        drop.opacity = Math.max(0, drop.opacity - 0.02);
+      }
+      
+      // Remove old drops
+      if (drop.y > this.canvas.height + 50 || drop.opacity <= 0) {
+        this.drops.splice(index, 1);
+      }
     });
   }
 
@@ -1058,30 +1027,23 @@ class MatrixBackground {
     this.ctx.font = `${this.fontSize}px 'Courier New', monospace`;
     this.ctx.textAlign = 'center';
     
-    this.columns.forEach(column => {
-      column.drops.forEach(drop => {
-        // Draw trail
-        drop.trail.forEach((trailPoint, index) => {
-          const trailOpacity = (trailPoint.opacity * (1 - index / drop.trail.length)) * 0.4;
-          this.ctx.fillStyle = `rgba(0, 255, 0, ${trailOpacity})`;
-          this.ctx.fillText(trailPoint.char, column.x + this.fontSize/2, trailPoint.y);
-        });
-        
-        // Draw main character
-        const mainOpacity = drop.opacity * drop.brightness;
-        this.ctx.fillStyle = `rgba(0, 255, 0, ${mainOpacity})`;
-        
-        // Add glow for bright characters
-        if (drop.brightness > 0.8) {
-          this.ctx.shadowColor = '#00ff00';
-          this.ctx.shadowBlur = 10;
-        } else {
-          this.ctx.shadowBlur = 0;
-        }
-        
-        this.ctx.fillText(drop.char, column.x + this.fontSize/2, drop.y);
-        this.ctx.shadowBlur = 0;
+    this.drops.forEach(drop => {
+      // Draw trail
+      drop.trail.forEach((trailPoint, index) => {
+        const trailOpacity = (trailPoint.opacity * (1 - index / drop.trail.length)) * 0.3;
+        this.ctx.fillStyle = `rgba(0, 255, 0, ${trailOpacity})`;
+        this.ctx.fillText(trailPoint.char, trailPoint.x, trailPoint.y);
       });
+      
+      // Draw main character
+      this.ctx.fillStyle = `rgba(0, 255, 0, ${drop.opacity})`;
+      
+      // Add glow
+      this.ctx.shadowColor = '#00ff00';
+      this.ctx.shadowBlur = 8;
+      
+      this.ctx.fillText(drop.char, drop.x, drop.y);
+      this.ctx.shadowBlur = 0;
     });
   }
 
