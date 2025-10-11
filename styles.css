@@ -2523,14 +2523,37 @@ span.contact-link:hover {
 *[class*="contact-link"]:focus,
 *[class*="contact-link"]:hover {
   color: #00ff41 !important;
+  text-decoration: underline !important;
   text-decoration-color: #00ff41 !important;
+  text-underline-offset: 3px !important;
   border-color: #00ff41 !important;
 }
 
 *[class*="contact-link"]:hover {
   color: #00ff88 !important;
+  text-decoration: underline !important;
   text-decoration-color: #00ff88 !important;
+  text-underline-offset: 3px !important;
   border-color: #00ff88 !important;
+}
+
+/* Specific override for contact section links */
+.contact .contact-link,
+.contact .contact-link:link,
+.contact .contact-link:visited,
+.contact .contact-link:active,
+.contact .contact-link:focus {
+  color: #00ff41 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #00ff41 !important;
+  text-underline-offset: 3px !important;
+}
+
+.contact .contact-link:hover {
+  color: #00ff88 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #00ff88 !important;
+  text-underline-offset: 3px !important;
 }
 
 .contact-cta {
@@ -2703,15 +2726,38 @@ span.contact-link:hover {
 .high-contrast a.contact-link:link,
 .high-contrast span.contact-link {
   color: #00ff41 !important;
+  text-decoration: underline !important;
   text-decoration-color: #00ff41 !important;
+  text-underline-offset: 3px !important;
   border-color: #00ff41 !important;
 }
 
 .high-contrast a.contact-link:hover,
 .high-contrast span.contact-link:hover {
   color: #00cc33 !important;
+  text-decoration: underline !important;
   text-decoration-color: #00cc33 !important;
+  text-underline-offset: 3px !important;
   border-color: #00cc33 !important;
+}
+
+/* High contrast specific override for contact section links */
+.high-contrast .contact .contact-link,
+.high-contrast .contact .contact-link:link,
+.high-contrast .contact .contact-link:visited,
+.high-contrast .contact .contact-link:active,
+.high-contrast .contact .contact-link:focus {
+  color: #00ff41 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #00ff41 !important;
+  text-underline-offset: 3px !important;
+}
+
+.high-contrast .contact .contact-link:hover {
+  color: #00cc33 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #00cc33 !important;
+  text-underline-offset: 3px !important;
 }
 
 .high-contrast .matrix-wall {
