@@ -317,6 +317,10 @@ body:not(.high-contrast) {
   --matrix-gray: #1a1a1a;
   --matrix-light-gray: #333333;
   --matrix-white: #ffffff;
+  
+  /* Ensure Matrix theme background is applied */
+  background-color: #000000 !important;
+  color: #00ff00 !important;
 }
 
 /* High Contrast Mode - Body and Main Elements */
