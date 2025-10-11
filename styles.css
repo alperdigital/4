@@ -2454,9 +2454,9 @@ section {
 }
 
 .contact-link {
-  color: var(--matrix-green);
-  text-decoration: underline;
-  text-decoration-color: var(--matrix-green);
+  color: var(--matrix-green) !important;
+  text-decoration: underline !important;
+  text-decoration-color: var(--matrix-green) !important;
   text-underline-offset: 3px;
   font-weight: 600;
   font-size: var(--font-size-sm);
@@ -2469,11 +2469,23 @@ section {
 }
 
 .contact-link:hover {
-  background: rgba(0, 255, 65, 0.2);
-  border-color: var(--matrix-green);
+  background: rgba(0, 255, 65, 0.2) !important;
+  border-color: var(--matrix-green) !important;
   transform: translateY(-2px);
-  text-decoration-color: var(--matrix-green-bright);
+  text-decoration-color: var(--matrix-green-bright) !important;
   text-decoration-thickness: 2px;
+  color: var(--matrix-green-bright) !important;
+}
+
+/* Ensure Matrix theme contact links are green */
+body:not(.high-contrast) .contact-link {
+  color: var(--matrix-green) !important;
+  text-decoration-color: var(--matrix-green) !important;
+}
+
+body:not(.high-contrast) .contact-link:hover {
+  color: var(--matrix-green-bright) !important;
+  text-decoration-color: var(--matrix-green-bright) !important;
 }
 
 .contact-cta {
@@ -2623,18 +2635,19 @@ section {
 
 .high-contrast .contact-link {
   background: #f0f0f0 !important;
-  color: #0066cc !important;
-  border-color: #000000 !important;
+  color: #00ff41 !important;
+  border-color: #00ff41 !important;
   text-decoration: underline !important;
-  text-decoration-color: #0066cc !important;
+  text-decoration-color: #00ff41 !important;
   text-underline-offset: 3px !important;
 }
 
 .high-contrast .contact-link:hover {
-  background: #e0e0e0 !important;
-  color: #004499 !important;
-  text-decoration-color: #004499 !important;
+  background: #e0ffe0 !important;
+  color: #00cc33 !important;
+  text-decoration-color: #00cc33 !important;
   text-decoration-thickness: 2px !important;
+  border-color: #00cc33 !important;
 }
 
 .high-contrast .matrix-wall {
