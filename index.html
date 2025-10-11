@@ -22,7 +22,7 @@
     <meta property="og:url" content="https://alperdigital.com">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="styles.css?v=15">
+    <link rel="stylesheet" href="styles.css?v=16">
     
     <!-- Audio System -->
     <script src="sounds.js"></script>
@@ -447,7 +447,7 @@
                     <div class="contact-content">
                         <h3 class="contact-title" data-en="Email Us" data-tr="E-posta Gönderin">Email Us</h3>
                         <p class="contact-description" data-en="Send us a message and we'll get back to you within 24 hours." data-tr="Bize bir mesaj gönderin, 24 saat içinde size geri dönüş yapacağız.">Send us a message and we'll get back to you within 24 hours.</p>
-                        <a href="mailto:alperdigital@icloud.com" class="contact-link">
+                        <a href="mailto:alperdigital@icloud.com" class="contact-link" style="color: #00ff41 !important; text-decoration: underline !important; text-decoration-color: #00ff41 !important; text-underline-offset: 3px !important;">
                             alperdigital@icloud.com
                         </a>
                     </div>
@@ -460,7 +460,7 @@
                     <div class="contact-content">
                         <h3 class="contact-title" data-en="Call Us" data-tr="Bizi Arayın">Call Us</h3>
                         <p class="contact-description" data-en="Speak directly with our team for immediate assistance." data-tr="Acil yardım için ekibimizle doğrudan konuşun.">Speak directly with our team for immediate assistance.</p>
-                        <a href="tel:+905071353025" class="contact-link">
+                        <a href="tel:+905071353025" class="contact-link" style="color: #00ff41 !important; text-decoration: underline !important; text-decoration-color: #00ff41 !important; text-underline-offset: 3px !important;">
                             +90 507 135 30 25
                         </a>
                     </div>
@@ -513,6 +513,25 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="app.js?v=15"></script>
+    <script src="app.js?v=16"></script>
+    
+    <!-- Contact Link Hover Effect -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactLinks = document.querySelectorAll('.contact-link');
+            
+            contactLinks.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    this.style.color = '#00ff88 !important';
+                    this.style.textDecorationColor = '#00ff88 !important';
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    this.style.color = '#00ff41 !important';
+                    this.style.textDecorationColor = '#00ff41 !important';
+                });
+            });
+        });
+    </script>
 </body>
 </html>
