@@ -79,17 +79,6 @@
         <!-- Code Rain Background -->
         <canvas id="code-rain" class="code-rain" aria-hidden="true"></canvas>
         
-        <!-- Puddle Reflection -->
-        <div class="puddle-container">
-            <div class="puddle" id="puddle">
-                <div class="puddle-reflection">
-                    <div class="reflection-content">
-                        <div class="ladder-silhouette"></div>
-                        <div class="crescent-moon"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
         
         <!-- Hero Content -->
         <div class="hero-content">
@@ -105,12 +94,10 @@
                 <span class="tagline-item">Human-centered.</span>
             </div>
             <div class="hero-cta">
-                <button class="cta-button primary" data-text="ENTER THE CODE">
-                    <span class="button-text">ENTER THE CODE</span>
-                </button>
-                <button class="cta-button secondary" data-text="VIEW WORK">
-                    <span class="button-text">VIEW WORK</span>
-                </button>
+                <a href="#contact" class="modern-btn modern-btn-secondary">
+                    <span class="modern-btn-icon">📡</span>
+                    <span>CONNECT NOW</span>
+                </a>
             </div>
         </div>
         
@@ -125,114 +112,175 @@
     <section id="services" class="services" role="region" aria-labelledby="services-heading">
         <div class="container">
             <h2 id="services-heading" class="section-title">
-                <span class="title-text">WHAT WE DO</span>
+                <span class="title-text">OUR SERVICES</span>
             </h2>
             <div class="services-grid">
-                <div class="service-card" data-service="ai">
-                    <div class="card-matrix" aria-hidden="true"></div>
-                    <div class="card-content">
-                        <h3 class="card-title">AI SYSTEMS</h3>
-                        <p class="card-description">Intelligent automation and machine learning solutions that adapt and evolve.</p>
-                        <div class="card-tech">TensorFlow • PyTorch • OpenAI</div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <div class="icon-ai">🧠</div>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">AI & Machine Learning</h3>
+                        <p class="service-description">Intelligent automation solutions that learn, adapt, and evolve with your business needs.</p>
+                        <ul class="service-features">
+                            <li>Custom AI Models</li>
+                            <li>Natural Language Processing</li>
+                            <li>Computer Vision</li>
+                            <li>Predictive Analytics</li>
+                        </ul>
                     </div>
                 </div>
-                <div class="service-card" data-service="security">
-                    <div class="card-matrix" aria-hidden="true"></div>
-                    <div class="card-content">
-                        <h3 class="card-title">CYBERSECURITY</h3>
-                        <p class="card-description">Fortress-grade protection for your digital infrastructure and data.</p>
-                        <div class="card-tech">Zero Trust • Penetration Testing • SOC</div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <div class="icon-security">🛡️</div>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Cybersecurity</h3>
+                        <p class="service-description">Fortress-grade protection for your digital infrastructure with zero-trust architecture.</p>
+                        <ul class="service-features">
+                            <li>Penetration Testing</li>
+                            <li>Security Audits</li>
+                            <li>Vulnerability Assessment</li>
+                            <li>Incident Response</li>
+                        </ul>
                     </div>
                 </div>
-                <div class="service-card" data-service="creative">
-                    <div class="card-matrix" aria-hidden="true"></div>
-                    <div class="card-content">
-                        <h3 class="card-title">CREATIVE ENGINEERING</h3>
-                        <p class="card-description">Innovative solutions that bridge technology and human experience.</p>
-                        <div class="card-tech">WebGL • React • Node.js</div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <div class="icon-web">💻</div>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Web Development</h3>
+                        <p class="service-description">Modern, scalable web applications with cutting-edge technologies and best practices.</p>
+                        <ul class="service-features">
+                            <li>Full-Stack Development</li>
+                            <li>Progressive Web Apps</li>
+                            <li>API Development</li>
+                            <li>Performance Optimization</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <div class="icon-mobile">📱</div>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Mobile Development</h3>
+                        <p class="service-description">Cross-platform mobile solutions that deliver native performance and user experience.</p>
+                        <ul class="service-features">
+                            <li>iOS & Android Apps</li>
+                            <li>React Native</li>
+                            <li>Flutter Development</li>
+                            <li>App Store Optimization</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <div class="icon-cloud">☁️</div>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Cloud Solutions</h3>
+                        <p class="service-description">Scalable cloud infrastructure and DevOps solutions for modern applications.</p>
+                        <ul class="service-features">
+                            <li>AWS & Azure</li>
+                            <li>Container Orchestration</li>
+                            <li>CI/CD Pipelines</li>
+                            <li>Infrastructure as Code</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <div class="icon-consulting">🎯</div>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Tech Consulting</h3>
+                        <p class="service-description">Strategic technology consulting to help you make informed decisions and drive innovation.</p>
+                        <ul class="service-features">
+                            <li>Technology Strategy</li>
+                            <li>Digital Transformation</li>
+                            <li>Architecture Review</li>
+                            <li>Team Training</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Work Section -->
-    <section id="work" class="work" role="region" aria-labelledby="work-heading">
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio" role="region" aria-labelledby="portfolio-heading">
         <div class="container">
-            <h2 id="work-heading" class="section-title">
-                <span class="title-text">SELECTED WORK</span>
+            <h2 id="portfolio-heading" class="section-title">
+                <span class="title-text">PORTFOLIO</span>
             </h2>
-            <div class="work-grid">
-                <div class="work-item" data-work="mobile-app">
-                    <div class="work-thumbnail">
-                        <div class="work-visual mobile-visual">
-                            <div class="phone-frame">
-                                <div class="phone-screen">
-                                    <div class="app-interface">
-                                        <div class="app-header"></div>
-                                        <div class="app-content">
-                                            <div class="data-stream"></div>
-                                            <div class="data-stream"></div>
-                                            <div class="data-stream"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="work-overlay">
-                            <h3 class="work-title">MOBILE APPLICATIONS</h3>
-                            <p class="work-description">Cross-platform mobile solutions with AI integration</p>
-                            <div class="work-tech">React Native • Flutter • Swift • Kotlin</div>
+            <div class="portfolio-grid">
+                <div class="portfolio-card">
+                    <div class="card-icon">
+                        <div class="icon-mobile">📱</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Mobile Apps</h3>
+                        <p class="card-description">Cross-platform mobile solutions with AI integration and modern UX design.</p>
+                        <div class="card-tech">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Swift</span>
+                            <span class="tech-tag">Kotlin</span>
                         </div>
                     </div>
                 </div>
-                <div class="work-item" data-work="web-app">
-                    <div class="work-thumbnail">
-                        <div class="work-visual web-visual">
-                            <div class="browser-frame">
-                                <div class="browser-header">
-                                    <div class="browser-dots">
-                                        <span></span><span></span><span></span>
-                                    </div>
-                                </div>
-                                <div class="browser-content">
-                                    <div class="web-interface">
-                                        <div class="code-lines">
-                                            <div class="code-line"></div>
-                                            <div class="code-line"></div>
-                                            <div class="code-line"></div>
-                                            <div class="code-line"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="work-overlay">
-                            <h3 class="work-title">WEB APPLICATIONS</h3>
-                            <p class="work-description">Scalable web platforms with real-time capabilities</p>
-                            <div class="work-tech">React • Node.js • TypeScript • WebSocket</div>
+                
+                <div class="portfolio-card">
+                    <div class="card-icon">
+                        <div class="icon-web">🌐</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Web Applications</h3>
+                        <p class="card-description">Scalable web platforms with real-time capabilities and modern architecture.</p>
+                        <div class="card-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">WebSocket</span>
                         </div>
                     </div>
                 </div>
-                <div class="work-item" data-work="ai-powered">
-                    <div class="work-thumbnail">
-                        <div class="work-visual ai-visual">
-                            <div class="neural-network">
-                                <div class="neuron"></div>
-                                <div class="neuron"></div>
-                                <div class="neuron"></div>
-                                <div class="neuron"></div>
-                                <div class="neuron"></div>
-                                <div class="connection"></div>
-                                <div class="connection"></div>
-                                <div class="connection"></div>
-                                <div class="connection"></div>
-                            </div>
+                
+                <div class="portfolio-card">
+                    <div class="card-icon">
+                        <div class="icon-ai">🤖</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">AI Systems</h3>
+                        <p class="card-description">Machine learning solutions and intelligent automation for business optimization.</p>
+                        <div class="card-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">TensorFlow</span>
+                            <span class="tech-tag">OpenAI</span>
+                            <span class="tech-tag">Computer Vision</span>
                         </div>
-                        <div class="work-overlay">
-                            <h3 class="work-title">AI-POWERED SYSTEMS</h3>
-                            <p class="work-description">Machine learning solutions and intelligent automation</p>
-                            <div class="work-tech">Python • TensorFlow • OpenAI • Computer Vision</div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-card">
+                    <div class="card-icon">
+                        <div class="icon-security">🔒</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Cybersecurity</h3>
+                        <p class="card-description">Advanced security solutions and penetration testing for enterprise systems.</p>
+                        <div class="card-tech">
+                            <span class="tech-tag">Penetration Testing</span>
+                            <span class="tech-tag">Security Audits</span>
+                            <span class="tech-tag">Vulnerability Assessment</span>
+                            <span class="tech-tag">Compliance</span>
                         </div>
                     </div>
                 </div>
@@ -244,35 +292,66 @@
     <section id="approach" class="approach" role="region" aria-labelledby="approach-heading">
         <div class="container">
             <h2 id="approach-heading" class="section-title">
-                <span class="title-text">OUR APPROACH</span>
+                <span class="title-text">OUR METHODOLOGY</span>
             </h2>
-            <div class="approach-timeline">
-                <div class="timeline-step" data-step="decode">
-                    <div class="step-number">01</div>
-                    <div class="step-content">
-                        <h3 class="step-title">DECODE</h3>
-                        <p class="step-description">We analyze the data streams, understand the patterns, and identify the opportunities hidden in the noise.</p>
+            <div class="approach-grid">
+                <div class="approach-card">
+                    <div class="approach-icon">
+                        <div class="icon-research">🔍</div>
+                    </div>
+                    <div class="approach-content">
+                        <h3 class="approach-title">Research & Analysis</h3>
+                        <p class="approach-description">Deep dive into your business requirements, market conditions, and technical constraints to build the perfect foundation.</p>
+                        <div class="approach-features">
+                            <span class="feature-tag">Market Research</span>
+                            <span class="feature-tag">Technical Audit</span>
+                            <span class="feature-tag">User Analysis</span>
+                        </div>
                     </div>
                 </div>
-                <div class="timeline-step" data-step="model">
-                    <div class="step-number">02</div>
-                    <div class="step-content">
-                        <h3 class="step-title">MODEL</h3>
-                        <p class="step-description">We architect intelligent systems that can adapt, learn, and evolve with your business needs.</p>
+                
+                <div class="approach-card">
+                    <div class="approach-icon">
+                        <div class="icon-design">🎨</div>
+                    </div>
+                    <div class="approach-content">
+                        <h3 class="approach-title">Design & Architecture</h3>
+                        <p class="approach-description">Create scalable, maintainable solutions with modern design patterns and cutting-edge technologies.</p>
+                        <div class="approach-features">
+                            <span class="feature-tag">System Design</span>
+                            <span class="feature-tag">UI/UX Design</span>
+                            <span class="feature-tag">Database Design</span>
+                        </div>
                     </div>
                 </div>
-                <div class="timeline-step" data-step="secure">
-                    <div class="step-number">03</div>
-                    <div class="step-content">
-                        <h3 class="step-title">SECURE</h3>
-                        <p class="step-description">We build fortress-grade security into every layer, ensuring your systems remain impenetrable.</p>
+                
+                <div class="approach-card">
+                    <div class="approach-icon">
+                        <div class="icon-develop">⚡</div>
+                    </div>
+                    <div class="approach-content">
+                        <h3 class="approach-title">Development & Testing</h3>
+                        <p class="approach-description">Agile development with continuous testing, code reviews, and quality assurance at every step.</p>
+                        <div class="approach-features">
+                            <span class="feature-tag">Agile Development</span>
+                            <span class="feature-tag">Automated Testing</span>
+                            <span class="feature-tag">Code Reviews</span>
+                        </div>
                     </div>
                 </div>
-                <div class="timeline-step" data-step="ship">
-                    <div class="step-number">04</div>
-                    <div class="step-content">
-                        <h3 class="step-title">SHIP</h3>
-                        <p class="step-description">We deploy with precision, monitor with vigilance, and iterate with purpose.</p>
+                
+                <div class="approach-card">
+                    <div class="approach-icon">
+                        <div class="icon-deploy">🚀</div>
+                    </div>
+                    <div class="approach-content">
+                        <h3 class="approach-title">Deployment & Support</h3>
+                        <p class="approach-description">Seamless deployment with comprehensive monitoring, maintenance, and ongoing support.</p>
+                        <div class="approach-features">
+                            <span class="feature-tag">CI/CD Pipeline</span>
+                            <span class="feature-tag">Monitoring</span>
+                            <span class="feature-tag">24/7 Support</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -283,34 +362,71 @@
     <section id="about" class="about" role="region" aria-labelledby="about-heading">
         <div class="container">
             <h2 id="about-heading" class="section-title">
-                <span class="title-text">ABOUT</span>
+                <span class="title-text">ABOUT ALPERDIGITAL</span>
             </h2>
-            <div class="about-content">
-                <div class="about-portrait">
-                    <svg class="portrait-svg" viewBox="0 0 200 200" aria-hidden="true">
-                        <path class="portrait-path" d="M100,20 Q150,50 150,100 Q150,150 100,180 Q50,150 50,100 Q50,50 100,20 Z" />
-                    </svg>
-                </div>
-                <div class="about-text">
-                    <p class="about-description">
-                        Founded by Alper Baş, Alperdigital operates at the intersection of artificial intelligence, 
-                        cybersecurity, and creative engineering. We believe that the future belongs to those who 
-                        can read the digital rain and transform it into meaningful action.
-                    </p>
-                    <div class="about-stats">
-                        <div class="stat">
-                            <span class="stat-number">50+</span>
-                            <span class="stat-label">Projects Delivered</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">99.9%</span>
-                            <span class="stat-label">Uptime Achieved</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">24/7</span>
-                            <span class="stat-label">Security Monitoring</span>
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="about-icon">
+                        <div class="icon-founder">👨‍💻</div>
+                    </div>
+                    <div class="about-content">
+                        <h3 class="about-title">Founder & CEO</h3>
+                        <p class="about-description">Alper Baş leads Alperdigital with a vision to bridge the gap between cutting-edge technology and real-world solutions.</p>
+                        <div class="about-features">
+                            <span class="feature-tag">AI Expert</span>
+                            <span class="feature-tag">Cybersecurity</span>
+                            <span class="feature-tag">Full-Stack</span>
                         </div>
                     </div>
+                </div>
+                
+                <div class="about-card">
+                    <div class="about-icon">
+                        <div class="icon-mission">🎯</div>
+                    </div>
+                    <div class="about-content">
+                        <h3 class="about-title">Our Mission</h3>
+                        <p class="about-description">We transform complex digital challenges into elegant, scalable solutions that drive business growth and innovation.</p>
+                        <div class="about-features">
+                            <span class="feature-tag">Innovation</span>
+                            <span class="feature-tag">Quality</span>
+                            <span class="feature-tag">Reliability</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-card">
+                    <div class="about-icon">
+                        <div class="icon-values">⚡</div>
+                    </div>
+                    <div class="about-content">
+                        <h3 class="about-title">Core Values</h3>
+                        <p class="about-description">Security-first approach, human-centered design, and continuous learning drive everything we build.</p>
+                        <div class="about-features">
+                            <span class="feature-tag">Security</span>
+                            <span class="feature-tag">UX Focus</span>
+                            <span class="feature-tag">Learning</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="about-stats">
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Projects Delivered</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">Uptime Achieved</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support Available</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Client Satisfaction</div>
                 </div>
             </div>
         </div>
@@ -320,24 +436,66 @@
     <section id="contact" class="contact" role="region" aria-labelledby="contact-heading">
         <div class="container">
             <h2 id="contact-heading" class="section-title">
-                <span class="title-text">CONTACT</span>
+                <span class="title-text">GET IN TOUCH</span>
             </h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3 class="contact-subtitle">Ready to enter the code?</h3>
-                    <p class="contact-description">
-                        Let's discuss how we can transform your digital challenges into competitive advantages.
-                    </p>
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <span class="contact-label">Email:</span>
-                            <a href="mailto:alperdigital@icloud.com" class="contact-link">alperdigital@icloud.com</a>
-                        </div>
-                        <div class="contact-item">
-                            <span class="contact-label">Phone:</span>
-                            <a href="tel:+905071353025" class="contact-link">+90 507 135 30 25</a>
-                        </div>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <div class="icon-email">📧</div>
                     </div>
+                    <div class="contact-content">
+                        <h3 class="contact-title">Email Us</h3>
+                        <p class="contact-description">Send us a message and we'll get back to you within 24 hours.</p>
+                        <a href="mailto:alperdigital@icloud.com" class="contact-link">
+                            alperdigital@icloud.com
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <div class="icon-phone">📞</div>
+                    </div>
+                    <div class="contact-content">
+                        <h3 class="contact-title">Call Us</h3>
+                        <p class="contact-description">Speak directly with our team for immediate assistance.</p>
+                        <a href="tel:+905071353025" class="contact-link">
+                            +90 507 135 30 25
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <div class="icon-location">📍</div>
+                    </div>
+                    <div class="contact-content">
+                        <h3 class="contact-title">Location</h3>
+                        <p class="contact-description">Based in Turkey, serving clients worldwide remotely.</p>
+                        <span class="contact-link">Turkey, Remote</span>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <div class="icon-time">⏰</div>
+                    </div>
+                    <div class="contact-content">
+                        <h3 class="contact-title">Response Time</h3>
+                        <p class="contact-description">We typically respond to inquiries within 2-4 hours.</p>
+                        <span class="contact-link">2-4 Hours</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-cta">
+                <h3 class="cta-title">Ready to Enter the Matrix?</h3>
+                <p class="cta-description">Let's discuss how we can transform your digital challenges into competitive advantages.</p>
+                <div class="cta-buttons">
+                    <a href="tel:+905071353025" class="modern-btn modern-btn-secondary">
+                        <span class="modern-btn-icon">📞</span>
+                        <span>DIRECT CALL</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -347,8 +505,7 @@
     <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo">ALPERDIGITAL</div>
-                <div class="footer-text">From signal to ship.</div>
+                <div class="footer-text matrix-wall">TEMET NOSCE</div>
                 <div class="footer-year">© 2024</div>
             </div>
         </div>
