@@ -286,6 +286,11 @@
   opacity: 0.1 !important;
 }
 
+/* High Contrast Mode - Code Rain Canvas */
+.high-contrast .code-rain {
+  opacity: 0.4 !important;
+}
+
 /* High Contrast Mode - Complete Color Palette Override (Day Mode) */
 .high-contrast {
   /* Override all Matrix colors to high contrast (Day Mode) */
@@ -1137,13 +1142,14 @@ body {
 
 /* Code Rain Canvas */
 .code-rain {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
+  z-index: -1;
   opacity: 0.3;
+  pointer-events: none;
 }
 
 
