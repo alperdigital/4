@@ -1061,18 +1061,18 @@ class MatrixBackground {
       // Draw trail
       drop.trail.forEach((trailPoint, index) => {
         const trailOpacity = (trailPoint.opacity * (1 - index / drop.trail.length)) * 0.3;
-        const trailColor = isHighContrast ? `rgba(0, 0, 0, ${trailOpacity})` : `rgba(0, 255, 0, ${trailOpacity})`;
+        const trailColor = isHighContrast ? `rgba(0, 0, 0, ${trailOpacity * 1.2})` : `rgba(0, 255, 0, ${trailOpacity})`;
         this.ctx.fillStyle = trailColor;
         this.ctx.fillText(trailPoint.char, trailPoint.x, trailPoint.y);
       });
       
       // Draw main character
-      const mainColor = isHighContrast ? `rgba(0, 0, 0, ${drop.opacity})` : `rgba(0, 255, 0, ${drop.opacity})`;
+      const mainColor = isHighContrast ? `rgba(0, 0, 0, ${drop.opacity * 1.1})` : `rgba(0, 255, 0, ${drop.opacity})`;
       this.ctx.fillStyle = mainColor;
       
       // Add glow
       this.ctx.shadowColor = isHighContrast ? '#000000' : '#00ff00';
-      this.ctx.shadowBlur = isHighContrast ? 4 : 8;
+      this.ctx.shadowBlur = isHighContrast ? 3 : 8;
       
       this.ctx.fillText(drop.char, drop.x, drop.y);
       this.ctx.shadowBlur = 0;
