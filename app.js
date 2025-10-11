@@ -3,7 +3,7 @@
 class MatrixApp {
   constructor() {
     this.isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    this.isHighContrast = true; // Start with high contrast (white) mode
+    this.isHighContrast = false; // Start with Matrix theme (default)
     this.isSoundEnabled = true;
     this.codeRain = null;
     this.puddle = null;
@@ -215,15 +215,13 @@ class MatrixApp {
         loader.style.display = 'none';
         document.body.classList.add('loaded');
         
-        // Activate high contrast mode after loading is complete
-        document.body.classList.add('high-contrast');
-        
+        // Keep Matrix theme as default (no high-contrast class added)
         // Update contrast toggle button to show correct state
         const contrastToggle = document.getElementById('high-contrast');
         if (contrastToggle) {
-          contrastToggle.classList.add('active');
-          contrastToggle.textContent = '🌙';
-          contrastToggle.setAttribute('aria-label', 'Switch to Night Mode (Matrix)');
+          contrastToggle.classList.remove('active');
+          contrastToggle.textContent = '🔆';
+          contrastToggle.setAttribute('aria-label', 'Switch to Day Mode (High Contrast)');
         }
         
         // Try to start audio after loading is complete
