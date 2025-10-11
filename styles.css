@@ -2527,6 +2527,9 @@ span.contact-link:hover {
   text-decoration-color: #00ff41 !important;
   text-underline-offset: 3px !important;
   border-color: #00ff41 !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
 }
 
 *[class*="contact-link"]:hover {
@@ -2535,9 +2538,35 @@ span.contact-link:hover {
   text-decoration-color: #00ff88 !important;
   text-underline-offset: 3px !important;
   border-color: #00ff88 !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
 }
 
-/* Specific override for contact section links */
+/* NUCLEAR OPTION - Override ALL possible browser styles */
+a[href^="mailto:"],
+a[href^="tel:"] {
+  color: #00ff41 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #00ff41 !important;
+  text-underline-offset: 3px !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+}
+
+a[href^="mailto:"]:hover,
+a[href^="tel:"]:hover {
+  color: #00ff88 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #00ff88 !important;
+  text-underline-offset: 3px !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+}
+
+/* Specific override for contact section links - WEB VERSION FIX */
 .contact .contact-link,
 .contact .contact-link:link,
 .contact .contact-link:visited,
@@ -2554,6 +2583,31 @@ span.contact-link:hover {
   text-decoration: underline !important;
   text-decoration-color: #00ff88 !important;
   text-underline-offset: 3px !important;
+}
+
+/* WEB VERSION SPECIFIC - Override browser defaults */
+@media (min-width: 768px) {
+  .contact .contact-link,
+  .contact .contact-link:link,
+  .contact .contact-link:visited,
+  .contact .contact-link:active,
+  .contact .contact-link:focus {
+    color: #00ff41 !important;
+    text-decoration: underline !important;
+    text-decoration-color: #00ff41 !important;
+    text-underline-offset: 3px !important;
+    border: none !important;
+    background: none !important;
+  }
+  
+  .contact .contact-link:hover {
+    color: #00ff88 !important;
+    text-decoration: underline !important;
+    text-decoration-color: #00ff88 !important;
+    text-underline-offset: 3px !important;
+    border: none !important;
+    background: none !important;
+  }
 }
 
 .contact-cta {
@@ -2751,6 +2805,9 @@ span.contact-link:hover {
   text-decoration: underline !important;
   text-decoration-color: #00ff41 !important;
   text-underline-offset: 3px !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
 }
 
 .high-contrast .contact .contact-link:hover {
@@ -2758,6 +2815,32 @@ span.contact-link:hover {
   text-decoration: underline !important;
   text-decoration-color: #00cc33 !important;
   text-underline-offset: 3px !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+}
+
+/* High contrast NUCLEAR OPTION */
+.high-contrast a[href^="mailto:"],
+.high-contrast a[href^="tel:"] {
+  color: #00ff41 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #00ff41 !important;
+  text-underline-offset: 3px !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+}
+
+.high-contrast a[href^="mailto:"]:hover,
+.high-contrast a[href^="tel:"]:hover {
+  color: #00cc33 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #00cc33 !important;
+  text-underline-offset: 3px !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
 }
 
 .high-contrast .matrix-wall {
