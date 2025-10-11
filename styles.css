@@ -2488,18 +2488,49 @@ body:not(.high-contrast) .contact-link:hover {
   text-decoration-color: var(--matrix-green-bright) !important;
 }
 
-/* Force all contact links to be green in both themes */
-.contact-link,
-.contact-link:visited,
-.contact-link:active,
-.contact-link:focus {
+/* Force all contact links to be green in both themes - Maximum specificity */
+a.contact-link,
+a.contact-link:visited,
+a.contact-link:active,
+a.contact-link:focus,
+span.contact-link {
   color: #00ff41 !important;
   text-decoration-color: #00ff41 !important;
+  border-color: #00ff41 !important;
 }
 
-.contact-link:hover {
+a.contact-link:hover,
+span.contact-link:hover {
   color: #00ff88 !important;
   text-decoration-color: #00ff88 !important;
+  border-color: #00ff88 !important;
+}
+
+/* Override any browser default link styles */
+.contact-link:link {
+  color: #00ff41 !important;
+}
+
+.contact-link:link:hover {
+  color: #00ff88 !important;
+}
+
+/* Ultimate override - Force green for ALL contact links */
+*[class*="contact-link"],
+*[class*="contact-link"]:link,
+*[class*="contact-link"]:visited,
+*[class*="contact-link"]:active,
+*[class*="contact-link"]:focus,
+*[class*="contact-link"]:hover {
+  color: #00ff41 !important;
+  text-decoration-color: #00ff41 !important;
+  border-color: #00ff41 !important;
+}
+
+*[class*="contact-link"]:hover {
+  color: #00ff88 !important;
+  text-decoration-color: #00ff88 !important;
+  border-color: #00ff88 !important;
 }
 
 .contact-cta {
@@ -2664,18 +2695,23 @@ body:not(.high-contrast) .contact-link:hover {
   border-color: #00cc33 !important;
 }
 
-/* Force high contrast contact links to be green */
-.high-contrast .contact-link,
-.high-contrast .contact-link:visited,
-.high-contrast .contact-link:active,
-.high-contrast .contact-link:focus {
+/* Force high contrast contact links to be green - Maximum specificity */
+.high-contrast a.contact-link,
+.high-contrast a.contact-link:visited,
+.high-contrast a.contact-link:active,
+.high-contrast a.contact-link:focus,
+.high-contrast a.contact-link:link,
+.high-contrast span.contact-link {
   color: #00ff41 !important;
   text-decoration-color: #00ff41 !important;
+  border-color: #00ff41 !important;
 }
 
-.high-contrast .contact-link:hover {
+.high-contrast a.contact-link:hover,
+.high-contrast span.contact-link:hover {
   color: #00cc33 !important;
   text-decoration-color: #00cc33 !important;
+  border-color: #00cc33 !important;
 }
 
 .high-contrast .matrix-wall {
