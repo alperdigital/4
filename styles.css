@@ -32,6 +32,7 @@
   --spacing-2xl: 3rem;
   --spacing-3xl: 4rem;
   --spacing-4xl: 6rem;
+  --spacing-xxl: 8rem;
   
   --transition-fast: 0.15s ease;
   --transition-normal: 0.3s ease;
@@ -1142,6 +1143,7 @@ body {
   justify-content: center;
   overflow: hidden;
   background: var(--matrix-black);
+  margin-bottom: var(--spacing-4xl);
 }
 
 /* Code Rain Canvas */
@@ -1422,6 +1424,7 @@ section {
 .services {
   background: var(--matrix-dark);
   padding: var(--spacing-xxl) 0;
+  margin: var(--spacing-4xl) 0;
 }
 
 .services-grid {
@@ -1639,6 +1642,7 @@ section {
 .portfolio {
   background: var(--matrix-black);
   padding: var(--spacing-xxl) 0;
+  margin: var(--spacing-4xl) 0;
 }
 
 .portfolio-grid {
@@ -1935,6 +1939,7 @@ section {
 .approach {
   background: var(--matrix-black);
   padding: var(--spacing-xxl) 0;
+  margin: var(--spacing-4xl) 0;
 }
 
 .approach-grid {
@@ -2150,6 +2155,7 @@ section {
 .about {
   background: var(--matrix-dark);
   padding: var(--spacing-xxl) 0;
+  margin: var(--spacing-4xl) 0;
 }
 
 .about-grid {
@@ -2170,6 +2176,14 @@ section {
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
+  .hero {
+    margin-bottom: var(--spacing-3xl);
+  }
+  
+  .services, .portfolio, .approach, .about, .contact {
+    margin: var(--spacing-3xl) 0;
+  }
+  
   .about-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-md);
@@ -2319,6 +2333,7 @@ section {
 .contact {
   background: var(--matrix-black);
   padding: var(--spacing-xxl) 0;
+  margin: var(--spacing-4xl) 0;
 }
 
 .contact-grid {
@@ -2493,6 +2508,14 @@ section {
 
 /* Mobile optimizations for about and contact */
 @media (max-width: 480px) {
+  .hero {
+    margin-bottom: var(--spacing-2xl);
+  }
+  
+  .services, .portfolio, .approach, .about, .contact {
+    margin: var(--spacing-2xl) 0;
+  }
+  
   .about-card, .contact-card {
     padding: var(--spacing-md);
     min-height: 240px;
