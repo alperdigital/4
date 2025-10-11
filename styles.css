@@ -2455,7 +2455,9 @@ section {
 
 .contact-link {
   color: var(--matrix-green);
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-color: var(--matrix-green);
+  text-underline-offset: 3px;
   font-weight: 600;
   font-size: var(--font-size-sm);
   transition: all var(--transition-normal);
@@ -2463,12 +2465,15 @@ section {
   border: 1px solid rgba(0, 255, 65, 0.2);
   border-radius: 20px;
   background: rgba(0, 255, 65, 0.1);
+  cursor: pointer;
 }
 
 .contact-link:hover {
   background: rgba(0, 255, 65, 0.2);
   border-color: var(--matrix-green);
   transform: translateY(-2px);
+  text-decoration-color: var(--matrix-green-bright);
+  text-decoration-thickness: 2px;
 }
 
 .contact-cta {
@@ -2618,8 +2623,18 @@ section {
 
 .high-contrast .contact-link {
   background: #f0f0f0 !important;
-  color: #000000 !important;
+  color: #0066cc !important;
   border-color: #000000 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #0066cc !important;
+  text-underline-offset: 3px !important;
+}
+
+.high-contrast .contact-link:hover {
+  background: #e0e0e0 !important;
+  color: #004499 !important;
+  text-decoration-color: #004499 !important;
+  text-decoration-thickness: 2px !important;
 }
 
 .high-contrast .matrix-wall {
