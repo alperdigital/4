@@ -22,7 +22,7 @@
     <meta property="og:url" content="https://alperdigital.com">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=7">
     
     <!-- Audio System -->
     <script src="sounds.js"></script>
@@ -50,6 +50,7 @@
         <button id="reduce-motion" class="control-btn" aria-label="Reduce Motion">⚡</button>
         <button id="high-contrast" class="control-btn" aria-label="High Contrast">🔆</button>
         <button id="sound-toggle" class="control-btn" aria-label="Toggle Sound">🔊</button>
+        <button id="language-toggle" class="control-btn" aria-label="Switch Language">🇹🇷</button>
     </div>
 
     <!-- Progress Bar -->
@@ -64,12 +65,12 @@
                 <span class="logo-text">ALPERDIGITAL</span>
             </div>
             <ul class="nav-links">
-                <li><a href="#hero" class="nav-link">Enter</a></li>
-                <li><a href="#services" class="nav-link">Services</a></li>
-                <li><a href="#work" class="nav-link">Work</a></li>
-                <li><a href="#approach" class="nav-link">Approach</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#hero" class="nav-link" data-en="Enter" data-tr="Giriş">Enter</a></li>
+                <li><a href="#services" class="nav-link" data-en="Services" data-tr="Hizmetler">Services</a></li>
+                <li><a href="#work" class="nav-link" data-en="Work" data-tr="Çalışmalar">Work</a></li>
+                <li><a href="#approach" class="nav-link" data-en="Approach" data-tr="Yaklaşım">Approach</a></li>
+                <li><a href="#about" class="nav-link" data-en="About" data-tr="Hakkımızda">About</a></li>
+                <li><a href="#contact" class="nav-link" data-en="Contact" data-tr="İletişim">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -86,17 +87,17 @@
                 <span class="title-line">ALPERDIGITAL</span>
             </h1>
             <h2 class="hero-subtitle">
-                <span class="subtitle-text">We translate falling code into working systems</span>
+                <span class="subtitle-text" data-en="We translate falling code into working systems" data-tr="Düşen kodları çalışan sistemlere dönüştürüyoruz">We translate falling code into working systems</span>
             </h2>
             <div class="hero-tagline">
-                <span class="tagline-item">Secure.</span>
-                <span class="tagline-item">Measurable.</span>
-                <span class="tagline-item">Human-centered.</span>
+                <span class="tagline-item" data-en="Secure." data-tr="Güvenli.">Secure.</span>
+                <span class="tagline-item" data-en="Measurable." data-tr="Ölçülebilir.">Measurable.</span>
+                <span class="tagline-item" data-en="Human-centered." data-tr="İnsan odaklı.">Human-centered.</span>
             </div>
             <div class="hero-cta">
                 <a href="#contact" class="modern-btn modern-btn-secondary">
                     <span class="modern-btn-icon">📞</span>
-                    <span>CONNECT NOW</span>
+                    <span data-en="CONNECT NOW" data-tr="BAĞLANTI KUR">CONNECT NOW</span>
                 </a>
             </div>
         </div>
@@ -112,7 +113,7 @@
     <section id="services" class="services" role="region" aria-labelledby="services-heading">
         <div class="container">
             <h2 id="services-heading" class="section-title">
-                <span class="title-text">OUR SERVICES</span>
+                <span class="title-text" data-en="OUR SERVICES" data-tr="HİZMETLERİMİZ">OUR SERVICES</span>
             </h2>
             <div class="services-grid">
                 <div class="service-card">
@@ -120,13 +121,13 @@
                         <div class="icon-ai">🧠</div>
                     </div>
                     <div class="service-content">
-                        <h3 class="service-title">AI & Machine Learning</h3>
-                        <p class="service-description">Intelligent automation solutions that learn, adapt, and evolve with your business needs.</p>
+                        <h3 class="service-title" data-en="AI & Machine Learning" data-tr="Yapay Zeka & Makine Öğrenmesi">AI & Machine Learning</h3>
+                        <p class="service-description" data-en="Intelligent automation solutions that learn, adapt, and evolve with your business needs." data-tr="İş ihtiyaçlarınızla birlikte öğrenen, uyum sağlayan ve gelişen akıllı otomasyon çözümleri.">Intelligent automation solutions that learn, adapt, and evolve with your business needs.</p>
                         <ul class="service-features">
-                            <li>Custom AI Models</li>
-                            <li>Natural Language Processing</li>
-                            <li>Computer Vision</li>
-                            <li>Predictive Analytics</li>
+                            <li data-en="Custom AI Models" data-tr="Özel AI Modelleri">Custom AI Models</li>
+                            <li data-en="Natural Language Processing" data-tr="Doğal Dil İşleme">Natural Language Processing</li>
+                            <li data-en="Computer Vision" data-tr="Bilgisayar Görüşü">Computer Vision</li>
+                            <li data-en="Predictive Analytics" data-tr="Tahmine Dayalı Analitik">Predictive Analytics</li>
                         </ul>
                     </div>
                 </div>
@@ -512,6 +513,6 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="app.js"></script>
+    <script src="app.js?v=7"></script>
 </body>
 </html>

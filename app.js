@@ -5,6 +5,7 @@ class MatrixApp {
     this.isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     this.isHighContrast = false; // Start with Matrix theme (default)
     this.isSoundEnabled = true;
+    this.currentLanguage = 'en'; // Start with English
     this.codeRain = null;
     this.puddle = null;
     this.audio = null;
@@ -17,6 +18,7 @@ class MatrixApp {
     
     this.setupMatrixLoader();
     this.setupAccessibilityControls();
+    this.setupLanguageToggle();
     this.setupProgressBar();
     this.setupNavigation();
     this.setupAudio();
@@ -241,6 +243,7 @@ class MatrixApp {
     const motionToggle = document.getElementById('reduce-motion');
     const contrastToggle = document.getElementById('high-contrast');
     const soundToggle = document.getElementById('sound-toggle');
+    const languageToggle = document.getElementById('language-toggle');
 
     // Motion toggle (⚡)
     if (motionToggle) {
@@ -328,6 +331,49 @@ class MatrixApp {
         this.audio.setEnabled(this.isSoundEnabled);
       }
     }
+  }
+
+  setupLanguageToggle() {
+    const languageToggle = document.getElementById('language-toggle');
+    if (!languageToggle) return;
+
+    // Set initial state - start with Turkish flag (showing English content)
+    languageToggle.textContent = '🇹🇷';
+    languageToggle.setAttribute('aria-label', 'Switch to Turkish');
+
+    languageToggle.addEventListener('click', () => {
+      this.currentLanguage = this.currentLanguage === 'en' ? 'tr' : 'en';
+      this.switchLanguage(this.currentLanguage);
+      
+      // Update button
+      languageToggle.textContent = this.currentLanguage === 'en' ? '🇹🇷' : '🇬🇧';
+      languageToggle.setAttribute('aria-label', this.currentLanguage === 'en' ? 'Switch to Turkish' : 'Switch to English');
+      
+      // Store preference
+      localStorage.setItem('language', this.currentLanguage);
+    });
+
+    // Load saved language preference
+    const savedLanguage = localStorage.getItem('language');
+    if (savedLanguage && savedLanguage !== 'en') {
+      this.currentLanguage = savedLanguage;
+      this.switchLanguage(this.currentLanguage);
+      languageToggle.textContent = this.currentLanguage === 'en' ? '🇹🇷' : '🇬🇧';
+      languageToggle.setAttribute('aria-label', this.currentLanguage === 'en' ? 'Switch to Turkish' : 'Switch to English');
+    }
+  }
+
+  switchLanguage(language) {
+    const elements = document.querySelectorAll('[data-en][data-tr]');
+    elements.forEach(element => {
+      const text = language === 'tr' ? element.getAttribute('data-tr') : element.getAttribute('data-en');
+      if (text) {
+        element.textContent = text;
+      }
+    });
+    
+    // Update document language
+    document.documentElement.lang = language;
   }
 
   setupProgressBar() {
