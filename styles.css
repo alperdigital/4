@@ -2487,9 +2487,9 @@ section {
 }
 
 .contact-link {
-  color: var(--matrix-green) !important;
+  color: #00ff41 !important;
   text-decoration: underline !important;
-  text-decoration-color: var(--matrix-green) !important;
+  text-decoration-color: #00ff41 !important;
   text-underline-offset: 3px;
   font-weight: 600;
   font-size: var(--font-size-sm);
@@ -2503,145 +2503,15 @@ section {
 
 .contact-link:hover {
   background: rgba(0, 255, 65, 0.2) !important;
-  border-color: var(--matrix-green) !important;
+  border-color: #00ff41 !important;
   transform: translateY(-2px);
-  text-decoration-color: var(--matrix-green-bright) !important;
+  text-decoration-color: #00ff88 !important;
   text-decoration-thickness: 2px;
-  color: var(--matrix-green-bright) !important;
-}
-
-/* Ensure Matrix theme contact links are green */
-body:not(.high-contrast) .contact-link {
-  color: var(--matrix-green) !important;
-  text-decoration-color: var(--matrix-green) !important;
-}
-
-body:not(.high-contrast) .contact-link:hover {
-  color: var(--matrix-green-bright) !important;
-  text-decoration-color: var(--matrix-green-bright) !important;
-}
-
-/* Force all contact links to be green in both themes - Maximum specificity */
-a.contact-link,
-a.contact-link:visited,
-a.contact-link:active,
-a.contact-link:focus,
-span.contact-link {
-  color: #00ff41 !important;
-  text-decoration-color: #00ff41 !important;
-  border-color: #00ff41 !important;
-}
-
-a.contact-link:hover,
-span.contact-link:hover {
-  color: #00ff88 !important;
-  text-decoration-color: #00ff88 !important;
-  border-color: #00ff88 !important;
-}
-
-/* Override any browser default link styles */
-.contact-link:link {
-  color: #00ff41 !important;
-}
-
-.contact-link:link:hover {
   color: #00ff88 !important;
 }
 
-/* Ultimate override - Force green for ALL contact links */
-*[class*="contact-link"],
-*[class*="contact-link"]:link,
-*[class*="contact-link"]:visited,
-*[class*="contact-link"]:active,
-*[class*="contact-link"]:focus,
-*[class*="contact-link"]:hover {
-  color: #00ff41 !important;
-  text-decoration: underline !important;
-  text-decoration-color: #00ff41 !important;
-  text-underline-offset: 3px !important;
-  border-color: #00ff41 !important;
-  background-color: transparent !important;
-  border: none !important;
-  outline: none !important;
-}
+/* Contact links - Matrix theme stays green by default, White theme overridden to black */
 
-*[class*="contact-link"]:hover {
-  color: #00ff88 !important;
-  text-decoration: underline !important;
-  text-decoration-color: #00ff88 !important;
-  text-underline-offset: 3px !important;
-  border-color: #00ff88 !important;
-  background-color: transparent !important;
-  border: none !important;
-  outline: none !important;
-}
-
-/* NUCLEAR OPTION - Override ALL possible browser styles */
-a[href^="mailto:"],
-a[href^="tel:"] {
-  color: #00ff41 !important;
-  text-decoration: underline !important;
-  text-decoration-color: #00ff41 !important;
-  text-underline-offset: 3px !important;
-  background-color: transparent !important;
-  border: none !important;
-  outline: none !important;
-}
-
-a[href^="mailto:"]:hover,
-a[href^="tel:"]:hover {
-  color: #00ff88 !important;
-  text-decoration: underline !important;
-  text-decoration-color: #00ff88 !important;
-  text-underline-offset: 3px !important;
-  background-color: transparent !important;
-  border: none !important;
-  outline: none !important;
-}
-
-/* Specific override for contact section links - WEB VERSION FIX */
-.contact .contact-link,
-.contact .contact-link:link,
-.contact .contact-link:visited,
-.contact .contact-link:active,
-.contact .contact-link:focus {
-  color: #00ff41 !important;
-  text-decoration: underline !important;
-  text-decoration-color: #00ff41 !important;
-  text-underline-offset: 3px !important;
-}
-
-.contact .contact-link:hover {
-  color: #00ff88 !important;
-  text-decoration: underline !important;
-  text-decoration-color: #00ff88 !important;
-  text-underline-offset: 3px !important;
-}
-
-/* WEB VERSION SPECIFIC - Override browser defaults */
-@media (min-width: 768px) {
-  .contact .contact-link,
-  .contact .contact-link:link,
-  .contact .contact-link:visited,
-  .contact .contact-link:active,
-  .contact .contact-link:focus {
-    color: #00ff41 !important;
-    text-decoration: underline !important;
-    text-decoration-color: #00ff41 !important;
-    text-underline-offset: 3px !important;
-    border: none !important;
-    background: none !important;
-  }
-  
-  .contact .contact-link:hover {
-    color: #00ff88 !important;
-    text-decoration: underline !important;
-    text-decoration-color: #00ff88 !important;
-    text-underline-offset: 3px !important;
-    border: none !important;
-    background: none !important;
-  }
-}
 
 .contact-cta {
   text-align: center;
@@ -2790,42 +2660,42 @@ a[href^="tel:"]:hover {
 
 .high-contrast .contact-link {
   background: #f0f0f0 !important;
-  color: #00ff41 !important;
-  border-color: #00ff41 !important;
+  color: #000000 !important;
+  border-color: #000000 !important;
   text-decoration: underline !important;
-  text-decoration-color: #00ff41 !important;
+  text-decoration-color: #000000 !important;
   text-underline-offset: 3px !important;
 }
 
 .high-contrast .contact-link:hover {
-  background: #e0ffe0 !important;
-  color: #00cc33 !important;
-  text-decoration-color: #00cc33 !important;
+  background: #e0e0e0 !important;
+  color: #333333 !important;
+  text-decoration-color: #333333 !important;
   text-decoration-thickness: 2px !important;
-  border-color: #00cc33 !important;
+  border-color: #333333 !important;
 }
 
-/* Force high contrast contact links to be green - Maximum specificity */
+/* Force high contrast contact links to be black - Maximum specificity */
 .high-contrast a.contact-link,
 .high-contrast a.contact-link:visited,
 .high-contrast a.contact-link:active,
 .high-contrast a.contact-link:focus,
 .high-contrast a.contact-link:link,
 .high-contrast span.contact-link {
-  color: #00ff41 !important;
+  color: #000000 !important;
   text-decoration: underline !important;
-  text-decoration-color: #00ff41 !important;
+  text-decoration-color: #000000 !important;
   text-underline-offset: 3px !important;
-  border-color: #00ff41 !important;
+  border-color: #000000 !important;
 }
 
 .high-contrast a.contact-link:hover,
 .high-contrast span.contact-link:hover {
-  color: #00cc33 !important;
+  color: #333333 !important;
   text-decoration: underline !important;
-  text-decoration-color: #00cc33 !important;
+  text-decoration-color: #333333 !important;
   text-underline-offset: 3px !important;
-  border-color: #00cc33 !important;
+  border-color: #333333 !important;
 }
 
 /* High contrast specific override for contact section links */
@@ -2834,9 +2704,9 @@ a[href^="tel:"]:hover {
 .high-contrast .contact .contact-link:visited,
 .high-contrast .contact .contact-link:active,
 .high-contrast .contact .contact-link:focus {
-  color: #00ff41 !important;
+  color: #000000 !important;
   text-decoration: underline !important;
-  text-decoration-color: #00ff41 !important;
+  text-decoration-color: #000000 !important;
   text-underline-offset: 3px !important;
   background-color: transparent !important;
   border: none !important;
@@ -2844,9 +2714,9 @@ a[href^="tel:"]:hover {
 }
 
 .high-contrast .contact .contact-link:hover {
-  color: #00cc33 !important;
+  color: #333333 !important;
   text-decoration: underline !important;
-  text-decoration-color: #00cc33 !important;
+  text-decoration-color: #333333 !important;
   text-underline-offset: 3px !important;
   background-color: transparent !important;
   border: none !important;
@@ -2856,9 +2726,9 @@ a[href^="tel:"]:hover {
 /* High contrast NUCLEAR OPTION */
 .high-contrast a[href^="mailto:"],
 .high-contrast a[href^="tel:"] {
-  color: #00ff41 !important;
+  color: #000000 !important;
   text-decoration: underline !important;
-  text-decoration-color: #00ff41 !important;
+  text-decoration-color: #000000 !important;
   text-underline-offset: 3px !important;
   background-color: transparent !important;
   border: none !important;
@@ -2867,9 +2737,9 @@ a[href^="tel:"]:hover {
 
 .high-contrast a[href^="mailto:"]:hover,
 .high-contrast a[href^="tel:"]:hover {
-  color: #00cc33 !important;
+  color: #333333 !important;
   text-decoration: underline !important;
-  text-decoration-color: #00cc33 !important;
+  text-decoration-color: #333333 !important;
   text-underline-offset: 3px !important;
   background-color: transparent !important;
   border: none !important;
@@ -3268,4 +3138,296 @@ a[href^="tel:"]:hover {
   0% { opacity: 0.3; transform: scaleX(0); }
   50% { opacity: 1; transform: scaleX(1); }
   100% { opacity: 0.3; transform: scaleX(0); }
+}
+
+/* WHITE THEME OVERRIDE - Force contact links to be BLACK in white theme only */
+.high-contrast a[href="mailto:alperdigital@icloud.com"],
+.high-contrast a[href="tel:+905071353025"],
+.high-contrast a[href^="mailto:"],
+.high-contrast a[href^="tel:"] {
+  color: #000000 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #000000 !important;
+  text-underline-offset: 3px !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  font-weight: 600 !important;
+}
+
+.high-contrast a[href="mailto:alperdigital@icloud.com"]:link,
+.high-contrast a[href="tel:+905071353025"]:link,
+.high-contrast a[href^="mailto:"]:link,
+.high-contrast a[href^="tel:"]:link {
+  color: #000000 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #000000 !important;
+  text-underline-offset: 3px !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  font-weight: 600 !important;
+}
+
+.high-contrast a[href="mailto:alperdigital@icloud.com"]:visited,
+.high-contrast a[href="tel:+905071353025"]:visited,
+.high-contrast a[href^="mailto:"]:visited,
+.high-contrast a[href^="tel:"]:visited {
+  color: #000000 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #000000 !important;
+  text-underline-offset: 3px !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  font-weight: 600 !important;
+}
+
+.high-contrast a[href="mailto:alperdigital@icloud.com"]:active,
+.high-contrast a[href="tel:+905071353025"]:active,
+.high-contrast a[href^="mailto:"]:active,
+.high-contrast a[href^="tel:"]:active {
+  color: #000000 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #000000 !important;
+  text-underline-offset: 3px !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  font-weight: 600 !important;
+}
+
+.high-contrast a[href="mailto:alperdigital@icloud.com"]:hover,
+.high-contrast a[href="tel:+905071353025"]:hover,
+.high-contrast a[href^="mailto:"]:hover,
+.high-contrast a[href^="tel:"]:hover {
+  color: #333333 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #333333 !important;
+  text-underline-offset: 3px !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+}
+
+/* ULTIMATE OVERRIDE - Force White theme contact links to be BLACK */
+.high-contrast a[href="mailto:alperdigital@icloud.com"],
+.high-contrast a[href="tel:+905071353025"],
+.high-contrast a[href^="mailto:"],
+.high-contrast a[href^="tel:"] {
+  color: #000000 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #000000 !important;
+  text-underline-offset: 3px !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  font-weight: 600 !important;
+}
+
+.high-contrast a[href="mailto:alperdigital@icloud.com"]:hover,
+.high-contrast a[href="tel:+905071353025"]:hover,
+.high-contrast a[href^="mailto:"]:hover,
+.high-contrast a[href^="tel:"]:hover {
+  color: #333333 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #333333 !important;
+  text-underline-offset: 3px !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+}
+
+/* WEB VERSION SPECIFIC - Force Matrix theme contact links to be GREEN on desktop */
+@media (min-width: 768px) {
+  body:not(.high-contrast) a[href="mailto:alperdigital@icloud.com"],
+  body:not(.high-contrast) a[href="tel:+905071353025"],
+  body:not(.high-contrast) a[href^="mailto:"],
+  body:not(.high-contrast) a[href^="tel:"] {
+    color: #00ff41 !important;
+    text-decoration: underline !important;
+    text-decoration-color: #00ff41 !important;
+    text-underline-offset: 3px !important;
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+    font-weight: 600 !important;
+  }
+
+  body:not(.high-contrast) a[href="mailto:alperdigital@icloud.com"]:hover,
+  body:not(.high-contrast) a[href="tel:+905071353025"]:hover,
+  body:not(.high-contrast) a[href^="mailto:"]:hover,
+  body:not(.high-contrast) a[href^="tel:"]:hover {
+    color: #00ff88 !important;
+    text-decoration: underline !important;
+    text-decoration-color: #00ff88 !important;
+    text-underline-offset: 3px !important;
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+  }
+
+  /* WEB VERSION - Force White theme contact links to be BLACK on desktop */
+  .high-contrast a[href="mailto:alperdigital@icloud.com"],
+  .high-contrast a[href="tel:+905071353025"],
+  .high-contrast a[href^="mailto:"],
+  .high-contrast a[href^="tel:"] {
+    color: #000000 !important;
+    text-decoration: underline !important;
+    text-decoration-color: #000000 !important;
+    text-underline-offset: 3px !important;
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+    font-weight: 600 !important;
+  }
+
+  .high-contrast a[href="mailto:alperdigital@icloud.com"]:hover,
+  .high-contrast a[href="tel:+905071353025"]:hover,
+  .high-contrast a[href^="mailto:"]:hover,
+  .high-contrast a[href^="tel:"]:hover {
+    color: #333333 !important;
+    text-decoration: underline !important;
+    text-decoration-color: #333333 !important;
+    text-underline-offset: 3px !important;
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+  }
+}
+
+/* Matrix theme contact links stay green by default */
+
+  /* EXTREME WEB OVERRIDE - Force White theme contact links to be BLACK on desktop */
+  .high-contrast .contact a[href="mailto:alperdigital@icloud.com"],
+  .high-contrast .contact a[href="tel:+905071353025"],
+  .high-contrast .contact a[href^="mailto:"],
+  .high-contrast .contact a[href^="tel:"] {
+    color: #000000 !important;
+    text-decoration: underline !important;
+    text-decoration-color: #000000 !important;
+    text-underline-offset: 3px !important;
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+    font-weight: 600 !important;
+  }
+
+  .high-contrast .contact a[href="mailto:alperdigital@icloud.com"]:hover,
+  .high-contrast .contact a[href="tel:+905071353025"]:hover,
+  .high-contrast .contact a[href^="mailto:"]:hover,
+  .high-contrast .contact a[href^="tel:"]:hover {
+    color: #333333 !important;
+    text-decoration: underline !important;
+    text-decoration-color: #333333 !important;
+    text-underline-offset: 3px !important;
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+  }
+}
+
+
+/* FINAL NUCLEAR OPTION - Override ALL browser defaults for White theme */
+.high-contrast a[href="mailto:alperdigital@icloud.com"]:link,
+.high-contrast a[href="mailto:alperdigital@icloud.com"]:visited,
+.high-contrast a[href="mailto:alperdigital@icloud.com"]:active,
+.high-contrast a[href="mailto:alperdigital@icloud.com"]:focus,
+.high-contrast a[href="tel:+905071353025"]:link,
+.high-contrast a[href="tel:+905071353025"]:visited,
+.high-contrast a[href="tel:+905071353025"]:active,
+.high-contrast a[href="tel:+905071353025"]:focus {
+  color: #000000 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #000000 !important;
+  text-underline-offset: 3px !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  font-weight: 600 !important;
+}
+
+/* FINAL NUCLEAR OPTION - Force Matrix theme contact links to be GREEN */
+a[href="mailto:alperdigital@icloud.com"],
+a[href="tel:+905071353025"],
+a[href^="mailto:"],
+a[href^="tel:"] {
+  color: #00ff41 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #00ff41 !important;
+  text-underline-offset: 3px !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  font-weight: 600 !important;
+}
+
+a[href="mailto:alperdigital@icloud.com"]:link,
+a[href="tel:+905071353025"]:link,
+a[href^="mailto:"]:link,
+a[href^="tel:"]:link {
+  color: #00ff41 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #00ff41 !important;
+  text-underline-offset: 3px !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  font-weight: 600 !important;
+}
+
+a[href="mailto:alperdigital@icloud.com"]:visited,
+a[href="tel:+905071353025"]:visited,
+a[href^="mailto:"]:visited,
+a[href^="tel:"]:visited {
+  color: #00ff41 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #00ff41 !important;
+  text-underline-offset: 3px !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  font-weight: 600 !important;
+}
+
+a[href="mailto:alperdigital@icloud.com"]:active,
+a[href="tel:+905071353025"]:active,
+a[href^="mailto:"]:active,
+a[href^="tel:"]:active {
+  color: #00ff41 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #00ff41 !important;
+  text-underline-offset: 3px !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  font-weight: 600 !important;
+}
+
+a[href="mailto:alperdigital@icloud.com"]:focus,
+a[href="tel:+905071353025"]:focus,
+a[href^="mailto:"]:focus,
+a[href^="tel:"]:focus {
+  color: #00ff41 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #00ff41 !important;
+  text-underline-offset: 3px !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  font-weight: 600 !important;
+}
+
+a[href="mailto:alperdigital@icloud.com"]:hover,
+a[href="tel:+905071353025"]:hover,
+a[href^="mailto:"]:hover,
+a[href^="tel:"]:hover {
+  color: #00ff88 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #00ff88 !important;
+  text-underline-offset: 3px !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  font-weight: 600 !important;
 }
