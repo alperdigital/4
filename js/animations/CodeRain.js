@@ -108,6 +108,10 @@ export class CodeRain {
   setupCanvas() {
     this.ctx.font = `${CONFIG.CODE_RAIN.FONT_SIZE}px "Courier New", monospace`;
     this.ctx.textAlign = 'center';
+    
+    // Theme-safe canvas properties
+    this.ctx.globalAlpha = 1;
+    this.ctx.globalCompositeOperation = 'source-over';
   }
 
   /**
@@ -148,7 +152,11 @@ export class CodeRain {
    * @param {Object} colors - Color configuration
    */
   drawDropMain(drop, colors) {
+    // Theme-safe rendering
+    this.ctx.globalAlpha = 1;
+    this.ctx.globalCompositeOperation = 'source-over';
     this.ctx.fillStyle = colors.color;
+    this.ctx.strokeStyle = colors.color;
     this.ctx.shadowColor = colors.glow;
     this.ctx.shadowBlur = 8;
     this.ctx.fillText(drop.char, drop.x, drop.y);
@@ -198,7 +206,11 @@ export class CodeRain {
     const glitchChars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
     drop.char = glitchChars[Math.floor(Math.random() * glitchChars.length)];
     
+    // Theme-safe rendering
+    this.ctx.globalAlpha = 1;
+    this.ctx.globalCompositeOperation = 'source-over';
     this.ctx.fillStyle = colors.color;
+    this.ctx.strokeStyle = colors.color;
     this.ctx.shadowColor = colors.glow;
     this.ctx.shadowBlur = shadowBlur;
     this.ctx.fillText(drop.char, drop.x, drop.y);

@@ -93,12 +93,12 @@
   --matrix-light-gray: #e9ecef;
   --matrix-dark: #f1f3f4;
   
-  /* Light / white theme overrides */
+  /* Light / white theme overrides - EXACT CYAN */
   --code-rain-color: #00FFFF;
   --code-rain-glow: rgba(0,255,255,0.60);
   
   /* Enhanced Light Theme */
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  background: #ffffff !important;
   color: #1a1a1a;
 }
 

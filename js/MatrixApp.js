@@ -206,11 +206,11 @@ export class MatrixApp {
       this.animations.codeRain.increaseIntensity();
     }
     
-    // Add visual feedback
-    document.body.style.filter = 'hue-rotate(180deg)';
-    setTimeout(() => {
-      document.body.style.filter = '';
-    }, 2000);
+    // Add visual feedback - REMOVED hue-rotate to prevent color distortion
+    // document.body.style.filter = 'hue-rotate(180deg)';
+    // setTimeout(() => {
+    //   document.body.style.filter = '';
+    // }, 2000);
   }
 
   /**

@@ -450,7 +450,7 @@ body:not(.high-contrast) {
 
 /* High Contrast Mode - Code Rain Canvas */
 .high-contrast canvas {
-  filter: invert(1) !important;
+  filter: none !important;
   opacity: 1.0 !important;
 }
 
@@ -1185,6 +1185,10 @@ body {
   z-index: 1;
   opacity: 0.4;
   pointer-events: none;
+  /* Theme-safe isolation */
+  isolation: isolate;
+  mix-blend-mode: normal;
+  filter: none;
 }
 
 

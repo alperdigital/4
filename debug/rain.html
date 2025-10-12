@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Rain Debug - Color Analysis</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: white;
+            font-family: 'Courier New', monospace;
+            color: #000;
+        }
+        
+        .debug-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .controls {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #f0f0f0;
+            border-radius: 8px;
+        }
+        
+        .theme-toggle {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        
+        .sample-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        
+        .canvas-container {
+            position: relative;
+            border: 2px solid #ccc;
+            margin: 20px 0;
+        }
+        
+        #debug-canvas {
+            display: block;
+            background: white;
+        }
+        
+        .log {
+            background: #000;
+            color: #0f0;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .current-theme {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .diagnostic-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: red;
+            top: 40px;
+            left: 40px;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <div class="debug-container">
+        <h1>Code Rain Color Debug Tool</h1>
+        
+        <div class="controls">
+            <div class="current-theme">Current Theme: <span id="current-theme">Matrix</span></div>
+            <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+            <button class="sample-btn" onclick="samplePixel()">Sample Pixel (40,40)</button>
+            <button class="sample-btn" onclick="clearLog()">Clear Log</button>
+        </div>
+        
+        <div class="canvas-container">
+            <canvas id="debug-canvas" width="400" height="300"></canvas>
+            <div class="diagnostic-dot"></div>
+        </div>
+        
+        <div class="log" id="log"></div>
+    </div>
+
+    <script>
+        // Import the CodeRain class
+        import { CodeRain } from '../js/animations/CodeRain.js';
+        import { getCodeRainColors } from '../js/utils.js';
+        
+        let currentTheme = 'matrix';
+        let codeRain = null;
+        let canvas = null;
+        let ctx = null;
+        
+        // Initialize debug page
+        function init() {
+            canvas = document.getElementById('debug-canvas');
+            ctx = canvas.getContext('2d');
+            
+            // Set up theme
+            document.body.className = currentTheme === 'light' ? 'high-contrast' : '';
+            
+            // Initialize code rain
+            codeRain = new CodeRain(canvas);
+            codeRain.start();
+            
+            // Draw diagnostic dot
+            drawDiagnosticDot();
+            
+            log(`Debug page initialized. Theme: ${currentTheme}`);
+            log(`Canvas size: ${canvas.width}x${canvas.height}`);
+        }
+        
+        // Toggle between themes
+        function toggleTheme() {
+            currentTheme = currentTheme === 'matrix' ? 'light' : 'matrix';
+            document.body.className = currentTheme === 'light' ? 'high-contrast' : '';
+            document.getElementById('current-theme').textContent = currentTheme;
+            
+            // Restart code rain with new theme
+            if (codeRain) {
+                codeRain.stop();
+            }
+            codeRain = new CodeRain(canvas);
+            codeRain.start();
+            
+            // Redraw diagnostic dot
+            drawDiagnosticDot();
+            
+            log(`Theme switched to: ${currentTheme}`);
+        }
+        
+        // Draw diagnostic dot at (40,40)
+        function drawDiagnosticDot() {
+            const colors = getCodeRainColors();
+            
+            // Draw a bright dot using the same style as code rain
+            ctx.fillStyle = colors.color;
+            ctx.shadowColor = colors.glow;
+            ctx.shadowBlur = 8;
+            ctx.fillRect(40, 40, 4, 4);
+            ctx.shadowBlur = 0;
+            
+            log(`Diagnostic dot drawn at (40,40) with color: ${colors.color}, glow: ${colors.glow}`);
+        }
+        
+        // Sample pixel color at (40,40)
+        function samplePixel() {
+            const x = 40, y = 40;
+            const imageData = ctx.getImageData(x, y, 1, 1);
+            const [r, g, b, a] = imageData.data;
+            
+            const hex = `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+            const colors = getCodeRainColors();
+            
+            log(`=== PIXEL SAMPLE AT (${x},${y}) ===`);
+            log(`Requested color: ${colors.color}`);
+            log(`Requested glow: ${colors.glow}`);
+            log(`Actual pixel RGB: (${r}, ${g}, ${b}, ${a})`);
+            log(`Actual pixel HEX: ${hex}`);
+            log(`Match: ${colors.color.toUpperCase() === hex ? 'YES' : 'NO'}`);
+            log(`===============================`);
+        }
+        
+        // Convert number to hex
+        function toHex(value) {
+            return ('0' + value.toString(16)).slice(-2).toUpperCase();
+        }
+        
+        // Log function
+        function log(message) {
+            const logElement = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString();
+            logElement.textContent += `[${timestamp}] ${message}\n`;
+            logElement.scrollTop = logElement.scrollHeight;
+        }
+        
+        // Clear log
+        function clearLog() {
+            document.getElementById('log').textContent = '';
+        }
+        
+        // Initialize when page loads
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>
