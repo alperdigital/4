@@ -236,3 +236,4 @@ export class CodeRain {
     this.ctx.fillStyle = originalFillStyle;
   }
 }
+

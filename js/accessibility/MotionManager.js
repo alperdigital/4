@@ -126,3 +126,4 @@ export class MotionManager {
     this.updateToggleButton();
   }
 }
+

@@ -35,3 +35,4 @@ export function checkManagerExists(managerName, app) {
   debugLog(`Manager found: ${managerName}`);
   return true;
 }
+

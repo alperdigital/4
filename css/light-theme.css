@@ -88,7 +88,7 @@
 /* Light Theme Navigation */
 .high-contrast .nav {
   background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
+  backdrop-filter: none;
   border-bottom: 1px solid rgba(0, 255, 255, 0.1);
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
 }
@@ -156,12 +156,12 @@
 
 /* Light Theme Code Rain Enhancement */
 .high-contrast .code-rain {
-  opacity: 1.0;
+  opacity: 0.3;
   filter: none;
 }
 
 .high-contrast .matrix-background {
-  opacity: 0.9;
+  opacity: 0.1;
   filter: none;
 }
 

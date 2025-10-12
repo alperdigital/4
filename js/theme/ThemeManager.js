@@ -122,3 +122,4 @@ export class ThemeManager {
     this.updateToggleButton();
   }
 }
+
