@@ -1,0 +1,247 @@
+/**
+ * Light Theme Specific Styles
+ * Enhanced styling for the light/white theme
+ */
+
+/* Light Theme Body */
+.high-contrast {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
+  min-height: 100vh;
+  position: relative;
+}
+
+.high-contrast::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(0, 255, 255, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.01) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(0, 255, 255, 0.005) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Light Theme Cards */
+.high-contrast .card,
+.high-contrast .service-card,
+.high-contrast .portfolio-card {
+  background: #ffffff !important;
+  border: 2px solid #00FFFF !important;
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 1.0);
+  backdrop-filter: none !important;
+  opacity: 1.0 !important;
+}
+
+.high-contrast .card:hover,
+.high-contrast .service-card:hover,
+.high-contrast .portfolio-card:hover {
+  border-color: rgba(0, 255, 255, 0.4);
+  box-shadow: 
+    0 8px 25px rgba(0, 255, 255, 0.15),
+    0 4px 10px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transform: translateY(-2px);
+}
+
+/* Light Theme Buttons */
+.high-contrast .modern-btn.primary {
+  background: linear-gradient(135deg, #00FFFF 0%, #00FFFF 100%);
+  color: #ffffff;
+  border: none;
+  box-shadow: 
+    0 4px 15px rgba(0, 255, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.high-contrast .modern-btn.primary:hover {
+  background: linear-gradient(135deg, #00CCCC 0%, #00FFFF 100%);
+  box-shadow: 
+    0 6px 20px rgba(0, 255, 255, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.high-contrast .modern-btn.secondary {
+  background: rgba(255, 255, 255, 0.9);
+  color: #00FFFF;
+  border: 2px solid #00FFFF;
+  box-shadow: 
+    0 2px 8px rgba(0, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.high-contrast .modern-btn.secondary:hover {
+  background: #00FFFF;
+  color: #ffffff;
+  box-shadow: 
+    0 4px 15px rgba(0, 255, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Light Theme Navigation */
+.high-contrast .nav {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+}
+
+.high-contrast .nav-link {
+  color: #1a1a1a;
+  transition: all 0.3s ease;
+}
+
+.high-contrast .nav-link:hover {
+  color: #00FFFF;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+}
+
+/* Light Theme Hero Section */
+.high-contrast .hero {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(248, 249, 250, 0.9) 50%, 
+    rgba(233, 236, 239, 0.95) 100%);
+  position: relative;
+}
+
+.high-contrast .hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 30% 70%, rgba(0, 255, 255, 0.02) 0%, transparent 60%),
+    radial-gradient(circle at 70% 30%, rgba(0, 255, 255, 0.01) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Light Theme Sections */
+.high-contrast .section {
+  background: #ffffff !important;
+  backdrop-filter: none;
+  border-radius: 20px;
+  margin: 2rem 0;
+  padding: 3rem 2rem;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 1.0);
+}
+
+/* Light Theme Text */
+.high-contrast h1,
+.high-contrast h2,
+.high-contrast h3 {
+  color: #000000 !important;
+  text-shadow: none !important;
+  font-weight: 700 !important;
+  opacity: 1.0 !important;
+}
+
+.high-contrast p {
+  color: #000000 !important;
+  line-height: 1.7;
+  font-weight: 400;
+  opacity: 1.0 !important;
+}
+
+/* Light Theme Code Rain Enhancement */
+.high-contrast .code-rain {
+  opacity: 1.0;
+  filter: none;
+}
+
+.high-contrast .matrix-background {
+  opacity: 0.9;
+  filter: none;
+}
+
+/* Light Theme Control Buttons */
+.high-contrast .control-btn {
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #00FFFF;
+  color: #00FFFF;
+  box-shadow: 
+    0 4px 15px rgba(0, 255, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.high-contrast .control-btn:hover {
+  background: #00FFFF;
+  color: #ffffff;
+  box-shadow: 
+    0 6px 20px rgba(0, 255, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.high-contrast .control-btn.active {
+  background: #00FFFF;
+  color: #ffffff;
+  box-shadow: 
+    0 0 20px rgba(0, 255, 255, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Light Theme Footer */
+.high-contrast .footer {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.9) 0%, 
+    rgba(248, 249, 250, 0.8) 100%);
+  border-top: 1px solid rgba(0, 255, 255, 0.1);
+  box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Light Theme Matrix Wall Text */
+.high-contrast .matrix-wall-text {
+  color: #00FFFF;
+  text-shadow: 
+    0 0 10px rgba(0, 255, 255, 0.5),
+    0 0 20px rgba(0, 255, 255, 0.3),
+    0 0 30px rgba(0, 255, 255, 0.1);
+}
+
+/* Light Theme Contact Links */
+.high-contrast .contact-link {
+  color: #00FFFF !important;
+  text-decoration: underline !important;
+  text-underline-offset: 4px;
+  transition: all 0.3s ease;
+}
+
+.high-contrast .contact-link:hover {
+  color: #00CCCC !important;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+}
+
+/* Light Theme Scroll Indicator */
+.high-contrast .scroll-indicator {
+  color: #00FFFF;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+/* Light Theme Loading Screen */
+.high-contrast .matrix-loader {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.high-contrast .loader-title {
+  color: #00FFFF;
+  text-shadow: 
+    0 0 20px rgba(0, 255, 255, 0.5),
+    0 0 40px rgba(0, 255, 255, 0.3);
+}
+
+.high-contrast .loader-subtitle,
+.high-contrast .loader-status {
+  color: #4a4a4a;
+}

@@ -1,0 +1,125 @@
+/**
+ * CSS Custom Properties (Variables)
+ * Centralized variable management for consistent theming
+ */
+
+:root {
+  /* Matrix Theme Colors */
+  --matrix-green: #00ff41;
+  --matrix-green-dim: #00cc33;
+  --matrix-green-bright: #00ff88;
+  --matrix-black: #000000;
+  --matrix-dark: #001100;
+  --matrix-gray: #001a00;
+  --matrix-light-gray: #003300;
+  --matrix-white: #ffffff;
+  --matrix-text: #00ff41;
+  
+  /* Code Rain Theme Variables */
+  --code-rain-color: #00FF41;
+  --code-rain-glow: rgba(0,255,65,0.55);
+  
+  /* Typography */
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', 'Consolas', monospace;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+  --font-size-6xl: 3.75rem;
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+  --spacing-4xl: 6rem;
+  --spacing-5xl: 8rem;
+  --spacing-6xl: 12rem;
+  
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  
+  /* Matrix Glow Effects */
+  --glow-sm: 0 0 5px var(--matrix-green);
+  --glow-md: 0 0 10px var(--matrix-green);
+  --glow-lg: 0 0 20px var(--matrix-green);
+  --glow-xl: 0 0 30px var(--matrix-green);
+  
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 300ms ease-in-out;
+  --transition-slow: 500ms ease-in-out;
+  
+  /* Z-Index Scale */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-toast: 1080;
+}
+
+/* High Contrast Mode (Light Theme) */
+.high-contrast {
+  /* Modern Light Theme Colors - All Cyan */
+  --matrix-green: #00FFFF;
+  --matrix-green-dim: #00CCCC;
+  --matrix-green-bright: #00FFFF;
+  --matrix-text: #1a1a1a;
+  --matrix-black: #ffffff;
+  --matrix-gray: #f8f9fa;
+  --matrix-light-gray: #e9ecef;
+  --matrix-dark: #f1f3f4;
+  
+  /* Light / white theme overrides */
+  --code-rain-color: #00FFFF;
+  --code-rain-glow: rgba(0,255,255,0.60);
+  
+  /* Enhanced Light Theme */
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  color: #1a1a1a;
+}
+
+/* Normal Mode - Night Mode (Matrix Theme) */
+body:not(.high-contrast) {
+  /* Keep original Matrix colors for night mode */
+  --matrix-green: #00ff00;
+  --matrix-green-dim: #00cc00;
+  --matrix-green-bright: #00ff88;
+  --matrix-text: #00ff00;
+  --matrix-black: #000000;
+  --matrix-dark: #0a0a0a;
+  --matrix-gray: #1a1a1a;
+  --matrix-light-gray: #333333;
+  --matrix-white: #ffffff;
+  
+  /* Explicit Matrix theme ensures green stays green */
+  --code-rain-color: #00FF41;
+  --code-rain-glow: rgba(0,255,65,0.55);
+  
+  /* Ensure Matrix theme background is applied */
+  background-color: #000000 !important;
+  color: #00ff00 !important;
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Buttons Test</title>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <style>
+        body {
+            padding: 2rem;
+            background: var(--matrix-black);
+            color: var(--matrix-green);
+        }
+        .test-section {
+            margin: 2rem 0;
+            padding: 1rem;
+            border: 1px solid var(--matrix-green);
+            border-radius: 8px;
+        }
+        .status {
+            margin: 1rem 0;
+            padding: 0.5rem;
+            background: var(--matrix-dark);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Control Buttons Test</h1>
+    
+    <div class="test-section">
+        <h2>Button Status</h2>
+        <div id="status" class="status">
+            <div>Motion: <span id="motion-status">Normal</span></div>
+            <div>Theme: <span id="theme-status">Matrix</span></div>
+            <div>Sound: <span id="sound-status">Off</span></div>
+            <div>Language: <span id="language-status">English</span></div>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2 data-en="Test Content" data-tr="Test İçeriği">Test Content</h2>
+        <p data-en="This is test content to see theme changes." data-tr="Bu, tema değişikliklerini görmek için test içeriğidir.">This is test content to see theme changes.</p>
+        <button class="modern-btn primary" data-en="Test Button" data-tr="Test Butonu">Test Button</button>
+    </div>
+
+    <!-- Accessibility Controls -->
+    <div id="accessibility-controls" class="accessibility-controls">
+        <button id="reduce-motion" class="control-btn" aria-label="Reduce Motion">⚡</button>
+        <button id="high-contrast" class="control-btn" aria-label="High Contrast">🔆</button>
+        <button id="sound-toggle" class="control-btn" aria-label="Toggle Sound">🔊</button>
+        <button id="language-toggle" class="control-btn" aria-label="Switch Language">🇹🇷</button>
+    </div>
+
+    <script type="module">
+        import { MatrixApp } from './js/MatrixApp.js';
+        
+        // Initialize the application
+        const app = new MatrixApp();
+        
+        // Update status display
+        function updateStatus() {
+            const motionStatus = document.getElementById('motion-status');
+            const themeStatus = document.getElementById('theme-status');
+            const soundStatus = document.getElementById('sound-status');
+            const languageStatus = document.getElementById('language-status');
+            
+            if (motionStatus) {
+                motionStatus.textContent = app.getManager('motion')?.isMotionReducedMode() ? 'Reduced' : 'Normal';
+            }
+            
+            if (themeStatus) {
+                themeStatus.textContent = app.getManager('theme')?.isHighContrastMode() ? 'High Contrast' : 'Matrix';
+            }
+            
+            if (soundStatus) {
+                soundStatus.textContent = app.getManager('audio')?.isAudioEnabled() ? 'On' : 'Off';
+            }
+            
+            if (languageStatus) {
+                languageStatus.textContent = app.getManager('language')?.getCurrentLanguage() === 'en' ? 'English' : 'Turkish';
+            }
+        }
+        
+        // Update status every second
+        setInterval(updateStatus, 1000);
+        
+        // Initial update
+        setTimeout(updateStatus, 1000);
+    </script>
+</body>
+</html>
