@@ -1,0 +1,59 @@
+/* Loading Splash Styles */
+#splash {
+  background: var(--splash-bg, #fff);
+  backdrop-filter: blur(0px);
+  transition: backdrop-filter 0.04s ease;
+}
+
+/* Theme-aware background colors */
+html[data-theme="matrix"] #splash,
+body:not(.high-contrast) #splash {
+  --splash-bg: rgba(0, 0, 0, 0.95);
+}
+
+html[data-theme="light"] #splash,
+body.high-contrast #splash {
+  --splash-bg: rgba(255, 255, 255, 0.95);
+}
+
+/* Letter styling */
+#splash .letter {
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  font-family: 'JetBrains Mono', monospace;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  #splash .letter {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  #splash .letter {
+    text-shadow: none !important;
+    font-weight: 900;
+  }
+}
+
+/* Accessibility improvements */
+#splash:focus {
+  outline: 2px solid var(--code-rain-color, #00FF41);
+  outline-offset: 2px;
+}
+
+/* Ensure proper stacking */
+#splash {
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}

@@ -4,7 +4,13 @@
  */
 
 import { CONFIG } from '../config.js';
-import { getCodeRainColors, getRandomMatrixChar, randomInRange, parseRGBAWithOpacity, resizeCanvas } from '../utils.js';
+import { getCodeRainColors, randomInRange, parseRGBAWithOpacity, resizeCanvas } from '../utils.js';
+
+// Simple Matrix character generator
+function getRandomMatrixChar() {
+  const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+  return chars[Math.floor(Math.random() * chars.length)];
+}
 
 export class MatrixBackground {
   constructor(canvas) {
@@ -14,6 +20,8 @@ export class MatrixBackground {
     this.animationId = null;
     this.isRunning = false;
     this.fontSize = CONFIG.MATRIX_BG.FONT_SIZE;
+    
+    // No token system needed for single characters
     
     this.init();
   }
@@ -109,8 +117,9 @@ export class MatrixBackground {
    * Setup canvas drawing properties
    */
   setupCanvas() {
-    this.ctx.font = `${this.fontSize}px 'Courier New', monospace`;
+    this.ctx.font = `${this.fontSize}px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`;
     this.ctx.textAlign = 'center';
+    this.ctx.letterSpacing = '0px';
   }
 
   /**

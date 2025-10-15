@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Loader Demo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'JetBrains Mono', monospace;
+            background: #000;
+            color: #00FF41;
+            overflow-x: hidden;
+        }
+        
+        .demo-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            padding: 2rem;
+        }
+        
+        .demo-title {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .demo-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .demo-button {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 2px solid #00FF41;
+            color: #00FF41;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .demo-button:hover {
+            background: #00FF41;
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+        }
+        
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid #00FF41;
+            color: #00FF41;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            background: #00FF41;
+            color: #000;
+        }
+        
+        .high-contrast {
+            background: #fff !important;
+            color: #000 !important;
+        }
+        
+        .high-contrast .demo-button {
+            border-color: #000;
+            color: #000;
+        }
+        
+        .high-contrast .demo-button:hover {
+            background: #000;
+            color: #fff;
+        }
+        
+        .high-contrast .theme-toggle {
+            border-color: #000;
+            color: #000;
+        }
+        
+        .high-contrast .theme-toggle:hover {
+            background: #000;
+            color: #fff;
+        }
+        
+        .demo-info {
+            max-width: 600px;
+            text-align: center;
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+        
+        .demo-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .feature {
+            padding: 1rem;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            background: rgba(0, 255, 65, 0.05);
+        }
+        
+        .feature h3 {
+            margin: 0 0 0.5rem 0;
+            color: #00FF41;
+        }
+        
+        .feature p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+    
+    <div class="demo-container">
+        <h1 class="demo-title">Matrix Loader Demo</h1>
+        
+        <div class="demo-info">
+            <p>Experience the Matrix-themed loading animation with spoon bending effect. 
+            The loader shows the famous Matrix quote with animated spoon that bends as progress increases.</p>
+        </div>
+        
+        <div class="demo-buttons">
+            <button class="demo-button" onclick="showLoader()">Show Matrix Loader</button>
+            <button class="demo-button" onclick="showLoaderWithProgress()">Show with Progress</button>
+            <button class="demo-button" onclick="showReducedMotion()">Reduced Motion</button>
+        </div>
+        
+        <div class="demo-features">
+            <div class="feature">
+                <h3>Theme Aware</h3>
+                <p>Automatically adapts to light/dark themes using CSS variables</p>
+            </div>
+            <div class="feature">
+                <h3>Accessible</h3>
+                <p>Respects prefers-reduced-motion and includes ARIA attributes</p>
+            </div>
+            <div class="feature">
+                <h3>Performance</h3>
+                <p>Vanilla JavaScript with optimized animations and no heavy libraries</p>
+            </div>
+            <div class="feature">
+                <h3>Responsive</h3>
+                <p>Works on all screen sizes with adaptive spoon and text sizing</p>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module">
+        import { showMatrixLoader, hideMatrixLoader, setMatrixLoaderProgress } from './js/MatrixLoader.js';
+        
+        // Make functions globally available
+        window.showLoader = () => {
+            showMatrixLoader();
+        };
+        
+        window.showLoaderWithProgress = () => {
+            const loader = showMatrixLoader();
+            
+            // Simulate progress
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 0.1;
+                setMatrixLoaderProgress(progress);
+                
+                if (progress >= 1) {
+                    clearInterval(interval);
+                }
+            }, 200);
+        };
+        
+        window.showReducedMotion = () => {
+            // Temporarily enable reduced motion
+            const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+            const originalMatches = mediaQuery.matches;
+            
+            // Override for demo
+            Object.defineProperty(mediaQuery, 'matches', {
+                value: true,
+                writable: false
+            });
+            
+            showMatrixLoader();
+            
+            // Restore after demo
+            setTimeout(() => {
+                Object.defineProperty(mediaQuery, 'matches', {
+                    value: originalMatches,
+                    writable: false
+                });
+            }, 2000);
+        };
+        
+        window.toggleTheme = () => {
+            document.body.classList.toggle('high-contrast');
+        };
+        
+        // Add CSS variables for theme support
+        const updateThemeVariables = () => {
+            const isLight = document.body.classList.contains('high-contrast');
+            document.documentElement.style.setProperty('--code-rain-color', isLight ? '#00FFFF' : '#00FF41');
+            document.documentElement.style.setProperty('--code-rain-glow', isLight ? 'rgba(0,255,255,0.35)' : 'rgba(0,255,65,0.35)');
+        };
+        
+        // Initial theme setup
+        updateThemeVariables();
+        
+        // Watch for theme changes
+        const observer = new MutationObserver(updateThemeVariables);
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+    </script>
+</body>
+</html>

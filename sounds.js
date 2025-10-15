@@ -3,7 +3,7 @@
 class MatrixAudio {
   constructor() {
     this.audioContext = null;
-    this.isEnabled = true;
+    this.isEnabled = false; // Start with sound disabled
     this.ambientGain = null;
     this.ambientOscillator = null;
     this.rainGain = null;

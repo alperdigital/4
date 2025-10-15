@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Loader Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            background: #000;
+            color: #00FF41;
+        }
+        
+        .test-button {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 2px solid #00FF41;
+            color: #00FF41;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .test-button:hover {
+            background: #00FF41;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Matrix Loader Test</h1>
+    <p>Click the button to test the Matrix Loader:</p>
+    
+    <button class="test-button" onclick="testLoader()">Show Matrix Loader</button>
+    
+    <script type="module">
+        import { showMatrixLoader, setMatrixLoaderProgress } from './js/MatrixLoader.js';
+        
+        window.testLoader = () => {
+            const loader = showMatrixLoader();
+            
+            // Simulate progress
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 0.1;
+                setMatrixLoaderProgress(progress);
+                
+                if (progress >= 1) {
+                    clearInterval(interval);
+                }
+            }, 200);
+        };
+        
+        // Set CSS variables
+        document.documentElement.style.setProperty('--code-rain-color', '#00FF41');
+        document.documentElement.style.setProperty('--code-rain-glow', 'rgba(0,255,65,0.35)');
+    </script>
+</body>
+</html>

@@ -34,9 +34,9 @@
   --spacing-4xl: 6rem;
   --spacing-xxl: 8rem;
   
-  --transition-fast: 0.15s ease;
-  --transition-normal: 0.3s ease;
-  --transition-slow: 0.5s ease;
+  --transition-fast: 0.015s ease;
+  --transition-normal: 0.03s ease;
+  --transition-slow: 0.05s ease;
   
   --glow-intensity: 0.5;
   --blur-radius: 2px;
@@ -576,7 +576,6 @@ body:not(.high-contrast) {
   .high-contrast .work-overlay .work-tech {
     color: #666666 !important;
   }
-}
   
   * {
     animation-duration: 0.01ms !important;
@@ -594,6 +593,13 @@ body:not(.high-contrast) {
   --matrix-white: #ffffff;
   --matrix-text: #ffffff;
   --glow-intensity: 1;
+}
+
+/* Progress Bar - Hidden by default */
+.progress-bar {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
 }
 
 /* Base Styles */
@@ -656,7 +662,8 @@ body {
   width: 100%;
   height: 100%;
   z-index: 1;
-  opacity: 1.0;
+  opacity: 0;
+  display: none;
 }
 
 .loader-content {
@@ -664,6 +671,7 @@ body {
   color: var(--matrix-green);
   position: relative;
   z-index: 2;
+  font-family: 'JetBrains Mono', monospace;
 }
 
 .loader-logo {
@@ -671,12 +679,39 @@ body {
   font-weight: 700;
   letter-spacing: 0.2em;
   margin-bottom: var(--spacing-md);
-  animation: logoGlow 3s ease-in-out infinite;
   text-shadow: 0 0 30px var(--matrix-green);
   padding: 0 var(--spacing-md);
   word-break: break-all;
   line-height: 1.1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
+
+.logo-letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(-200px);
+  animation: letterDrop 1.2s ease-out forwards;
+  margin: 0 0.1em;
+  text-shadow: 0 0 30px var(--matrix-green);
+  animation-fill-mode: forwards;
+  position: relative;
+}
+
+.logo-letter:nth-child(1) { animation-delay: 0.2s; }
+.logo-letter:nth-child(2) { animation-delay: 0.4s; }
+.logo-letter:nth-child(3) { animation-delay: 0.6s; }
+.logo-letter:nth-child(4) { animation-delay: 0.8s; }
+.logo-letter:nth-child(5) { animation-delay: 1.0s; }
+.logo-letter:nth-child(6) { animation-delay: 1.2s; }
+.logo-letter:nth-child(7) { animation-delay: 1.4s; }
+.logo-letter:nth-child(8) { animation-delay: 1.6s; }
+.logo-letter:nth-child(9) { animation-delay: 1.8s; }
+.logo-letter:nth-child(10) { animation-delay: 2.0s; }
+.logo-letter:nth-child(11) { animation-delay: 2.2s; }
+.logo-letter:nth-child(12) { animation-delay: 2.4s; }
 
 .loader-subtitle {
   font-size: var(--font-size-lg);
@@ -758,6 +793,35 @@ body {
   0%, 100% { opacity: 0.8; }
   50% { opacity: 0.4; }
 }
+
+@keyframes letterDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-200px) rotateX(90deg) scale(0.5);
+    text-shadow: 0 0 50px var(--matrix-green);
+  }
+  30% {
+    opacity: 0.6;
+    transform: translateY(-100px) rotateX(60deg) scale(0.8);
+    text-shadow: 0 0 40px var(--matrix-green);
+  }
+  60% {
+    opacity: 0.9;
+    transform: translateY(-30px) rotateX(30deg) scale(1.1);
+    text-shadow: 0 0 30px var(--matrix-green);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(10px) rotateX(10deg) scale(0.95);
+    text-shadow: 0 0 25px var(--matrix-green);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg) scale(1);
+    text-shadow: 0 0 20px var(--matrix-green);
+  }
+}
+
 
 @keyframes progressShine {
   0% { transform: translateX(-100%); }
@@ -977,12 +1041,45 @@ body {
   transform: scale(0.95);
 }
 
-/* Cyberpunk sound button effects */
+/* Sound button - consistent with other control buttons */
 #sound-toggle {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(45deg, var(--matrix-black), var(--matrix-gray));
-  border: 2px solid var(--matrix-green);
+  background: var(--matrix-gray);
+  border: 1px solid var(--matrix-green);
+  animation: soundButtonPulse 2s ease-in-out infinite;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-sm);
+  backdrop-filter: none;
+  user-select: none;
+}
+
+/* Sound button pulse animation to attract attention */
+@keyframes soundButtonPulse {
+  0%, 100% {
+    box-shadow: 0 0 5px var(--matrix-green);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--matrix-green), 0 0 30px var(--matrix-green);
+    transform: scale(1.05);
+  }
+}
+
+/* Hover effect for sound button - consistent with other buttons */
+#sound-toggle:hover,
+#sound-toggle:focus {
+  background: var(--matrix-green);
+  color: var(--matrix-black);
+  box-shadow: 0 0 10px var(--matrix-green);
+  transform: scale(1.05);
 }
 
 #sound-toggle::before {
@@ -1017,12 +1114,12 @@ body {
   width: 80px;
   height: 80px;
   opacity: 0.4;
-  animation: cyberPulse 1.8s ease-in-out infinite;
+  animation: cyberPulse 0.18s ease-in-out infinite;
 }
 
 #sound-toggle.active::after {
   opacity: 0.6;
-  animation: cyberGlow 2s linear infinite;
+  animation: cyberGlow 0.2s linear infinite;
 }
 
 @keyframes cyberPulse {
@@ -1054,12 +1151,34 @@ body {
   }
 }
 
-/* Cyberpunk sound waves animation for active state */
+/* Active state when sound is ON */
 #sound-toggle.active {
-  animation: cyberWave 1.2s ease-in-out infinite;
-  box-shadow: 
-    0 0 10px var(--matrix-green),
-    inset 0 0 10px rgba(0, 255, 136, 0.1);
+  animation: cyberWave 0.12s ease-in-out infinite;
+  background: var(--matrix-green);
+  color: var(--matrix-black);
+  box-shadow: 0 0 15px var(--matrix-green);
+}
+
+/* When sound is OFF, keep the pulse animation to attract attention */
+#sound-toggle:not(.active) {
+  animation: soundButtonPulse 2s ease-in-out infinite;
+}
+
+/* Remove the problematic ::after pseudo-element that was showing text */
+#sound-toggle::after {
+  display: none !important;
+}
+
+/* Global sound control - disable all audio when sound is off */
+body.sound-disabled audio {
+  display: none !important;
+}
+
+/* Only disable audio elements, not all interactions */
+body.sound-disabled audio,
+body.sound-disabled [data-audio],
+body.sound-disabled .audio-element {
+  pointer-events: none !important;
 }
 
 @keyframes cyberWave {
@@ -1091,7 +1210,7 @@ body {
   height: 100%;
   background: linear-gradient(90deg, var(--matrix-green), var(--matrix-green-bright));
   width: 0%;
-  transition: width 0.1s ease;
+  transition: width 0.01s ease;
   box-shadow: 0 0 10px var(--matrix-green);
 }
 
@@ -1419,6 +1538,52 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--spacing-lg);
+}
+
+/* Loading Splash Styles */
+.loading-splash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(0px);
+  transition: backdrop-filter 0.4s ease, opacity 0.4s ease;
+}
+
+.loading-splash .letters-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.loading-splash .letter {
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .loading-splash .letter {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .loading-splash .letter {
+    text-shadow: none !important;
+    font-weight: 900;
+  }
 }
 
 /* Section Styles */

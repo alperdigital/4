@@ -8,7 +8,7 @@ import { CONFIG } from '../config.js';
 export class AudioManager {
   constructor() {
     this.audioContext = null;
-    this.isEnabled = true;
+    this.isEnabled = false; // Start with sound disabled
     this.volume = CONFIG.AUDIO.VOLUME;
     
     this.init();
@@ -20,6 +20,7 @@ export class AudioManager {
   init() {
     this.setupAudioToggle();
     this.setupAudioContext();
+    this.updateToggleButton(); // Update button state on init
   }
 
   /**
@@ -136,7 +137,7 @@ export class AudioManager {
     toggleBtn.classList.toggle('active', this.isEnabled);
     toggleBtn.textContent = this.isEnabled ? '🔊' : '🔇';
     toggleBtn.setAttribute('aria-label', 
-      this.isEnabled ? 'Disable Sound' : 'Enable Sound'
+      this.isEnabled ? 'Disable Sound' : 'Enable Sound - Click to turn on audio'
     );
   }
 

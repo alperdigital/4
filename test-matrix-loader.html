@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Loader Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            background: #000;
+            color: #00FF41;
+        }
+        
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .test-button {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 2px solid #00FF41;
+            color: #00FF41;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .test-button:hover {
+            background: #00FF41;
+            color: #000;
+        }
+        
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid #00FF41;
+            color: #00FF41;
+            font-family: inherit;
+            cursor: pointer;
+        }
+        
+        .high-contrast {
+            background: #fff !important;
+            color: #000 !important;
+        }
+        
+        .high-contrast .test-button,
+        .high-contrast .theme-toggle {
+            border-color: #000;
+            color: #000;
+        }
+        
+        .high-contrast .test-button:hover {
+            background: #000;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+    
+    <div class="test-container">
+        <h1>Matrix Loader Test</h1>
+        <p>Test the Matrix Loader with spoon bending animation.</p>
+        
+        <button class="test-button" onclick="testLoader()">Show Matrix Loader</button>
+        <button class="test-button" onclick="testWithProgress()">Test with Progress</button>
+        <button class="test-button" onclick="testReducedMotion()">Test Reduced Motion</button>
+    </div>
+    
+    <script type="module">
+        import { showMatrixLoader, hideMatrixLoader, setMatrixLoaderProgress } from './js/MatrixLoader.js';
+        
+        window.testLoader = () => {
+            showMatrixLoader();
+        };
+        
+        window.testWithProgress = () => {
+            const loader = showMatrixLoader();
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 0.1;
+                setMatrixLoaderProgress(progress);
+                
+                if (progress >= 1) {
+                    clearInterval(interval);
+                }
+            }, 200);
+        };
+        
+        window.testReducedMotion = () => {
+            // Temporarily enable reduced motion
+            const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+            const originalMatches = mediaQuery.matches;
+            
+            Object.defineProperty(mediaQuery, 'matches', {
+                value: true,
+                writable: false
+            });
+            
+            showMatrixLoader();
+            
+            setTimeout(() => {
+                Object.defineProperty(mediaQuery, 'matches', {
+                    value: originalMatches,
+                    writable: false
+                });
+            }, 2000);
+        };
+        
+        window.toggleTheme = () => {
+            document.body.classList.toggle('high-contrast');
+            
+            // Update CSS variables
+            const isLight = document.body.classList.contains('high-contrast');
+            document.documentElement.style.setProperty('--code-rain-color', isLight ? '#00FFFF' : '#00FF41');
+            document.documentElement.style.setProperty('--code-rain-glow', isLight ? 'rgba(0,255,255,0.35)' : 'rgba(0,255,65,0.35)');
+        };
+        
+        // Initial theme setup
+        document.documentElement.style.setProperty('--code-rain-color', '#00FF41');
+        document.documentElement.style.setProperty('--code-rain-glow', 'rgba(0,255,65,0.35)');
+    </script>
+</body>
+</html>

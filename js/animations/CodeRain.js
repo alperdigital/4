@@ -4,7 +4,12 @@
  */
 
 import { CONFIG } from '../config.js';
-import { getCodeRainColors, getRandomMatrixChar, randomInRange, parseRGBAWithOpacity, resizeCanvas } from '../utils.js';
+import { getCodeRainColors, randomInRange, parseRGBAWithOpacity, resizeCanvas } from '../utils.js';
+// Simple Matrix character generator
+function getRandomMatrixChar() {
+  const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+  return chars[Math.floor(Math.random() * chars.length)];
+}
 
 export class CodeRain {
   constructor(canvas) {
@@ -13,6 +18,8 @@ export class CodeRain {
     this.drops = [];
     this.animationId = null;
     this.isRunning = false;
+    
+    // No token system needed for single characters
     
     this.init();
   }
@@ -106,8 +113,9 @@ export class CodeRain {
    * Setup canvas drawing properties
    */
   setupCanvas() {
-    this.ctx.font = `${CONFIG.CODE_RAIN.FONT_SIZE}px "Courier New", monospace`;
+    this.ctx.font = `${CONFIG.CODE_RAIN.FONT_SIZE}px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`;
     this.ctx.textAlign = 'center';
+    this.ctx.letterSpacing = '0px';
     
     // Theme-safe canvas properties
     this.ctx.globalAlpha = 1;
@@ -203,7 +211,8 @@ export class CodeRain {
    * @param {number} shadowBlur - Shadow blur amount
    */
   drawGlitchEffect(drop, colors, shadowBlur) {
-    const glitchChars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+    // Use special glitch characters
+    const glitchChars = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '-', '=', '[', ']', '{', '}', '|', ';', ':', ',', '.', '<', '>', '?'];
     drop.char = glitchChars[Math.floor(Math.random() * glitchChars.length)];
     
     // Theme-safe rendering

@@ -24,11 +24,15 @@ export const CONFIG = {
 
   // Animation Configuration
   ANIMATION: {
-    LOADER_DURATION: 3000,
-    EXPLOSION_DURATION: 1500,
-    FADE_DURATION: 500,
+    LOADER_DURATION: 50,              // Total animation duration: 0.05 seconds
+    EXPLOSION_DURATION: 20,           // Explosion effect duration
+    FADE_DURATION: 10,                // Fade in/out duration
     GLITCH_PROBABILITY: 0.005,
-    MORPH_PROBABILITY: 0.05
+    MORPH_PROBABILITY: 0.05,
+    // Entrance Animation Control (Always enabled with fast duration)
+    ENABLE_ENTRANCE_ANIMATION: true,  // Always true - animation toggle removed
+    SKIP_LOADING_SCREEN: false,       // Always false - animation always shows
+    SHOW_LOADING_PROGRESS: false      // Always false - no progress bar
   },
 
   // Code Rain Configuration

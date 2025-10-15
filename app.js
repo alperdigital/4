@@ -71,12 +71,12 @@ class MatrixApp {
         
         setTimeout(() => {
           this.triggerScreenExplosion();
-        }, 500);
+        }, 10);
       }
       
       progressBar.style.width = progress + '%';
       percentage.textContent = Math.floor(progress) + '%';
-    }, 50);
+    }, 10);
   }
 
   setupLoaderCanvas() {
@@ -151,12 +151,12 @@ class MatrixApp {
     // Start screen corruption
     setTimeout(() => {
       this.startScreenCorruption(loader);
-    }, 200);
+    }, 5);
     
     // Final explosion and transition
     setTimeout(() => {
       this.finalExplosion(loader);
-    }, 1500);
+    }, 15);
   }
 
   createExplosionEffect(container) {
@@ -232,8 +232,8 @@ class MatrixApp {
             this.attemptAutoStart();
           }, 1000);
         }
-      }, 500);
-    }, 1000);
+      }, 5);
+    }, 5);
   }
 
   setupAccessibilityControls() {
@@ -255,6 +255,15 @@ class MatrixApp {
         // Update button text
         motionToggle.textContent = this.isReducedMotion ? '⚡' : '⚡';
         motionToggle.setAttribute('aria-label', this.isReducedMotion ? 'Enable Motion' : 'Reduce Motion');
+        
+        // Update button visual state
+        if (this.isReducedMotion) {
+          motionToggle.style.opacity = '0.5';
+          motionToggle.style.filter = 'grayscale(100%)';
+        } else {
+          motionToggle.style.opacity = '1';
+          motionToggle.style.filter = 'none';
+        }
         
         if (this.isReducedMotion) {
           this.stopAnimations();
@@ -290,48 +299,33 @@ class MatrixApp {
       });
     }
 
-    // Sound toggle (🔊)
-    if (soundToggle) {
-      soundToggle.addEventListener('click', () => {
-        this.isSoundEnabled = !this.isSoundEnabled;
-        soundToggle.classList.toggle('active', !this.isSoundEnabled);
-        
-        // Update button text
-        soundToggle.textContent = this.isSoundEnabled ? '🔊' : '🔇';
-        soundToggle.setAttribute('aria-label', this.isSoundEnabled ? 'Disable Sound' : 'Enable Sound');
-        
-        // Control audio system
-        if (this.audio) {
-          this.audio.setEnabled(this.isSoundEnabled);
-        }
-        
-        // Store preference
-        localStorage.setItem('soundEnabled', this.isSoundEnabled);
-      });
-    }
+    // Sound toggle is now handled by SoundManager
 
     // Load saved preferences
     this.loadAccessibilityPreferences();
   }
 
   loadAccessibilityPreferences() {
-    // Load sound preference
-    const savedSound = localStorage.getItem('soundEnabled');
-    if (savedSound !== null) {
-      this.isSoundEnabled = savedSound === 'true';
-      const soundToggle = document.getElementById('sound-toggle');
-      if (soundToggle) {
-        soundToggle.classList.toggle('active', !this.isSoundEnabled);
-        soundToggle.textContent = this.isSoundEnabled ? '🔊' : '🔇';
-        soundToggle.setAttribute('aria-label', this.isSoundEnabled ? 'Disable Sound' : 'Enable Sound');
-      }
+    // Sound preferences are now handled by SoundManager
+    
+    // Update motion toggle button state
+    const motionToggle = document.getElementById('reduce-motion');
+    if (motionToggle) {
+      motionToggle.classList.toggle('active', this.isReducedMotion);
+      motionToggle.setAttribute('aria-label', this.isReducedMotion ? 'Enable Motion' : 'Reduce Motion');
       
-      // Apply to audio system
-      if (this.audio) {
-        this.audio.setEnabled(this.isSoundEnabled);
+      // Update visual state
+      if (this.isReducedMotion) {
+        motionToggle.style.opacity = '0.5';
+        motionToggle.style.filter = 'grayscale(100%)';
+      } else {
+        motionToggle.style.opacity = '1';
+        motionToggle.style.filter = 'none';
       }
     }
   }
+
+  // Sound feedback is now handled by SoundManager
 
   setupLanguageToggle() {
     const languageToggle = document.getElementById('language-toggle');
@@ -505,27 +499,15 @@ class MatrixApp {
   }
 
   addClickSounds() {
-    const clickableElements = document.querySelectorAll('button, .nav-link, .control-btn');
-    
-    clickableElements.forEach(element => {
-      element.addEventListener('click', () => {
-        if (this.audio && this.isSoundEnabled) {
-          this.audio.playClickSound();
-        }
-      });
-    });
+    // Click sesleri artık SoundManager tarafından yönetiliyor
+    // Bu fonksiyon artık kullanılmıyor
+    console.log('addClickSounds: Click sounds are now managed by SoundManager');
   }
 
   addHoverSounds() {
-    const hoverElements = document.querySelectorAll('.control-btn, .nav-link, .work-item');
-    
-    hoverElements.forEach(element => {
-      element.addEventListener('mouseenter', () => {
-        if (this.audio && this.isSoundEnabled) {
-          this.audio.playHoverSound();
-        }
-      });
-    });
+    // Hover sesleri artık SoundManager tarafından yönetiliyor
+    // Bu fonksiyon artık kullanılmıyor
+    console.log('addHoverSounds: Hover sounds are now managed by SoundManager');
   }
 
   setupMatrixBackground() {

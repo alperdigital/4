@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rain Tokens Debug</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: white;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        }
+        
+        .controls {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #00FF41;
+            padding: 20px;
+            border-radius: 8px;
+            z-index: 1000;
+            min-width: 300px;
+        }
+        
+        .control-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            margin-bottom: 5px;
+        }
+        
+        button {
+            background: #00FF41;
+            color: black;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+        }
+        
+        button:hover {
+            background: #00ff88;
+        }
+        
+        .value {
+            font-size: 12px;
+            color: #888;
+        }
+        
+        .sample {
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(0, 255, 65, 0.1);
+            border-radius: 4px;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .stats {
+            margin-top: 15px;
+            font-size: 12px;
+        }
+        
+        #rain-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .info {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #00FF41;
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 1000;
+            font-size: 12px;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <h3>Rain Tokens Debug</h3>
+        
+        <div class="control-group">
+            <label for="density">Density: <span class="value" id="density-value">1.0</span></label>
+            <input type="range" id="density" min="0.5" max="2.0" step="0.1" value="1.0">
+        </div>
+        
+        <div class="control-group">
+            <label for="maxLen">Max Token Length: <span class="value" id="maxLen-value">6</span></label>
+            <input type="range" id="maxLen" min="3" max="8" step="1" value="6">
+        </div>
+        
+        <button id="reshuffle">Reshuffle Tokens</button>
+        
+        <div class="sample" id="sample">
+            <strong>Token Sample (first 20):</strong><br>
+            <span id="sample-tokens"></span>
+        </div>
+        
+        <div class="stats" id="stats">
+            <strong>Pool Stats:</strong><br>
+            <span id="stats-content"></span>
+        </div>
+    </div>
+    
+    <div class="info">
+        <strong>Theme Colors:</strong><br>
+        Light: #00FFFF (cyan)<br>
+        Matrix: #00FF41 (green)<br><br>
+        <strong>Token Categories:</strong><br>
+        SYMBOLS (3.0x), CORE (2.0x), JS (2.0x), PY (1.8x)<br>
+        REGEX (1.5x), LITERALS (1.5x), BITS (1.5x)<br>
+        C (1.0x), HTMLCSS (1.0x)
+    </div>
+    
+    <canvas id="rain-canvas"></canvas>
+    
+    <script type="module">
+        import { TokenSystem, TOKENS, WEIGHTS } from '../lib/rainTokens.js';
+        
+        class RainTokensDebug {
+            constructor() {
+                this.canvas = document.getElementById('rain-canvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.drops = [];
+                this.animationId = null;
+                this.isRunning = false;
+                
+                // Initialize token system
+                this.tokenSystem = new TokenSystem({ minLen: 1, maxLen: 6 });
+                
+                this.setupControls();
+                this.resize();
+                this.updateSample();
+                this.updateStats();
+                this.start();
+            }
+            
+            setupControls() {
+                const densitySlider = document.getElementById('density');
+                const maxLenSlider = document.getElementById('maxLen');
+                const reshuffleBtn = document.getElementById('reshuffle');
+                
+                densitySlider.addEventListener('input', (e) => {
+                    document.getElementById('density-value').textContent = e.target.value;
+                    // Update rain density (simplified)
+                });
+                
+                maxLenSlider.addEventListener('input', (e) => {
+                    document.getElementById('maxLen-value').textContent = e.target.value;
+                    this.tokenSystem.updateOptions({ maxLen: parseInt(e.target.value) });
+                    this.updateSample();
+                    this.updateStats();
+                });
+                
+                reshuffleBtn.addEventListener('click', () => {
+                    this.tokenSystem.initialize();
+                    this.updateSample();
+                    this.updateStats();
+                });
+            }
+            
+            resize() {
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+                this.initDrops();
+            }
+            
+            initDrops() {
+                this.drops = [];
+                const columns = Math.floor(this.canvas.width / 20);
+                
+                for (let i = 0; i < columns; i++) {
+                    this.drops.push({
+                        x: i * 20,
+                        y: Math.random() * this.canvas.height,
+                        speed: Math.random() * 2 + 1,
+                        token: this.tokenSystem.getToken()
+                    });
+                }
+            }
+            
+            start() {
+                this.isRunning = true;
+                this.animate();
+            }
+            
+            animate() {
+                if (!this.isRunning) return;
+                
+                this.clearCanvas();
+                this.drawDrops();
+                this.updateDrops();
+                
+                this.animationId = requestAnimationFrame(() => this.animate());
+            }
+            
+            clearCanvas() {
+                this.ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+            }
+            
+            drawDrops() {
+                this.ctx.font = '14px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
+                this.ctx.textAlign = 'center';
+                this.ctx.fillStyle = '#00FF41';
+                this.ctx.shadowColor = '#00FF41';
+                this.ctx.shadowBlur = 8;
+                
+                this.drops.forEach(drop => {
+                    this.ctx.fillText(drop.token, drop.x, drop.y);
+                });
+                
+                this.ctx.shadowBlur = 0;
+            }
+            
+            updateDrops() {
+                this.drops.forEach(drop => {
+                    drop.y += drop.speed;
+                    
+                    if (drop.y > this.canvas.height) {
+                        drop.y = -20;
+                        drop.token = this.tokenSystem.getToken();
+                        drop.speed = Math.random() * 2 + 1;
+                    }
+                });
+            }
+            
+            updateSample() {
+                const sample = this.tokenSystem.getSample(20);
+                document.getElementById('sample-tokens').textContent = sample.join(', ');
+            }
+            
+            updateStats() {
+                const stats = this.tokenSystem.getStats();
+                let statsText = '';
+                
+                Object.keys(stats).forEach(category => {
+                    const stat = stats[category];
+                    statsText += `${category}: ${stat.count} tokens (${stat.weight}x)<br>`;
+                });
+                
+                document.getElementById('stats-content').innerHTML = statsText;
+            }
+        }
+        
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            new RainTokensDebug();
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.rainDebug) {
+                window.rainDebug.resize();
+            }
+        });
+    </script>
+</body>
+</html>
